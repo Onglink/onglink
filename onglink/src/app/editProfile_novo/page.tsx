@@ -1,24 +1,29 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { CepResponse, getCepData } from '@/services/cep';
 
 // Tipos para os dados dos formulários
 interface BasicFormValues {
-  nome: string;
+  razãoSocial: string;
+  cnpj: string;
   email: string;
-  telefone: string;
-  dataNascimento: string;
+  pessoaResponsavel: string;
+  telefone01: string;
+  telefone02: string;
+  causaSocial: string;
+  sobreOng: string;
 }
 
 interface AddressFormValues {
   cep: string;
-  logradouro: string;
+  cidade: string;
+  estado: string;
+  endereco: string;
   numero: string;
   complemento: string;
   bairro: string;
-  cidade: string;
-  estado: string;
 }
 
 interface SocialFormValues {
@@ -35,19 +40,31 @@ interface UploadFormValues {
 
 // Componente do formulário básico
 const BasicForm: React.FC = () => {
+  const [causaSelecionada, setCausaSelecionada] = useState<number | null>(null);
+
+  const handleCausaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCausaSelecionada(parseInt(e.target.value));
+  };
+
   const validationSchema = Yup.object({
-    nome: Yup.string().required('Nome é obrigatório'),
+    razãoSocial: Yup.string().required('Razão Social é obrigatória'),
+    cnpj: Yup.string().required('CNPJ é obrigatório'),
     email: Yup.string().email('Email inválido').required('Email é obrigatório'),
-    telefone: Yup.string().required('Telefone é obrigatório'),
-    dataNascimento: Yup.date().required('Data de nascimento é obrigatória'),
+    pessoaResponsavel: Yup.string().required('Pessoa responsável é obrigatória'),
+    telefone01: Yup.string().required('Telefone é obrigatório'),
+    causaSocial: Yup.string().required('Causa social é obrigatória'),
   });
 
   const formik = useFormik<BasicFormValues>({
     initialValues: {
-      nome: '',
+      razãoSocial: '',
+      cnpj: '',
       email: '',
-      telefone: '',
-      dataNascimento: '',
+      pessoaResponsavel: '',
+      telefone01: '',
+      telefone02: '',
+      causaSocial: '',
+      sobreOng: '',
     },
     validationSchema,
     onSubmit: (values) => {
@@ -60,17 +77,32 @@ const BasicForm: React.FC = () => {
       <h2>Informações Básicas</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className="form-group">
-          <label htmlFor="nome">Nome Completo</label>
+          <label htmlFor="razãoSocial">Razão Social</label>
           <input
-            id="nome"
-            name="nome"
+            id="razãoSocial"
+            name="razãoSocial"
             type="text"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.nome}
+            value={formik.values.razãoSocial}
           />
-          {formik.touched.nome && formik.errors.nome ? (
-            <div className="error">{formik.errors.nome}</div>
+          {formik.touched.razãoSocial && formik.errors.razãoSocial ? (
+            <div className="error">{formik.errors.razãoSocial}</div>
+          ) : null}
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="cnpj">CNPJ</label>
+          <input
+            id="cnpj"
+            name="cnpj"
+            type="text"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.cnpj}
+          />
+          {formik.touched.cnpj && formik.errors.cnpj ? (
+            <div className="error">{formik.errors.cnpj}</div>
           ) : null}
         </div>
 
@@ -90,32 +122,134 @@ const BasicForm: React.FC = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="telefone">Telefone</label>
+          <label htmlFor="pessoaResponsavel">Pessoa Responsável</label>
           <input
-            id="telefone"
-            name="telefone"
-            type="tel"
+            id="pessoaResponsavel"
+            name="pessoaResponsavel"
+            type="text"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.telefone}
+            value={formik.values.pessoaResponsavel}
           />
-          {formik.touched.telefone && formik.errors.telefone ? (
-            <div className="error">{formik.errors.telefone}</div>
+          {formik.touched.pessoaResponsavel && formik.errors.pessoaResponsavel ? (
+            <div className="error">{formik.errors.pessoaResponsavel}</div>
           ) : null}
         </div>
 
         <div className="form-group">
-          <label htmlFor="dataNascimento">Data de Nascimento</label>
+          <label htmlFor="telefone01">Telefone 01</label>
           <input
-            id="dataNascimento"
-            name="dataNascimento"
-            type="date"
+            id="telefone01"
+            name="telefone01"
+            type="tel"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.dataNascimento}
+            value={formik.values.telefone01}
           />
-          {formik.touched.dataNascimento && formik.errors.dataNascimento ? (
-            <div className="error">{formik.errors.dataNascimento}</div>
+          {formik.touched.telefone01 && formik.errors.telefone01 ? (
+            <div className="error">{formik.errors.telefone01}</div>
+          ) : null}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="telefone02">Telefone 02</label>
+          <input
+            id="telefone02"
+            name="telefone02"
+            type="tel"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.telefone02}
+          />
+          {formik.touched.telefone02 && formik.errors.telefone02 ? (
+            <div className="error">{formik.errors.telefone02}</div>
+          ) : null}
+        </div>
+
+        {/* Seleção de causa (obrigatório) */}
+        <div className="form-group">
+          <h3 className="text-lg font-semibold mb-3">Escolha a causa principal da sua organização:</h3>
+          
+          <div className="causas-container">
+            <div className="causa-option">
+              <input 
+                type="radio" 
+                name="causaSocial" 
+                id="causaAmbiental" 
+                value="1"
+                onChange={handleCausaChange}
+                checked={causaSelecionada === 1}
+                className="mr-1"
+              />
+              <label htmlFor="causaAmbiental">Ambiental</label>
+            </div>
+            
+            <div className="causa-option">
+              <input 
+                type="radio" 
+                name="causaSocial" 
+                id="causaAnimal" 
+                value="2"
+                onChange={handleCausaChange}
+                checked={causaSelecionada === 2}
+                className="mr-1"
+              />
+              <label htmlFor="causaAnimal">Animal</label>
+            </div>
+            
+            <div className="causa-option">
+              <input 
+                type="radio" 
+                name="causaSocial" 
+                id="causaEducacao" 
+                value="3"
+                onChange={handleCausaChange}
+                checked={causaSelecionada === 3}
+                className="mr-1"
+              />
+              <label htmlFor="causaEducacao">Educação</label>
+            </div>
+            
+            <div className="causa-option">
+              <input 
+                type="radio" 
+                name="causaSocial" 
+                id="causaSaude" 
+                value="4"
+                onChange={handleCausaChange}
+                checked={causaSelecionada === 4}
+                className="mr-1"
+              />
+              <label htmlFor="causaSaude">Saúde</label>
+            </div>
+            
+            <div className="causa-option">
+              <input 
+                type="radio" 
+                name="causaSocial" 
+                id="causaSocial" 
+                value="5"
+                onChange={handleCausaChange}
+                checked={causaSelecionada === 5}
+                className="mr-1"
+              />
+              <label htmlFor="causaSocial">Social</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="sobreOng">Conte mais sobre a ONG</label>
+          <textarea
+            id="sobreOng"
+            name="sobreOng"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.sobreOng}
+            rows={4}
+          />
+          {formik.touched.sobreOng && formik.errors.sobreOng ? (
+            <div className="error">{formik.errors.sobreOng}</div>
           ) : null}
         </div>
 
@@ -127,9 +261,24 @@ const BasicForm: React.FC = () => {
 
 // Componente do formulário de endereço
 const AddressForm: React.FC = () => {
+  const handleBuscarCep = async (cep: string, setFieldValue: (field: string, value: any) => void) => {
+    try {
+      const cepDados = await getCepData(cep.replace(/\D/g, ''));
+      
+      // Atualiza os campos do formulário com os dados do CEP
+      setFieldValue('cidade', cepDados.localidade);
+      setFieldValue('estado', cepDados.uf);
+      setFieldValue('endereco', cepDados.logradouro);
+      setFieldValue('bairro', cepDados.bairro);
+      
+    } catch (error) {
+      console.error("Erro ao buscar CEP:", error);
+    }
+  };
+
   const validationSchema = Yup.object({
     cep: Yup.string().required('CEP é obrigatório'),
-    logradouro: Yup.string().required('Logradouro é obrigatório'),
+    endereco: Yup.string().required('Endereço é obrigatório'),
     numero: Yup.string().required('Número é obrigatório'),
     bairro: Yup.string().required('Bairro é obrigatório'),
     cidade: Yup.string().required('Cidade é obrigatória'),
@@ -139,7 +288,7 @@ const AddressForm: React.FC = () => {
   const formik = useFormik<AddressFormValues>({
     initialValues: {
       cep: '',
-      logradouro: '',
+      endereco: '',
       numero: '',
       complemento: '',
       bairro: '',
@@ -162,8 +311,15 @@ const AddressForm: React.FC = () => {
             id="cep"
             name="cep"
             type="text"
+            placeholder="00000-000"
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+              formik.handleBlur(e);
+              const cep = e.target.value.replace(/\D/g, '');
+              if (cep.length === 8) {
+                handleBuscarCep(cep, formik.setFieldValue);
+              }
+            }}
             value={formik.values.cep}
           />
           {formik.touched.cep && formik.errors.cep ? (
@@ -172,17 +328,17 @@ const AddressForm: React.FC = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="logradouro">Logradouro</label>
+          <label htmlFor="endereco">Endereço</label>
           <input
-            id="logradouro"
-            name="logradouro"
+            id="endereco"
+            name="endereco"
             type="text"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.logradouro}
+            value={formik.values.endereco}
           />
-          {formik.touched.logradouro && formik.errors.logradouro ? (
-            <div className="error">{formik.errors.logradouro}</div>
+          {formik.touched.endereco && formik.errors.endereco ? (
+            <div className="error">{formik.errors.endereco}</div>
           ) : null}
         </div>
 
@@ -245,42 +401,14 @@ const AddressForm: React.FC = () => {
 
         <div className="form-group">
           <label htmlFor="estado">Estado</label>
-          <select
+          <input
             id="estado"
             name="estado"
+            type="text"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.estado}
-          >
-            <option value="">Selecione</option>
-            <option value="AC">Acre</option>
-            <option value="AL">Alagoas</option>
-            <option value="AP">Amapá</option>
-            <option value="AM">Amazonas</option>
-            <option value="BA">Bahia</option>
-            <option value="CE">Ceará</option>
-            <option value="DF">Distrito Federal</option>
-            <option value="ES">Espírito Santo</option>
-            <option value="GO">Goiás</option>
-            <option value="MA">Maranhão</option>
-            <option value="MT">Mato Grosso</option>
-            <option value="MS">Mato Grosso do Sul</option>
-            <option value="MG">Minas Gerais</option>
-            <option value="PA">Pará</option>
-            <option value="PB">Paraíba</option>
-            <option value="PR">Paraná</option>
-            <option value="PE">Pernambuco</option>
-            <option value="PI">Piauí</option>
-            <option value="RJ">Rio de Janeiro</option>
-            <option value="RN">Rio Grande do Norte</option>
-            <option value="RS">Rio Grande do Sul</option>
-            <option value="RO">Rondônia</option>
-            <option value="RR">Roraima</option>
-            <option value="SC">Santa Catarina</option>
-            <option value="SP">São Paulo</option>
-            <option value="SE">Sergipe</option>
-            <option value="TO">Tocantins</option>
-          </select>
+          />
           {formik.touched.estado && formik.errors.estado ? (
             <div className="error">{formik.errors.estado}</div>
           ) : null}
