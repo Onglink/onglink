@@ -56,7 +56,7 @@ const validationSchema = Yup.object().shape({
     bairro: Yup.string().required('Campo Obrigatório'),
 });
 
-export default function editProfilePage() {
+export default function EditProfilePage() {
     const router = useRouter();
     const [initialValues, setInitialValues] = useState<Usuario>({
         id: '',
