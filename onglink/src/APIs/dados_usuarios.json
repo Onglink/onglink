@@ -1,0 +1,46 @@
+{
+    "usuario":[
+        {   
+            "id" : "emp_0001",
+            "razao_social": "MUXN",
+            "cnpj": "111222",
+            "email" : "contato@muxn.com.br",
+            "telefone_01": "15999999999",
+            "telefone_02": "",
+            "pessoa_responsavel": "Felipe Paes da Silva",
+            "cpf": "00000000000",
+            "cep": "18053352",
+            "cidade": "Sorocaba",
+            "estado": "São Paulo",
+            "endereco": "Rua Suzana Francisco Vasques de Moura",
+            "num_rua": "166",
+            "bairro": "Julio de Mesquita Filho",
+            "complemento" : "",
+            "sobre": "Empresa administradora do projeto ONGLink",
+            "instagram": "intagram.com",
+            "facebook": "facebook.com",
+            "x_twitter": "x.com",
+            "linkedin": "linkedin.com"
+        },
+        {           
+            "id" : "",
+            "razao_social": "",
+            "cnpj": "",
+            "email" : "",
+            "telefone_01": "",
+            "pessoa_responsavel": "",
+            "cpf": "",
+            "cep": "",
+            "cidade": "",
+            "estado": "",
+            "endereco": "",
+            "num_rua": "",
+            "bairro": "",
+            "sobre": "",
+            "instagram": "",
+            "facebook": "",
+            "x_twitter": "",
+            "linkedin": ""
+        }
+    ]
+}
