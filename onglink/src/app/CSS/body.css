@@ -1,0 +1,13 @@
+.rowlogin {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.rowlogin #div_email, #div_senha{
+    width: 400px;
+}
+
+#btn_entrar {
+    width: 200px;
+}

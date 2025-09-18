@@ -1,0 +1,89 @@
+
+#main_parceiros
+{
+    background-image: url("https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+}
+
+#navbar
+{
+    background-color: #2b3710c4;
+    color: white;
+    padding: 20px;
+    width: 100%;
+}
+
+#navbar li
+{
+    width: 250px;
+    height: 30px;
+    border-radius: 30px;
+    font-weight: 700;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbar li:hover
+{
+    background-color: oklch(52.7% .154 150.069);
+    color: #48f718;
+}
+
+#fundo_navbar
+{
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #283903a6
+}
+
+#navbar ul
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    list-style-type: none;
+    padding: 0px;
+    margin-bottom: 0px;
+    font-size: large;
+}
+
+#div_parceiros
+{
+    background-color: #283903a6;
+    color: white;
+    padding: 30px;
+}
+
+#div_parceiros h2
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 15px;
+    background-color: #2b3710c4;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    width:fit-content;
+}
+
+#img_empresas
+{
+    margin-bottom: 60px;
+}
+
+#img_empresas, #img_ONG
+{
+    background-color: #2b3710c4;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}

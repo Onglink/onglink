@@ -1,103 +1,99 @@
-import Image from "next/image";
+"use client";
+
+import Image from "next/image"
+import Link from "next/link"
+import {Button, Col, Row} from "react-bootstrap"
+import logo_onglink_01 from '@/app/img/LOGO_ONGLINK_1.png'
+import image_home from '@/app/img/image_home.jpg'
+import logo_muxn from '@/app/img/MUXN_logo1.png'
+import React from "react";
+import '@/app/CSS/home.css'
+import '@/app/CSS/header_alt.css'
+import '@/app/CSS/menu.css'
+import '@/app/CSS/main.css'
+import '@/app/CSS/body.css'
+import Header_home from "@/app/components/header_home"
+
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+  return (
+        <>
+        
+        <Header_home/>
+        
+        
+            <main className="main_home">
+              {/*<!--Main-->*/}
+        
+              <div className="main1">
+                <div id="sub_div_desc">
+                  
+                  <Row className="row">
+        
+                      <Col sm={6} id="div_imagem_home">
+                        <Image src={image_home} alt="image_home" className="image_home" width={500} height={300}></Image>
+                      </Col>
+                      <Col sm={6} id="desc_home">
+                          <h4 id="header_vantagens">Por que sua empresa ou ONG deve estar aqui? </h4>
+                          <ul id="vantagens">
+                              <li>Otimizar investimentos em organizações confiáveis</li>
+                              <li>Figurar entre as empresas que se preocupam com causas sociais</li>
+                              <li>Promover o bem estar social e o fortalecimento dos direitos sociais</li>
+                          </ul>
+        
+                              <p>
+                                Visando otimizar o uso de recursos financeiros da sua empresa e fomentar as organizações não governamentais, 
+                                a plataforma ONGlink fornece os recursos e ferramentas ideais para criar a conexão necessária, onde investidores 
+                                podem ter a garantia de que seu projeto social terá um melhor aproveitamento de seus recursos e uma maior visibilidade
+                                pela sociedade, governo e outras empresas.
+                              </p> 
+                                
+                              <p>
+                                A plataforma garante que os investidores possam acompanhar o aproveitamento 
+                                dos recursos financeiros, além de oferecer visibilidade para as iniciativas sociais, promovendo uma cultura de responsabilidade 
+                                social corporativa. 
+                              </p>
+        
+                              <div id="div_botao">
+                                <h4>
+                                  Venha fazer parte da ONGLink!
+                                </h4>
+        
+                                <Link href={"/cad_pj"}><Button variant= "success" id="btn_main1"> Cadastre sua Organização! </Button></Link>
+                              </div>
+                      </Col>
+                  </Row>
+        
+                </div>
+              </div>
+        
+        
+        
+              <div className="b-example-divider"></div>
+        
+              <div id="div_nossos_parceiros">
+        
+                <div id="sub_div_apoiadores">
+                    <h3>Nossos Parceiros:</h3>
+        
+                    <div id="div_apoiadores">
+                        <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxmdfTkAvl8uqvjj8M3TUV-n9SkBSZL0kTVOpfRUxaI9X1LtKlfUiOfmHchqZoBkIs-M&usqp=CAU"} alt="Empresa 1" width="200" height="200"></img>
+                        <img src={"https://img.freepik.com/vector-premium/logotipo-comercializacion-venta_712682-3297.jpg"} alt="Empresa 2" width="200" height="200"></img>
+                        <img src={"https://img.freepik.com/vetores-premium/modelo-do-logotipo-da-caixa-do-estudio_10399-28.jpg"} alt="Empresa 3" width="200" height="200"></img>
+                        <img src={"https://img.freepik.com/vetores-premium/logotipo-da-empresa_7436-14.jpg"} alt="Empresa 4" width="200" height="200"></img>
+                        <img src={"https://img.freepik.com/vetores-gratis/modelo-de-logotipo-de-dados-gradiente_23-2149200604.jpg"} alt="Empresa 5" width="200" height="200"></img>
+                    </div>
+                </div>
+        
+              </div>
+        
+          
+              
+            </main>
+            
+            
+        </>
+    )
+    
 }

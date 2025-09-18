@@ -1,17 +1,18 @@
 'use client';
-//import '@/src/app/CSS/header_alt.css'
+import Header_feed from "../components/header_feed";
+import '@/src/app/CSS/header_alt.css'
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import logo_instagram from '@/img/icons/instagram_6422200.png';
-import logo_twitter from '@/img/icons/twitter_5968830.png';
-import logo_facebook from '@/img/icons/social_12942738.png';
-import logo_linkedin from '@/img/icons/linkedin_3536569.png';
-import { CepResponse, getCepData } from '@/services/cep';
+import logo_instagram from '@/src/app/img/icons/instagram_6422200.png';
+import logo_twitter from '@/src/app/img/icons/twitter_5968830.png';
+import logo_facebook from '@/src/app/img/icons/social_12942738.png';
+import logo_linkedin from '@/src/app/img/icons/linkedin_3536569.png';
+import { CepResponse, getCepData } from '../services/cep';
 import { Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
 import { ErrorMessage } from "formik";
-import dados_usuarios from '@/APIs/dados_usuarios.json';
+import dados_usuarios from '@/src/app/APIs/dados_usuarios.json';
 
 // Definição de tipos
 interface Usuario {
@@ -56,7 +57,7 @@ const validationSchema = Yup.object().shape({
     bairro: Yup.string().required('Campo Obrigatório'),
 });
 
-export default function EditProfilePage() {
+export default function Editar_perfil() {
     const router = useRouter();
     const [initialValues, setInitialValues] = useState<Usuario>({
         id: '',
@@ -104,7 +105,7 @@ export default function EditProfilePage() {
 
     return (
         <>
-            
+            <Header_feed/>
             <body className='bg-verde1'>
                 <main className="bg-verde2 min-h-screen flex items-center justify-center p-4 mt-4 mb-4">
                     <div className="bg-white rounded-3xl border-4 p-6 w-full max-w-4xl">   

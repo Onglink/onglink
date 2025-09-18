@@ -1,0 +1,147 @@
+#navbar
+{
+    background-color: #2b3710c4;
+    color: white;
+    padding: 20px;
+    width: 100%;
+}
+
+#navbar li
+{
+    width: 250px;
+    height: 30px;
+    border-radius: 30px;
+    font-weight: 700;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbar li:hover
+{
+    background-color: oklch(52.7% .154 150.069);
+    color: #48f718;
+}
+
+#fundo_navbar
+{
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #283903a6
+}
+
+#navbar ul
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    list-style-type: none;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+
+#texto_historia h3, #texto_historia p, #lista_missao, #header_missao
+{
+    background-color: #2b3710c4;
+    color: white;
+    padding: 20px;
+    width: 500px;
+}
+
+#texto_historia
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+#missao_valores
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#texto_historia h3, #header_missao
+{
+    text-align: center;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 50px;
+    width: 500px;
+}
+
+#lista_missao
+{
+    padding-left: 30px;
+}
+
+#lista_missao li
+{
+    padding-bottom: 20px;
+}
+
+#lista_missao b
+{
+    color: #4ccb00;
+}
+
+#div_imagem
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    
+}
+
+#div_imagem img
+{
+    height: 800px;
+    width: 500px;
+    margin-bottom: 16px;
+    border-radius: 20px;
+}
+
+iframe
+{
+    border: 1px solid white;
+}
+
+#video_pitch
+{
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+#main_div
+{
+    background-image: url("https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.row
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#div_texto
+{
+    background-color: #2b3710c4;
+}
+
+#sub_div_historia
+{
+    background-color: #283903a6;
+}

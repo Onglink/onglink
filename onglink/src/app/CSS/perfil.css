@@ -1,0 +1,84 @@
+
+#fundo_perfil {
+    height: 200px;
+    object-fit: cover;
+    object-position: 0 100%;
+    width: 100%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+#perfil{
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+#titulo_perfil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+#MUXN_certificado{
+    display: flex;
+    align-items: center;
+}
+
+
+#MUXN_certificado h3{
+    margin-bottom: 2px;
+    margin-right: 5px;
+}
+
+#container_perfil{
+    margin-bottom: 30px;
+}
+
+#div1_perfil{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#div_nome_perfil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#div_publi{
+    overflow: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-right: 0px;
+    height: 600px;
+    padding: 20px;
+}
+
+
+#borda_publi{
+    border-radius: 10px;
+    border-color:#789186;
+    background-color: #99b4a8;
+    width: 80%;
+}
+
+.img-overlay-wrap:hover #logo_MUXN{
+    filter: blur(2px);
+    cursor: pointer;
+}
+
+.img-overlay-wrap:hover #svg_mudar_pfp{
+    opacity: 1;
+    cursor: pointer;
+}
+
+.img-overlay-wrap svg{
+    position: relative;
+    top: -95;
+    left: 63;
+    opacity: 0;
+}
+

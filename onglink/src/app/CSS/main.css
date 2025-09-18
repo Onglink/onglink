@@ -1,0 +1,181 @@
+main, #body_login{
+    background-color: #95b95f;
+}
+
+/* Main da Homepage (Vinicius)*/
+
+
+#main1, #div_nossos_parceiros
+{
+    background-image:url("https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+#image_home
+{
+    height: 800px;
+    width: 500px;
+    margin-bottom: 16px;
+    border-radius: 20px;
+}
+
+#main1
+{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#sub_div_desc
+{
+    padding-right: 50px;
+    background-color: #283903a6;
+}
+
+#header_vantagens
+{
+    margin-bottom: 40px;
+    text-align: center;
+    border-radius: 50px;
+}
+
+#desc_home p, #header_vantagens, #vantagens, #div_botao
+{
+    background-color:#2b3710c4;
+    padding: 20px;
+    width: 600px;
+    color: white;
+}
+
+#desc_home p
+{
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+#desc_home
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+#div_imagem_home
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#vantagens li
+{
+    list-style-type: disc;
+    padding-bottom: 30px;
+}
+
+#vantagens
+{
+    padding-left: 70px;
+    padding-top: 30px;
+    padding-bottom: 0px;
+    text-align: left;
+}
+
+#img_votorantim, #img_tvtem
+{
+    width: 220px;
+    height: 180px;
+}
+
+#img_havan
+{
+    width: 250px;
+    height: 200px;
+}
+
+#img_sesc
+{
+    width: 250px;
+}
+
+#div_nossos_parceiros
+{
+
+    color: white;
+}
+
+#sub_div_apoiadores
+{
+    background-color: #283903a6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+#div_nossos_parceiros h3
+{
+    height: 60px;
+    width: 30%;
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 50px;
+    background-color: #2b3710c4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#div_apoiadores
+{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #637b30;
+    width: 90%;
+}
+
+#div_botao
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#btn_main1, #btn_main2
+{
+    --bs-btn-bg: #5F8C1B;
+    border: none;
+    width: 300px;
+    height: 50px;
+}
+
+#div_botao a
+{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+a
+{
+    color: white;
+    text-decoration: none;
+}
+
+#links_footer
+{
+    text-align: center;
+}

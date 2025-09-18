@@ -1,0 +1,388 @@
+/*cadastro_main*/
+
+header#header_header.py-3.mb-3.border-bottom{
+
+    margin-bottom: 0px;
+    
+    }
+
+    
+    
+    
+    main{
+            /* background-color: white ; */
+    
+    
+            justify-content: center;
+            justify-items: center;
+            text-align: center;
+    
+    
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+    
+            
+    
+    
+           
+        }
+    
+    
+    
+        #par_sep{
+    
+            margin-bottom: 2%;
+            margin-top: 2%;
+            
+            
+            
+            }
+
+/*cadastro_1.HTML*/
+
+/*Dentro container*/
+
+#div_cad_container{
+
+
+    border-radius: 20px;
+    border-color: black;
+    border-style: solid;
+
+    padding-left: 2%;
+    padding-right: 2%;
+
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+
+    max-width: 50%;
+
+    margin-bottom: 1% ;
+    margin-top: 1%;
+    background-color: white;
+
+   
+
+}
+
+
+/*Divisão dentro container*/
+
+
+#main_recSenha{
+  display: flex;
+  align-items: center;
+}
+
+#tele_recSenha{
+  margin-bottom: 20px;
+  width: 200%;
+}
+
+#email_recSenha{
+  width: 200%;
+}
+
+#div_cad_ong_tela_1{
+  margin: 30px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#div_email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#div_email a{
+  color: green;
+  font-size: small;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+#cnpj, #cpf{
+
+width: 100%px;
+text-align: center;
+}
+
+
+
+#cidade, #estado {
+
+width: 100%;
+text-align: center;
+}
+
+#cep{
+
+    width: 100%;
+    text-align: center;
+}
+
+
+
+
+
+
+/*telefone*/
+
+#telefone1, #telefone2{
+
+width: 75%;
+text-align: center;
+
+}
+#div_tel{
+
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+
+}
+
+
+
+/*sobre*/
+
+#txt_sobre_entidade{
+margin-bottom: 10px;
+
+
+
+}
+
+
+
+
+/*botão continuar */
+#div_row_btn_continuar_entidade{
+
+margin-top: 10px;
+margin-bottom: 10px;
+
+
+
+}
+
+
+
+/*Cadastro_2.html*/
+#div_tipo_entidade{
+
+width: 300px;
+
+
+
+}
+
+#empresa, #ong{
+
+    margin-left: 5%;
+    margin-right: 4px;
+
+}
+
+#esc_causa_amb, #esc_causa_ani,#esc_causa_edu,#esc_causa_sau,#esc_causa_soc, #esc_causa_out{
+
+    margin-left: 5%;
+    margin-right: 4px;
+    
+    
+    }
+    
+input#esc_causa_out_txt{
+
+width: 25%;
+
+}
+
+
+
+
+/*Input caixas de texto redes*/
+input#redes_ong_instagram,input#redes_ong_facebook,input#redes_ong_x,input#redes_ong_linkedin{
+    
+    width: 400px;
+
+
+
+}
+
+#row_logo_entidade{
+
+    margin-top: 3%;
+    
+    
+    }
+
+
+
+#div_row_btn_continuar_ong_2{
+
+   
+    margin-top: 50px;
+    margin-bottom: 10px;
+        
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+/*Selecionar opção Empresa ou ONG*/
+.container {
+    margin-top: 20px;
+  }
+  .hidden {
+    display: none;
+  }
+
+
+  #data_fund{
+
+width: 120px;
+text-align: center;
+
+  }
+
+
+  #sigla_ong{
+
+width: 50px;
+text-align: center;
+
+
+  }
+
+
+
+  /*tela cadastro_1.html alt*/
+
+
+
+
+#div_container{
+
+    border-radius: 20px;
+    border-color: black;
+    border-style: solid;
+
+    padding-left: 2%;
+    padding-right: 2%;
+
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+
+    max-width: 70%;
+
+    margin-bottom: 1% ;
+    margin-top: 1%;
+    background-color: white;
+
+
+
+
+}
+
+#senha {
+  margin-bottom: 20px;
+}
+
+#esqueci_senha{
+  color: darkgreen;
+}
+
+#btn_continuar{
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+
+#main_cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+/* Adiciona borda preta aos inputs */
+input.form-control {
+    border: 1px solid black;
+  }
+  
+  /* Adiciona borda preta ao textarea */
+  textarea.form-control {
+    border: 1px solid black;
+  }
+  
+  /* Para estilizar o select com a borda preta */
+  select.form-select {
+    border: 1px solid black;
+  }
+  
+
+
+
+
+
+
+  div.col-10.text-center{
+
+ 
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+
+
+  }
+  #row_out_causa{
+
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+
+
+  }
+
+
+  #div_cep{
+
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+
+  }
+
+  /* Estilização de bordas pretas */
+  input.form-control, textarea.form-control, select.form-select {
+    border: 1px solid black;
+  }
+
+  /* Feedback visual */
+  .is-invalid {
+    border-color: red;
+  }
+
+  .is-valid {
+    border-color: green;
+  }
