@@ -3,7 +3,7 @@ import React, { FC, useState } from "react";
 import Image from "next/image";
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import NeWUploadButton from "./button/NewUploadButton";
-import { Button, Modal, Form, FormCheck, Alert } from "react-bootstrap";
+import { Button, Modal, Form, FormCheck, Alert, ModalProps } from "react-bootstrap";
 
 interface PublicarFormProps {
   onPublish: (post: {
@@ -29,7 +29,7 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
   };
   const [modalShow, setModalShow] = React.useState(false);
 
-  function ModalDenuncia(props: any) {
+  function ModalDenuncia(props: ModalProps) {
     function handleClose() {
       setModalShow(false);
       return alert("Denúncia Enviada com Sucesso!");

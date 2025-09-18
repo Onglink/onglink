@@ -20,7 +20,7 @@ export default function Login() {
           
       <Header_home/>
   
-      <body id="body_login">
+      
         
       <main className="bg-verde2 min-h-screen flex items-center justify-center p-4 mt-4 mb-4">
         {/* <!--Main--> */}
@@ -73,7 +73,7 @@ export default function Login() {
       </div>
 
       </main>
-      </body>
+      
       </>
     )
 }
