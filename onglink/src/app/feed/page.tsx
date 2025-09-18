@@ -1,24 +1,26 @@
 "use client";
 import Image from "next/image";
-import React, { useRef, useState, ChangeEvent } from "react";
+import React, {  useState, ChangeEvent } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "@/src/app/CSS/feed.css";
-import "@/src/app/CSS/header_alt.css";
-import FeedCarousel from "@/src/app/components/carrousel/carousel";
-import Arara from "@/src/app/img/arara.jpeg";
-import AraraAzul from "@/src/app/img/arara_azul.jpeg";
-import MuxnLogo1 from "@/src/app/img/MUXN_logo1.png";
-import Capivara from "@/src/app/img/capivara.jpeg";
-import Ceu from "@/src/app/img/ceu.jpeg";
-import Mico from "@/src/app/img/mico.jpeg";
-import Tucano from "@/src/app/img/tucano.jpeg";
-import logo_instagram from "@/src/app/img/icons/instagram_6422200.png";
-import logo_twitter from "@/src/app/img/icons/twitter_5968830.png";
-import logo_facebook from "@/src/app/img/icons/social_12942738.png";
+import "@/app/CSS/feed.css";
+import "@/app/CSS/header_alt.css";
+import FeedCarousel from "@/app/components/carrousel/carousel";
+import Arara from "@/app/img/arara.jpeg";
+import AraraAzul from "@/app/img/arara_azul.jpeg";
+import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
+import Capivara from "@/app/img/capivara.jpeg";
+import Ceu from "@/app/img/ceu.jpeg";
+import Mico from "@/app/img/mico.jpeg";
+import Tucano from "@/app/img/tucano.jpeg";
+import logo_instagram from "@/app/img/icons/instagram_6422200.png";
+import logo_twitter from "@/app/img/icons/twitter_5968830.png";
+import logo_facebook from "@/app/img/icons/social_12942738.png";
 import { Button, Modal, Form, FormCheck, Alert } from "react-bootstrap";
 import Header_feed from "../components/header_feed";
 import UploadButton from "../components/button/UploadButton";
 import FeedPage from "../components/FeedPage";
+import type { ModalProps } from "react-bootstrap";
+
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
@@ -58,7 +60,7 @@ export default function Home() {
 
   const [modalShow, setModalShow] = React.useState(false);
 
-  function ModalDenuncia(props: any) {
+  function ModalDenuncia(props: ModalProps) {
     function handleClose() {
       setModalShow(false);
       return alert("Denúncia Enviada com Sucesso!");

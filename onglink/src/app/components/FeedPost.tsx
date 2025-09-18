@@ -1,9 +1,9 @@
 "use client";
 import React, { FC, useState } from "react";
 import Image from "next/image";
-import MuxnLogo1 from "@/src/app/img/MUXN_logo1.png";
-import { Button, Modal, Form, FormCheck } from "react-bootstrap";
-import "@/src/app/CSS/feed.css"
+import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
+import { Button, Modal, Form, FormCheck, ModalProps } from "react-bootstrap";
+import "@/app/CSS/feed.css"
 
 interface Post {
   title: string;
@@ -19,7 +19,7 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
     const [modalShow, setModalShow] = useState(false);
   const imageURL = post.image ? URL.createObjectURL(post.image) : null;
   
-  function ModalDenuncia(props:any) {
+  function ModalDenuncia(props:ModalProps) {
       function handleClose(){
         setModalShow(false);
         return(
@@ -83,7 +83,7 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
         <p>{post.message}</p>
         {imageURL && (
           <div>
-            <img
+            <Image
               src={imageURL}
               alt="Imagem da publicação"
               style={{ maxWidth: "auto", marginTop: 8, height:"auto"}}

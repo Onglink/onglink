@@ -1,7 +1,7 @@
 "use client";
 import React, { FC, useState } from "react";
 import Image from "next/image";
-import MuxnLogo1 from "@/src/app/img/MUXN_logo1.png";
+import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import NeWUploadButton from "./button/NewUploadButton";
 import { Button, Modal, Form, FormCheck, Alert } from "react-bootstrap";
 

@@ -1,5 +1,5 @@
 "use client";
-import logo_onglink_01 from "@/src/app/img/LOGO_ONGLINK_1.png";
+import logo_onglink_01 from "@/app/img/LOGO_ONGLINK_1.png";
 import Image from "next/image";
 import Link from "next/link";
 import { Button, Col, Row } from "react-bootstrap";
