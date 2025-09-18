@@ -1,15 +1,15 @@
 'use client';
 import { global } from "styled-jsx/css";
 import Image from 'next/image';
-import logo_instagram from '@/src/app/img/icons/instagram_6422200.png';
-import logo_twitter from '@/src/app/img/icons/twitter_5968830.png';
-import logo_facebook from '@/src/app/img/icons/social_12942738.png';
-import logo_linkedin from '@/src/app/img/icons/linkedin_3536569.png';
+import logo_instagram from '@/app/img/icons/instagram_6422200.png';
+import logo_twitter from '@/app/img/icons/twitter_5968830.png';
+import logo_facebook from '@/app/img/icons/social_12942738.png';
+import logo_linkedin from '@/app/img/icons/linkedin_3536569.png';
 import { useState, useRef, ChangeEvent } from 'react';
 import { Button } from "react-bootstrap";
-import Header_home from "@/src/app/components/header_home";
-import '@/src/app/CSS/home.css'
-import '@/src/app/CSS/header_alt.css'
+import Header_home from "@/app/components/header_home";
+import '@/app/CSS/home.css'
+import '@/app/CSS/header_alt.css'
 import Input from '../components/inputFormulario';
 import { useRouter } from "next/navigation";
 
