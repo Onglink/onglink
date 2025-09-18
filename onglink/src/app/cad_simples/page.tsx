@@ -1,0 +1,153 @@
+'use client';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Header_home from "@/app/components/header_home";
+import '@/app/CSS/home.css'
+import '@/app/CSS/header_alt.css'
+import { CepResponse, getCepData } from '../services/cep';
+import { Field, Form, Formik } from "formik";
+import * as Yup from 'yup';
+import { ErrorMessage } from "formik";
+
+const validationSchema = Yup.object().shape({
+    razao_social: Yup.string().required('Campo obrigatório'),
+    cnpj: Yup.string().required('Campo Obrigatório'),
+    email: Yup.string().email('Digite o email válido').required('Campo Obrigatório'),
+    senha: Yup.string().required('Campo Obrigatório'),
+    confirmarSenha: Yup.string().required('Campo Obrigatório')
+   
+    
+});
+
+
+
+export default function Cad_pj() {
+    const router = useRouter();
+    const initialValues = {
+        razao_social: '',
+        cnpj: '',
+        email: '',
+        senha: '',
+        confirmarSenha: ''
+    };
+
+    
+
+
+    return (
+        <>
+        <Header_home/>
+        <body className='bg-verde1'>
+            <main className="bg-verde2 min-h-screen flex items-center justify-center p-4 mt-4 mb-4">
+                <div className="bg-white rounded-3xl border-4 p-6 w-full max-w-4xl">   
+                    <h1 className="text-center">Cadastro</h1>
+                    <Formik 
+                        initialValues={initialValues}
+                        onSubmit={values => {
+                            console.log(values);
+                            // Redireciona para a página de login após o cadastro
+                            router.push('/login');
+                        }}
+                        validationSchema={validationSchema}
+                    >
+                        {({ handleSubmit, setFieldValue, values }) => (
+                            <Form onSubmit={handleSubmit}>  
+                                <div>
+                                    {/* Razão Social */}
+                                    <div className="mb-4">
+                                        <label htmlFor="razao_social" className="block mb-1">
+                                            Razão Social <span className="text-red-500">*</span>
+                                        </label>
+                                        <Field 
+                                            type="text" 
+                                            name="razao_social" 
+                                            placeholder="Razão Social"
+                                            className="border-1 rounded w-full p-2 border-gray-600"
+                                        />
+                                        <ErrorMessage name="razao_social" component="div" className="error"/>
+                                    </div>
+
+                                    {/* Email e CNPJ */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label htmlFor="cnpj" className="block mb-1">
+                                                CNPJ <span className="text-red-500">*</span>
+                                            </label>
+                                            <Field 
+                                                type="text" 
+                                                name="cnpj" 
+                                                maxLength={18}
+                                                placeholder="00.000.000/0000-00"
+                                                className="border-1 rounded w-full p-2 border-gray-600"
+                                            />
+                                            <ErrorMessage name="cnpj" component="div" className="error"/>
+                                        </div>
+
+                                        {/* Email */}
+                                        <div>
+                                            <label htmlFor="email" className="block mb-1">
+                                                Email <span className="text-red-500">*</span>
+                                            </label>
+                                            <Field 
+                                                type="email" 
+                                                name="email" 
+                                                placeholder="exemplo@email.com"
+                                                className="border-1 rounded w-full p-2 border-gray-600"
+                                            />
+                                            <ErrorMessage name="email" component="div" className="error"/>
+                                        </div>
+                                    </div>
+
+                                    {/* Senha */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div>
+                                            <label htmlFor="senha" className="block mb-1">
+                                                Senha <span className="text-red-500">*</span>
+                                            </label>
+                                            <Field 
+                                                type="password" 
+                                                name="senha" 
+                                                
+                                                className="border-1 rounded w-full p-2 border-gray-600"
+                                            />
+                                            <ErrorMessage name="password" component="div" className="error"/>
+                                        </div>
+
+                                        {/*Confirmar senha */}
+                                        <div>
+                                            <label htmlFor="confirmarSenha" className="block mb-1">
+                                                Confirmar Senha <span className="text-red-500">*</span>
+                                            </label>
+                                            <Field 
+                                                type="password" 
+                                                name="confirmarSenha" 
+                                                
+                                                className="border-1 rounded w-full p-2 border-gray-600"
+                                            />
+                                            <ErrorMessage name="password" component="div" className="error"/>
+                                        </div>
+
+                                        
+                                    </div>
+
+                                
+
+                                    {/* Botão de Enviar */}
+                                    <div className="text-center">
+                                        <button 
+                                            type="submit" 
+                                            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                                        >
+                                            Enviar
+                                        </button>
+                                    </div>
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>
+                </div>
+            </main>
+        </body>            
+        </>
+    );
+}
