@@ -14,7 +14,7 @@ import Tucano from '@/app/img/tucano.jpeg';
 function FeedCarousel() {
   const [index, setIndex] = useState(0);
 
-  const handleSelect = (selectedIndex) => {
+  const handleSelect = (selectedIndex:number) => {
     setIndex(selectedIndex);
   };
 
