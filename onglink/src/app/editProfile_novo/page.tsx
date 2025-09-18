@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { CepResponse, getCepData } from '@/services/cep';
+import { CepResponse, getCepData } from '@/app/services/cep';
 
 // Tipos para os dados dos formulários
 interface BasicFormValues {
