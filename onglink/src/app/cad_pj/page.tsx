@@ -1,9 +1,9 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import Header_home from "@/src/app/components/header_home";
-import '@/src/app/CSS/home.css'
-import '@/src/app/CSS/header_alt.css'
+import Header_home from "@/app/components/header_home";
+import '@/app/CSS/home.css'
+import '@/app/CSS/header_alt.css'
 import { CepResponse, getCepData } from '../services/cep';
 import { Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
