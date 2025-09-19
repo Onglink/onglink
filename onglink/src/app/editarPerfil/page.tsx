@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { CepResponse, getCepData } from '@/app/services/cep';
+import Header_feed from '../components/header_feed';
+//import '@/app/CSS/';
 
 // Tipos para os dados dos formulários
 interface BasicFormValues {
@@ -40,6 +42,9 @@ interface UploadFormValues {
 
 // Componente do formulário básico
 const BasicForm: React.FC = () => {
+    
+  
+
   const [causaSelecionada, setCausaSelecionada] = useState<number | null>(null);
 
   const handleCausaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,6 +78,7 @@ const BasicForm: React.FC = () => {
   });
 
   return (
+    
     <div className="form-container">
       <h2>Informações Básicas</h2>
       <form onSubmit={formik.handleSubmit}>
@@ -256,6 +262,7 @@ const BasicForm: React.FC = () => {
         <button type="submit">Enviar</button>
       </form>
     </div>
+
   );
 };
 
@@ -606,6 +613,7 @@ const FormPage: React.FC = () => {
 
   return (
     <div className="container">
+      <Header_feed/>
       <div className="header">
         <div className="nav-buttons">
           <button 
