@@ -29,7 +29,7 @@ export default function Header_home() {
             <Button
               id="botao_cadastro"
               onClick={() => {
-                router.push("/cad_pj");
+                router.push("/cad_simples");
               }}
             >
               Cadastre-se
