@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { CepResponse, getCepData } from '@/app/services/cep';
 import Header_feed from '../components/header_feed';
-//import '@/app/CSS/';
+import '@/app/CSS/header_alt.css'
 
 // Tipos para os dados dos formulários
 interface BasicFormValues {
@@ -612,8 +612,10 @@ const FormPage: React.FC = () => {
   };
 
   return (
+    <> 
+    <Header_feed/> 
     <div className="container">
-      <Header_feed/>
+      
       <div className="header">
         <div className="nav-buttons">
           <button 
@@ -646,6 +648,7 @@ const FormPage: React.FC = () => {
         {renderForm()}
       </div>
     </div>
+    </>
   );
 };
 
