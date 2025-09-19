@@ -177,7 +177,7 @@ const BasicForm: React.FC = () => {
         <div className="form-group">
           <h3 className="text-lg font-semibold mb-3">Escolha a causa principal da sua organização:</h3>
           
-          <div className="causas-container">
+          <div className="causas-container flex justify-center items-center border-4 rounded-2xl space-x-5 p-4 ">
             <div className="causa-option">
               <input 
                 type="radio" 
@@ -260,7 +260,7 @@ const BasicForm: React.FC = () => {
           ) : null}
         </div>
 
-        <button type="submit">Enviar</button>
+        <button className=' border-2 rounded-5 bg-green-400 p-4' type="submit">Enviar</button>
       </form>
     </div>
 
