@@ -7,6 +7,9 @@ import logo_onglink_01 from '@/app/img/LOGO_ONGLINK_1.png'
 import image_home from '@/app/img/image_home.jpg'
 import logo_muxn from '@/app/img/MUXN_logo1.png'
 import React from "react";
+import planetilson from '@/app/img/gb1png 1.png'
+import planetilson_pintor from '@/app/img/gb2png 2.png'
+import globalison3 from '@/app/img/gb3.png'
 import '@/app/CSS/home.css'
 import '@/app/CSS/header_alt.css'
 import '@/app/CSS/menu.css'
@@ -27,65 +30,84 @@ export default function Home() {
               {/*<!--Main-->*/}
         
               <div className="main1">
-                <div id="sub_div_desc">
                   
-                  <Row className="row">
+                  <Row className="row mt-5 mb-8" id="row1">
         
                       <Col sm={6} id="div_imagem_home">
-                        <Image src={image_home} alt="image_home" className="image_home" width={500} height={300}></Image>
+                        <Image alt="" src={planetilson} width={1000}></Image>
                       </Col>
                       <Col sm={6} id="desc_home">
-                          <h4 id="header_vantagens">Por que sua empresa ou ONG deve estar aqui? </h4>
-                          <ul id="vantagens">
-                              <li>Otimizar investimentos em organizações confiáveis</li>
-                              <li>Figurar entre as empresas que se preocupam com causas sociais</li>
-                              <li>Promover o bem estar social e o fortalecimento dos direitos sociais</li>
-                          </ul>
-        
-                              <p>
-                                Visando otimizar o uso de recursos financeiros da sua empresa e fomentar as organizações não governamentais, 
-                                a plataforma ONGlink fornece os recursos e ferramentas ideais para criar a conexão necessária, onde investidores 
-                                podem ter a garantia de que seu projeto social terá um melhor aproveitamento de seus recursos e uma maior visibilidade
-                                pela sociedade, governo e outras empresas.
-                              </p> 
-                                
-                              <p>
-                                A plataforma garante que os investidores possam acompanhar o aproveitamento 
-                                dos recursos financeiros, além de oferecer visibilidade para as iniciativas sociais, promovendo uma cultura de responsabilidade 
-                                social corporativa. 
-                              </p>
-        
-                              <div id="div_botao">
-                                <h4>
-                                  Venha fazer parte da ONGLink!
-                                </h4>
-        
-                                <Link href={"/cad_pj"}><Button variant= "success" id="btn_main1"> Cadastre sua Organização! </Button></Link>
-                              </div>
+
+                          <h4> O apoio que sua ONG precisa! </h4>
+
+                          <p>
+                            Venha conhecer a Onglink, 
+                            plataforma desenvolvida para você
+                            poder consultar as entidades de 
+                            apoio social e ONG’s.
+                            Nossa missão é ter aqui na plataforma, 
+                            entidades certificadas e de real atuação 
+                            no mercado.
+                            Clique aqui para se cadastrar e nos 
+                            ajudar a divulgar o link do bem.  
+                          </p>
                       </Col>
                   </Row>
-        
+
+
+                  <Row className="row" id="row2">
+                      <Col>
+                        <h4>Por que se juntar à ONGlink?</h4>
+
+                        <ul id="vantagens">
+                            <li>Otimizar investimentos em organizações confiáveis</li>
+                            <li>Figurar entre as empresas que se preocupam com causas sociais</li>
+                            <li>Promover o bem estar social e o fortalecimento dos direitos sociais</li>
+                        </ul>
+                      </Col>
+                      
+                      <Col>
+                        <Image alt="" src={planetilson_pintor}></Image>
+                      </Col>
+                  </Row>
+
+                  <Row className="row" id="row3">
+                    <Col>
+                      <Image alt="" src={globalison3} width={500} id="planetilson3"></Image>
+                    </Col>
+
+                    <Col>
+                      <div id="div_botao">
+                        <h4>Junte-se à ONGlink!</h4>
+
+                        <p>
+                          Venha fazer parte da ONGLink, e se junte com os nossos outros parceiros na plataforma.
+                        </p>
+
+                        <Link href={"/cad_pj"}>
+                          <Button
+                              id="botao_cadastro2"
+                            >
+                              Cadastre-se
+                          </Button></Link>
+                      </div>
+                    </Col>
+
+                  </Row>
+
+                <div id="div_nossos_parceiros">
+          
+                      <h3>Nossos Parceiros:</h3>
+          
+                      <div id="div_apoiadores">
+                          <img className="border-3 border-blue-500 rounded-xl" src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxmdfTkAvl8uqvjj8M3TUV-n9SkBSZL0kTVOpfRUxaI9X1LtKlfUiOfmHchqZoBkIs-M&usqp=CAU"} alt="Empresa 1" width="200" height="200"></img>
+                          <img className="border-3 border-yellow-300 rounded-xl" src={"https://img.freepik.com/vector-premium/logotipo-comercializacion-venta_712682-3297.jpg"} alt="Empresa 2" width="200" height="200"></img>
+                          <img className="border-3 border-red-500 rounded-xl" src={"https://img.freepik.com/vetores-premium/modelo-do-logotipo-da-caixa-do-estudio_10399-28.jpg"} alt="Empresa 3" width="200" height="200"></img>
+                          <img className="border-3 border-green-500 rounded-xl" src={"https://img.freepik.com/vetores-premium/logotipo-da-empresa_7436-14.jpg"} alt="Empresa 4" width="200" height="200"></img>
+                      </div>
+          
                 </div>
-              </div>
-        
-        
-        
-              <div className="b-example-divider"></div>
-        
-              <div id="div_nossos_parceiros">
-        
-                <div id="sub_div_apoiadores">
-                    <h3>Nossos Parceiros:</h3>
-        
-                    <div id="div_apoiadores">
-                        <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxmdfTkAvl8uqvjj8M3TUV-n9SkBSZL0kTVOpfRUxaI9X1LtKlfUiOfmHchqZoBkIs-M&usqp=CAU"} alt="Empresa 1" width="200" height="200"></img>
-                        <img src={"https://img.freepik.com/vector-premium/logotipo-comercializacion-venta_712682-3297.jpg"} alt="Empresa 2" width="200" height="200"></img>
-                        <img src={"https://img.freepik.com/vetores-premium/modelo-do-logotipo-da-caixa-do-estudio_10399-28.jpg"} alt="Empresa 3" width="200" height="200"></img>
-                        <img src={"https://img.freepik.com/vetores-premium/logotipo-da-empresa_7436-14.jpg"} alt="Empresa 4" width="200" height="200"></img>
-                        <img src={"https://img.freepik.com/vetores-gratis/modelo-de-logotipo-de-dados-gradiente_23-2149200604.jpg"} alt="Empresa 5" width="200" height="200"></img>
-                    </div>
-                </div>
-        
+
               </div>
         
           

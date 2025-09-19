@@ -1,16 +1,12 @@
-.main_home{
-    background-color: #95b95f;
-}
-
 /* Main da Homepage (Vinicius)*/
 
 .main1, .div_nossos_parceiros
 {
-    background-image:url("https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-color: rgba(120, 171, 191, 0.35);
     background-repeat: no-repeat; 
     background-size: cover;
+    padding-top: 20px;
 }
-
 
 .image_home
 {
@@ -26,11 +22,6 @@
     padding-bottom: 30px;
 }
 
-#sub_div_desc
-{
-    padding-right: 50px;
-    background-color: #283903a6;
-}
 
 #header_vantagens
 {
@@ -39,12 +30,39 @@
     border-radius: 50px;
 }
 
-#desc_home p, #header_vantagens, #vantagens, #div_botao
+#desc_home p, #header_vantagens, #vantagens, #div_botao, #div_botao p
 {
-    background-color:#2b3710c4;
     padding: 20px;
     width: 600px;
-    color: white;
+    color: rgba(7, 113, 33, 0.75);
+    font-weight: 900;
+    font-size: larger;
+}
+
+#desc_home h4, #row2 h4, #row3 h4
+{
+    font-weight: 900;
+    font-size: xx-large;
+    color: #05b3ca;
+}
+
+#row1, #row2, #row3
+{
+    margin-top: 70px;
+    margin-bottom: 150px;
+}
+
+#row2 .col
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#planetilson3
+{
+    margin-left: 50px;
+    padding-top: 35px;
 }
 
 #desc_home p
@@ -73,13 +91,15 @@
 #vantagens li
 {
     padding-bottom: 30px;
+    padding-top: 10px;
 }
 
 #vantagens
 {
     padding-left: 70px;
-    padding-top: 30px;
+    padding-top: 40px;
     padding-bottom: 0px;
+    margin-top: 30px;
 }
 
 #img_votorantim, #img_tvtem
@@ -101,31 +121,30 @@
 
 #div_nossos_parceiros
 {
-
-    color: white;
-}
-
-#sub_div_apoiadores
-{
-    background-color: #283903a6;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 400px;
+    padding-bottom: 60px;
 }
 
 #div_nossos_parceiros h3
 {
     height: 60px;
     width: 30%;
+    margin-top: 20px;
+    padding: 20px;
     text-align: center;
     border-radius: 50px;
-    background-color: #2b3710c4;
+    color:#05b3ca;
+    font-weight: 900;
+    font-size: xx-large;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 
 #div_apoiadores
 {
@@ -136,7 +155,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #637b30;
     width: 90%;
 }
 
@@ -149,12 +167,20 @@
     margin-bottom: 20px;
 }
 
-#btn_main1, #btn_main2
+#botao_cadastro2
 {
-    --bs-btn-bg: #5F8C1B;
+    background-color: rgba(4, 165, 44, 0.75);
     border: none;
-    width: 300px;
+    color: #01292E;
+    width: 200px;
     height: 50px;
+    font-weight: 700;
+    box-shadow: 0px 6px rgba(2, 84, 23, 0.75)
+}
+
+#botao_cadastro2:hover{
+    background-color: rgba(3, 62, 18, 0.85);
+    color: #AEF2AC;
 }
 
 #div_botao a
@@ -165,7 +191,8 @@
 
 a
 {
-    color: white;
+    color: rgba(2, 84, 23, 0.75);
+    font-weight: 700;
     text-decoration: none;
 }
 

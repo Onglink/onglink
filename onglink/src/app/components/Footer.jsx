@@ -49,7 +49,7 @@ export default function Footer() {
                 <li>
                 <Link 
                     onClick={() => {router.push("/legislacao")}}
-                    href="/legislacao" className="text-white hover:text-blue-600 transition-colors">
+                    href="/legislacao" className=" hover:text-blue-600 transition-colors">
                     Legislação
                 </Link>
                 </li>
@@ -57,7 +57,7 @@ export default function Footer() {
                 <li>
                 <Link 
                     onClick={() => {router.push("/nossa_historia")}}
-                    href="/nossa_historia" className="text-white hover:text-blue-600 transition-colors">
+                    href="/nossa_historia" className=" hover:text-blue-600 transition-colors">
                     Nossa história
                 </Link>
                 </li>
@@ -65,7 +65,7 @@ export default function Footer() {
                 <li>
                 <Link 
                     onClick={() => {router.push("/parceiros")}}
-                    href="/parceiros" className="text-white hover:text-blue-600 transition-colors">
+                    href="/parceiros" className="hover:text-blue-600 transition-colors">
                     Parceiros
                 </Link>
                 </li>
@@ -74,8 +74,8 @@ export default function Footer() {
 
             {/* Coluna 3 - Newsletter */}
             <div>
-            <h3 className="text-lg font-semibold mb-4 text-white">Subscreva na nossa newsletter</h3>
-            <p className="text-white mb-4">
+            <h3 className="text-lg font-semibold mb-4">Subscreva na nossa newsletter</h3>
+            <p className="mb-4">
                 Receba as modalidades diretamente pelo seu email.
             </p>
             <form className="" id='form_footer'>
@@ -100,7 +100,7 @@ export default function Footer() {
       <div id="div_infos_redes_sociais" className="max-w-6xl mx-auto mt-12 pt-6 border-t border-gray-200 text-center flex">
 
         {/* Rodapé inferior */}
-        <div id='div_Copyright' className="ml-10 text-white">
+        <div id='div_Copyright' className="ml-10 font-bold">
             <p>© 2024 MUXN Company, Inc. All rights reserved.</p>
         </div>
         <div className='w-50'></div>

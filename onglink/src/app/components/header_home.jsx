@@ -14,7 +14,7 @@ export default function Header_home() {
         <div className="d-flex align-items-center" id="div_header">
           <Link href="/">
             <Image
-              className="border"
+              className="rounded-lg"
               src={logo_onglink_01}
               style={{ minWidth: "100px" }}
               alt="Logo ONGLink"
@@ -27,7 +27,7 @@ export default function Header_home() {
 
           <div id="botoes_cadastro">
             <Button
-              variant="success"
+              id="botao_cadastro"
               onClick={() => {
                 router.push("/cad_pj");
               }}
@@ -36,7 +36,7 @@ export default function Header_home() {
             </Button>
 
             <Button
-              variant="success"
+              id="botao_login"
               onClick={() => {
                 router.push("/login");
               }}
