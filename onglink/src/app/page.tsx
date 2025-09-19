@@ -9,7 +9,7 @@ import logo_muxn from '@/app/img/MUXN_logo1.png'
 import React from "react";
 import planetilson from '@/app/img/gb1png 1.png'
 import planetilson_pintor from '@/app/img/gb2png 2.png'
-import globalison3 from '@/app/img/gb3.png'
+import planetilson3 from '@/app/img/gb3.png'
 import '@/app/CSS/home.css'
 import '@/app/CSS/header_alt.css'
 import '@/app/CSS/menu.css'
@@ -73,7 +73,7 @@ export default function Home() {
 
                   <Row className="row" id="row3">
                     <Col>
-                      <Image alt="" src={globalison3} width={500} id="planetilson3"></Image>
+                      <Image alt="" src={planetilson3} width={1000} id="planetilson3"></Image>
                     </Col>
 
                     <Col>
