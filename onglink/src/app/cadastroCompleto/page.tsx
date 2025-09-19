@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { CepResponse, getCepData } from '@/app/services/cep';
 import Header_feed from '../components/header_feed';
 import '@/app/CSS/header_alt.css'
+import '@/app/CSS/cadastro.css'
 
 // Tipos para os dados dos formulários
 interface BasicFormValues {
@@ -79,7 +80,7 @@ const BasicForm: React.FC = () => {
 
   return (
     
-    <div className="form-container">
+    <div className="form-container border-5 ">
       <h2>Informações Básicas</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className="form-group">
@@ -614,36 +615,51 @@ const FormPage: React.FC = () => {
   return (
     <> 
     <Header_feed/> 
-    <div className="container">
+    <div className="container text-center">
       
-      <div className="header">
-        <div className="nav-buttons">
-          <button 
-            className={`nav-button ${activeTab === 'basico' ? 'active' : ''}`}
+      
+        <div className="flex justify-center items-center border-4 rounded-2xl space-x-5 p-4 ">
+
+          <div className=' border-2 rounded-full bg-green-400 p-4' >
+            <button 
+            className={`nav-button ${activeTab === 'basico' ? 'active' : ''}` }
             onClick={() => setActiveTab('basico')}
           >
             Básico
           </button>
+          </div>
+
+          <div className=' border-2 rounded-full bg-green-400 p-4'>
           <button 
             className={`nav-button ${activeTab === 'endereco' ? 'active' : ''}`}
             onClick={() => setActiveTab('endereco')}
           >
             Endereço
           </button>
+          </div>
+          
+          <div className=' border-2 rounded-full bg-green-400 p-4'>
           <button 
             className={`nav-button ${activeTab === 'social' ? 'active' : ''}`}
             onClick={() => setActiveTab('social')}
           >
             Rede Social
           </button>
+
+          </div>
+
+          <div className=' border-2 rounded-full bg-green-400 p-4'>
           <button 
             className={`nav-button ${activeTab === 'upload' ? 'active' : ''}`}
             onClick={() => setActiveTab('upload')}
           >
             Upload PDF
           </button>
+
+          </div>
+          
         </div>
-      </div>
+      
       <div className="content">
         {renderForm()}
       </div>
