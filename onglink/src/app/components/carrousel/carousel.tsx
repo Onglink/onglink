@@ -2,19 +2,19 @@
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Image from 'next/image';
-import Arara from '@/src/app/img/arara.jpeg';
-import AraraAzul from '@/src/app/img/arara_azul.jpeg';
-import MuxnLogo1 from '@/src/app/img/MUXN_logo1.png';
-import Capivara from '@/src/app/img/capivara.jpeg';
-import Ceu from '@/src/app/img/ceu.jpeg';
-import Mico from '@/src/app/img/mico.jpeg';
-import Tucano from '@/src/app/img/tucano.jpeg';
+import Arara from '@/app/img/arara.jpeg';
+import AraraAzul from '@/app/img/arara_azul.jpeg';
+import MuxnLogo1 from '@/app/img/MUXN_logo1.png';
+import Capivara from '@/app/img/capivara.jpeg';
+import Ceu from '@/app/img/ceu.jpeg';
+import Mico from '@/app/img/mico.jpeg';
+import Tucano from '@/app/img/tucano.jpeg';
 
 
 function FeedCarousel() {
   const [index, setIndex] = useState(0);
 
-  const handleSelect = (selectedIndex) => {
+  const handleSelect = (selectedIndex:number) => {
     setIndex(selectedIndex);
   };
 

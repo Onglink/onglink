@@ -14,7 +14,7 @@ import '@/src/app/CSS/menu.css'
 import '@/src/app/CSS/main.css'
 import '@/src/app/CSS/body.css'
 import '@/src/app/CSS/parceiros.css'
-import Header_home from "@/src/app/components/header_home"
+import Header_home from "@/app/components/header_home"
 
 export default function Parceiros() {
 

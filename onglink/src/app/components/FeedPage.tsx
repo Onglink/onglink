@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import PublicarForm from "@/src/app/components/PublicarForm";
-import FeedPost from "@/src/app/components/FeedPost";
+import PublicarForm from "@/app/components/PublicarForm";
+import FeedPost from "@/app/components/FeedPost";
 
 interface Post {
   title: string;
