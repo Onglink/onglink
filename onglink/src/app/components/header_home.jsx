@@ -2,7 +2,7 @@
 import logo_onglink_01 from "@/app/img/LOGO_ONGLINK_1.png";
 import Image from "next/image";
 import Link from "next/link";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row, InputGroup, Form} from "react-bootstrap";
 import { useRouter } from "next/navigation";
 
 export default function Header_home() {
@@ -23,7 +23,19 @@ export default function Header_home() {
             ></Image>
           </Link>
 
-          <form className="w-100 me-3" role="search"></form>
+          <form className="w-100 me-3" role="search">
+            <InputGroup className="mb-3" id="searchONG">
+              <Form.Control
+                placeholder="Procurar ONG"
+                aria-label="Procurar ONG"
+                aria-describedby="basic-addon2"
+                
+              />
+              <Button id="botaoBuscar">
+                Buscar
+              </Button>
+            </InputGroup>
+          </form>
 
           <div id="botoes_cadastro">
             <Button

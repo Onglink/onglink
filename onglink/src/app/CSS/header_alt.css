@@ -11,6 +11,23 @@
   #div_logo_header{
     text-align: center;
   }
+
+  #searchONG{
+    width: 80%;
+    margin-left: 100px;
+    padding-top: 20px;
+    height: 70px;
+  }
+
+  #botaoBuscar{
+    background-color: rgba(4, 165, 44, 0.75);
+    border: none;
+  }
+
+  #botaoBuscar:hover{
+    background-color: rgba(3, 62, 18, 0.85);
+    color: #AEF2AC;
+  }
   
   #botao_login{
     background-color: #01292E;

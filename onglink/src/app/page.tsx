@@ -77,7 +77,7 @@ export default function Home() {
                     </Col>
 
                     <Col>
-                      <div id="div_botao">
+                      <div id="div_botao" className="text-center">
                         <h4>Junte-se à ONGlink!</h4>
 
                         <p>
@@ -89,7 +89,19 @@ export default function Home() {
                               id="botao_cadastro2"
                             >
                               Cadastre-se
-                          </Button></Link>
+                          </Button>
+                        </Link>
+
+                          <p> ou </p>
+
+                        <Link className="mt-0" href={"/feed"}>
+                          <Button
+                              id="botao_cadastro2"
+                            >
+                              Entre como visitante
+                          </Button>
+                        </Link>
+                          
                       </div>
                     </Col>
 
