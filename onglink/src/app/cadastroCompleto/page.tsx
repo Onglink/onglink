@@ -10,6 +10,7 @@ import FileUpload from '@/app/components/formulario/FileUpload';
 import StepButton from '@/app/components/formulario/StepButton';
 import { getCepData } from '@/app/services/cep';
 
+
 interface BasicFormValues {
   razaoSocial: string;
   cnpj: string;
