@@ -3,26 +3,33 @@ import React from 'react';
 interface FileUploadProps {
   label: string;
   file: File | null;
-  onFileChange: (file: File | null) => void;
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ label, file, onFileChange }) => {
+const FileUpload: React.FC<FileUploadProps> = ({ label, file, setFile }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0] || null;
-    onFileChange(selectedFile);
+    setFile(selectedFile);
   };
 
+  const inputId = `file-${label.replace(/\s+/g, '')}`;
+
   return (
-    <div className="form-group mb-3">
-      <p className="font-semibold mb-2">{label}</p>
-      <div className="file-upload border p-4 rounded">
+    <div className="form-group">
+      <label>{label}</label>
+      <div className="file-upload">
+        <p>Arraste o arquivo ou clique para selecionar</p>
         <input
+          id={inputId}
           type="file"
           accept=".pdf"
+          className="file-input"
           onChange={handleChange}
-          className="mb-2"
         />
-        {file && <p>Arquivo selecionado: {file.name}</p>}
+        <label htmlFor={inputId} className="upload-button">
+          Selecionar Arquivo
+        </label>
+        {file && <p className="file-name">Arquivo selecionado: {file.name}</p>}
       </div>
     </div>
   );

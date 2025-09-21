@@ -1,22 +1,21 @@
-import React from "react";
+import React from 'react';
 
 interface StepButtonProps {
-  step: string;               // id da aba (ex: "basico", "endereco")
-  label: string;              // texto exibido
-  isActive: boolean;          // se o botão está ativo
-  onClick: (step: string) => void; // troca de aba
+  active: boolean;
+  label: string;
+  onClick: () => void;
 }
 
-const StepButton: React.FC<StepButtonProps> = ({ step, label, isActive, onClick }) => {
+const StepButton: React.FC<StepButtonProps> = ({ active, label, onClick }) => {
   return (
-    <div className="border-2 rounded-full bg-green-400 p-4">
-      <button
-        className={`nav-button ${isActive ? "active" : ""}`}
-        onClick={() => onClick(step)}
-      >
-        {label}
-      </button>
-    </div>
+    <button
+      className={`px-4 py-2 rounded-full border-2 ${
+        active ? 'bg-green-400 text-white' : 'bg-white text-black'
+      }`}
+      onClick={onClick}
+    >
+      {label}
+    </button>
   );
 };
 

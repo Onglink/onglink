@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import StepButton from '@/app/components/formulario/StepButton';
-import FormInput from '@/app/components/formulario//FormInput';
+import FormInput from '@/app/components/formulario/FormInput';
 import FormRadioGroup from '@/app/components/formulario/FormRadioGroup';
 import FileUpload from '@/app/components/formulario/FileUpload';
+import { getCepData } from '@/app/services/cep';
 
 // Interfaces dos formulários
 interface BasicFormValues {
@@ -24,6 +25,8 @@ interface AddressFormValues {
   cep: string;
   endereco: string;
   numero: string;
+  complemento: string;
+  bairro: string;
   cidade: string;
   estado: string;
 }
@@ -124,6 +127,8 @@ const CadastroCompleto: React.FC = () => {
       cep: '',
       endereco: '',
       numero: '',
+      complemento: '',
+      bairro: '',
       cidade: '',
       estado: '',
     },
@@ -131,6 +136,7 @@ const CadastroCompleto: React.FC = () => {
       cep: Yup.string().required('Obrigatório'),
       endereco: Yup.string().required('Obrigatório'),
       numero: Yup.string().required('Obrigatório'),
+      bairro: Yup.string().required('Obrigatório'),
       cidade: Yup.string().required('Obrigatório'),
       estado: Yup.string().required('Obrigatório'),
     }),
@@ -139,6 +145,18 @@ const CadastroCompleto: React.FC = () => {
       handleNextStep();
     },
   });
+
+  const handleBuscarCep = async (cep: string) => {
+    try {
+      const cepDados = await getCepData(cep.replace(/\D/g, ''));
+      formikEndereco.setFieldValue('cidade', cepDados.localidade);
+      formikEndereco.setFieldValue('estado', cepDados.uf);
+      formikEndereco.setFieldValue('endereco', cepDados.logradouro);
+      formikEndereco.setFieldValue('bairro', cepDados.bairro);
+    } catch (error) {
+      console.error('Erro ao buscar CEP:', error);
+    }
+  };
 
   // ---------------- FORM 3 - SOCIAL ----------------
   const formikSocial = useFormik<SocialFormValues>({
@@ -173,7 +191,7 @@ const CadastroCompleto: React.FC = () => {
     switch (activeTab) {
       case 'basico':
         return (
-          <form onSubmit={formikBasico.handleSubmit} className="p-4">
+          <form onSubmit={formikBasico.handleSubmit}>
             <h2>Informações Básicas</h2>
             <FormInput
               label="Razão Social"
@@ -233,8 +251,8 @@ const CadastroCompleto: React.FC = () => {
             {formikBasico.touched.causaSocial && formikBasico.errors.causaSocial && (
               <div className="text-red-500 text-sm">{formikBasico.errors.causaSocial}</div>
             )}
-            <div className="form-group mb-3">
-              <label htmlFor="sobreOng" className="block font-semibold mb-1">Conte mais sobre a ONG</label>
+            <div className="form-group">
+              <label htmlFor="sobreOng">Conte mais sobre a ONG</label>
               <textarea
                 id="sobreOng"
                 name="sobreOng"
@@ -242,7 +260,6 @@ const CadastroCompleto: React.FC = () => {
                 onChange={formikBasico.handleChange}
                 onBlur={formikBasico.handleBlur}
                 rows={4}
-                className="border p-2 w-full rounded"
               />
             </div>
             <div className="flex justify-end mt-4">
@@ -253,14 +270,18 @@ const CadastroCompleto: React.FC = () => {
 
       case 'endereco':
         return (
-          <form onSubmit={formikEndereco.handleSubmit} className="p-4">
+          <form onSubmit={formikEndereco.handleSubmit}>
             <h2>Endereço</h2>
             <FormInput
               label="CEP"
               name="cep"
               value={formikEndereco.values.cep}
               onChange={formikEndereco.handleChange}
-              onBlur={formikEndereco.handleBlur}
+              onBlur={e => {
+                formikEndereco.handleBlur(e);
+                const cep = e.target.value.replace(/\D/g, '');
+                if (cep.length === 8) handleBuscarCep(cep);
+              }}
               error={formikEndereco.touched.cep ? formikEndereco.errors.cep : undefined}
             />
             <FormInput
@@ -278,6 +299,21 @@ const CadastroCompleto: React.FC = () => {
               onChange={formikEndereco.handleChange}
               onBlur={formikEndereco.handleBlur}
               error={formikEndereco.touched.numero ? formikEndereco.errors.numero : undefined}
+            />
+            <FormInput
+              label="Complemento"
+              name="complemento"
+              value={formikEndereco.values.complemento}
+              onChange={formikEndereco.handleChange}
+              onBlur={formikEndereco.handleBlur}
+            />
+            <FormInput
+              label="Bairro"
+              name="bairro"
+              value={formikEndereco.values.bairro}
+              onChange={formikEndereco.handleChange}
+              onBlur={formikEndereco.handleBlur}
+              error={formikEndereco.touched.bairro ? formikEndereco.errors.bairro : undefined}
             />
             <FormInput
               label="Cidade"
@@ -304,7 +340,7 @@ const CadastroCompleto: React.FC = () => {
 
       case 'social':
         return (
-          <form onSubmit={formikSocial.handleSubmit} className="p-4">
+          <form onSubmit={formikSocial.handleSubmit}>
             <h2>Redes Sociais</h2>
             <FormInput
               label="Facebook"
@@ -343,10 +379,10 @@ const CadastroCompleto: React.FC = () => {
 
       case 'upload':
         return (
-          <form onSubmit={handleUploadSubmit} className="p-4">
-            <h2>Upload de PDF</h2>
-            <FileUpload label="Primeiro Arquivo PDF" file={file1} onFileChange={setFile1} />
-            <FileUpload label="Segundo Arquivo PDF" file={file2} onFileChange={setFile2} />
+          <form onSubmit={handleUploadSubmit}>
+            <h2>Upload de Arquivos PDF</h2>
+            <FileUpload label="Primeiro Arquivo" file={file1} setFile={setFile1} />
+            <FileUpload label="Segundo Arquivo" file={file2} setFile={setFile2} />
             <div className="flex justify-between mt-4">
               <button type="button" onClick={handlePrevStep}>Voltar</button>
               <button type="submit">Finalizar</button>
