@@ -244,13 +244,13 @@ const CadastroCompleto: React.FC = () => {
               label="Primeiro Arquivo"
               file={formikUpload.values.arquivo1}
               setFile={(file) => formikUpload.setFieldValue('arquivo1', file)}
-              accept=".pdf,.doc,.docx"
+              accept=".pdf"
             />
             <FileUpload
               label="Segundo Arquivo"
               file={formikUpload.values.arquivo2}
               setFile={(file) => formikUpload.setFieldValue('arquivo2', file)}
-              accept=".pdf,.doc,.docx"
+              accept=".pdf"
             />
             <ImageUpload label="Imagem da ONG" image={imagem} setImage={(file) => { setImagem(file); formikUpload.setFieldValue('imagem', file); }} />
             <div className="flex space-x-2">
