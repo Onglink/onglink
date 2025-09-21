@@ -10,6 +10,12 @@ import FileUpload from '@/app/components/formulario/FileUpload';
 import StepButton from '@/app/components/formulario/StepButton';
 import { getCepData } from '@/app/services/cep';
 
+import '@/app/CSS/home.css'
+import '@/app/CSS/header_alt.css'
+import '@/app/CSS/menu.css'
+import '@/app/CSS/main.css'
+import '@/app/CSS/body.css'
+
 
 interface BasicFormValues {
   razaoSocial: string;
@@ -193,7 +199,9 @@ const CadastroCompleto: React.FC = () => {
                 className="w-full border rounded p-2"
               />
             </div>
-            <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
+            <div className='flex justify-content-end'>
+              <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
+            </div>
           </form>
         );
       case 1:
@@ -219,7 +227,7 @@ const CadastroCompleto: React.FC = () => {
             <FormInput formik={formikEndereco} name="bairro" label="Bairro" />
             <FormInput formik={formikEndereco} name="cidade" label="Cidade" />
             <FormInput formik={formikEndereco} name="estado" label="Estado" />
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 justify-content-end gap-4">
               <button type="button" onClick={prevStep} className="px-4 py-2 bg-gray-400 text-white rounded">Voltar</button>
               <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
             </div>
@@ -232,7 +240,7 @@ const CadastroCompleto: React.FC = () => {
             <FormInput formik={formikSocial} name="facebook" label="Facebook" type="url" />
             <FormInput formik={formikSocial} name="instagram" label="Instagram" type="url" />
             <FormInput formik={formikSocial} name="twitter" label="Twitter" type="url" />
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 justify-content-end gap-4">
               <button type="button" onClick={prevStep} className="px-4 py-2 bg-gray-400 text-white rounded">Voltar</button>
               <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
             </div>
@@ -254,7 +262,7 @@ const CadastroCompleto: React.FC = () => {
               accept=".pdf"
             />
             <ImageUpload label="Imagem da ONG" image={imagem} setImage={(file) => { setImagem(file); formikUpload.setFieldValue('imagem', file); }} />
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 justify-content-end gap-4">
               <button type="button" onClick={prevStep} className="px-4 py-2 bg-gray-400 text-white rounded">Voltar</button>
               <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Enviar</button>
             </div>
