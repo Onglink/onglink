@@ -1,44 +1,42 @@
+'use client';
 import React from 'react';
+import { FormikProps } from 'formik';
 
-interface RadioOption {
+interface Option {
   label: string;
   value: string;
 }
 
 interface FormRadioGroupProps {
-  label: string;
+  formik: FormikProps<any>;
   name: string;
-  options: RadioOption[];
-  selectedValue: string;
-  onChange: (value: string) => void;
+  label: string;
+  options: Option[];
 }
 
-const FormRadioGroup: React.FC<FormRadioGroupProps> = ({
-  label,
-  name,
-  options,
-  selectedValue,
-  onChange,
-}) => {
+const FormRadioGroup: React.FC<FormRadioGroupProps> = ({ formik, name, label, options }) => {
   return (
-    <div className="form-group mb-3">
-      <p className="font-semibold mb-2">{label}</p>
-      <div className="flex gap-4">
-        {options.map(option => (
-          <div key={option.value} className="flex items-center">
+    <div className="mb-4">
+      <p className="block mb-2 font-medium">{label}</p>
+      <div className="flex space-x-4">
+        {options.map(opt => (
+          <label key={opt.value} className="flex items-center space-x-1">
             <input
               type="radio"
-              id={`${name}-${option.value}`}
               name={name}
-              value={option.value}
-              checked={selectedValue === option.value}
-              onChange={() => onChange(option.value)}
+              value={opt.value}
+              checked={formik.values[name] === opt.value}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               className="mr-1"
             />
-            <label htmlFor={`${name}-${option.value}`}>{option.label}</label>
-          </div>
+            <span>{opt.label}</span>
+          </label>
         ))}
       </div>
+      {formik.touched[name] && formik.errors[name] && (
+        <div className="text-red-500 text-sm mt-1">{formik.errors[name]}</div>
+      )}
     </div>
   );
 };
