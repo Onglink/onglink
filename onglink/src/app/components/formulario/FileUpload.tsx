@@ -16,9 +16,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ label, file, setFile }) => {
 
   return (
     <div className="form-group">
-      <label>{label}</label>
-      <div className="file-upload">
-        <p>Arraste o arquivo ou clique para selecionar</p>
+      <label className='mt-3 mb-2'>{label}</label>
+      <div className="file-upload border-2 rounded-4 p-2">
+        <p>Arraste o arquivo ou clique nessa área para selecionar</p>
         <input
           id={inputId}
           type="file"
