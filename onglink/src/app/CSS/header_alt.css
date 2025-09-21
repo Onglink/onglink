@@ -55,6 +55,19 @@
     color: #AEF2AC;
   }
 
+    #botao_sair{
+    background-color: #01292E;
+    border: none;
+    color: #05b3ca;
+    font-weight: 700;
+    box-shadow: 0px 6px #035b67
+  }
+
+  #botao_sair:hover{
+    background-color: #05b3ca;
+    color: #01292E;
+  }
+
   #div_header{
     align-items: center;
     text-align: center;

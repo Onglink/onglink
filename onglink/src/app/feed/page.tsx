@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, {  useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/app/CSS/feed.css";
 import "@/app/CSS/header_alt.css";
@@ -20,7 +20,6 @@ import Header_feed from "../components/header_feed";
 import UploadButton from "../components/button/UploadButton";
 import FeedPage from "../components/FeedPage";
 import type { ModalProps } from "react-bootstrap";
-
 
 export default function Home() {
   const [file, setFile] = useState<File | null>(null);
@@ -114,6 +113,7 @@ export default function Home() {
   return (
     <>
       <Header_feed />
+      <div className="pt-5"/>
       <main id="main_feed">
         {/* <!--Main-->  */}
 
@@ -409,17 +409,16 @@ export default function Home() {
                 {/* <div className="b-example-divider"></div> */}
 
                 {/* ///////////////////////////////////////////////////////////////////////////////////////// */}
-                <div
+                {/* <div
                   style={{ backgroundColor: "#3b481dc4" }}
                   className="container-fluid col-12 vstack gap-4 p-3 rounded-4 d-flex mt-3"
-                >
-                  {/* <div className="col-md-8 col-lg-6 vstack gap-4"> */}
-                    {" "}
-                    {/* //PUBLICAR NO FEED */}
-                    <div className="d-flex flex-column">
-                      <div className="d-flex">
+                > */}
+                  {/* <div className="col-md-8 col-lg-6 vstack gap-4"> */}{" "}
+                  {/* //PUBLICAR NO FEED */}
+                  {/* <div className="d-flex flex-column"> */}
+                    {/* <div className="d-flex"> */}
                       {/* <!-- LOGO/IMAGEM --> */}
-                      <div
+                      {/* <div
                         className="avatar avatar-xs me-2"
                         style={{ minWidth: "60px" }}
                       >
@@ -433,29 +432,80 @@ export default function Home() {
                             width={60}
                           ></Image>{" "}
                         </a>
-                      </div>
+                      </div> */}
                       {/* div do textto com botões */}
-                        <div className="card-body flex-grow-1">
+                      {/* <div className="card-body flex-grow-1">
                         <h2>Ambiental Force</h2>
-                        </div>
+                      </div> */}
+                    {/* </div> */}
+{/* 
+                    <div>
+                      <h6 className="fw-bold">
+                        EM DEFESA AOS ANIMAIS, APOIE ESSA CAUSA!
+                      </h6>
 
-                        </div>
+                      <div>
+                        <p className="text-wrap">
+                          Silvestre não é pet! DIGA NÃO AO TRÁFICO DE ANIMAIS.
+                          Tráfico de animais é crime, Denuncie!
+                        </p>
+                      </div>
 
-                            <div>
-                            <h6 className="fw-bold">
-                            EM DEFESA AOS ANIMAIS, APOIE ESSA CAUSA!
-                            </h6>
-                            
-                            <div>
-                            <p className="text-wrap">
-                              Silvestre não é pet! DIGA NÃO AO TRÁFICO DE ANIMAIS.
-                              Tráfico de animais é crime, Denuncie!
-                            </p>
-                            </div>
-
-                        <FeedCarousel />
-                        <div id="div_botoes" className=" justify-self-center">
-                          <Button variant="success" title="Curtir">
+                      <FeedCarousel />                      <div id="div_botoes" className=" justify-self-center">
+                        <Button variant="success" title="Curtir">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="35"
+                            height="35"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-heart-icon lucide-heart"
+                          >
+                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                          </svg>
+                        </Button>
+                        <Button variant="success" title="Compartilhar">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="35"
+                            height="35"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-share2-icon lucide-share-2"
+                          >
+                            <circle cx="18" cy="5" r="3" />
+                            <circle cx="6" cy="12" r="3" />
+                            <circle cx="18" cy="19" r="3" />
+                            <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+                            <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+                          </svg>
+                        </Button>
+                        <Button variant="success" title="Comentar">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="35"
+                            height="35"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-message-circle-icon lucide-message-circle"
+                          >
+                            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+                          </svg>
+                        </Button>
+                        <Button variant="success" title="Apoiar">
+                          <a href="/apoio">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="35"
@@ -464,103 +514,43 @@ export default function Home() {
                               fill="none"
                               stroke="currentColor"
                               strokeWidth="2"
-                             strokeLinecap="round"
+                              strokeLinecap="round"
                               strokeLinejoin="round"
-                              className="lucide lucide-heart-icon lucide-heart"
+                              className="lucide lucide-heart-handshake-icon lucide-heart-handshake"
                             >
                               <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                              <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66" />
+                              <path d="m18 15-2-2" />
+                              <path d="m15 18-2-2" />
                             </svg>
-                          </Button>
-                          <Button variant="success" title="Compartilhar">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="35"
-                              height="35"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                             strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="lucide lucide-share2-icon lucide-share-2"
-                            >
-                              <circle cx="18" cy="5" r="3" />
-                              <circle cx="6" cy="12" r="3" />
-                              <circle cx="18" cy="19" r="3" />
-                              <line
-                                x1="8.59"
-                                x2="15.42"
-                                y1="13.51"
-                                y2="17.49"
-                              />
-                              <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
-                            </svg>
-                          </Button>
-                          <Button variant="success" title="Comentar">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="35"
-                              height="35"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                             strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="lucide lucide-message-circle-icon lucide-message-circle"
-                            >
-                              <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-                            </svg>
-                          </Button>
-                          <Button variant="success" title="Apoiar">
-                            <a href="/apoio">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="35"
-                                height="35"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                               strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="lucide lucide-heart-handshake-icon lucide-heart-handshake"
-                              >
-                                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                                <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66" />
-                                <path d="m18 15-2-2" />
-                                <path d="m15 18-2-2" />
-                              </svg>
-                            </a>
-                          </Button>
-                          <Button
-                            title="Denunciar"
-                            onClick={() => setModalShow(true)}
+                          </a>
+                        </Button>
+                        <Button
+                          title="Denunciar"
+                          onClick={() => setModalShow(true)}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="35"
+                            height="35"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-message-square-warning-icon lucide-message-square-warning"
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="35"
-                              height="35"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                             strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="lucide lucide-message-square-warning-icon lucide-message-square-warning"
-                            >
-                              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                              <path d="M12 7v2" />
-                              <path d="M12 13h.01" />
-                            </svg>
-                          </Button>
-                        </div>
-
-                        {/* <Image src="/img/michelin.jpeg" className="img-fluid" alt="none"height={600} width={600}/> */}
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            <path d="M12 7v2" />
+                            <path d="M12 13h.01" />
+                          </svg>
+                        </Button>
                       </div>
-                    </div>
-                  {/* </div> */}
 
+                      </div> */}
+                  {/* </div> */}
+                  {/* </div> */}
                   {/* <div> */}
                   {/* <ul className=" nav nav-pills nav-stack small fw-normal">
                           <li className="nav-item me-1">
@@ -587,7 +577,7 @@ export default function Home() {
                           </li>
                         </ul> */}
                   {/* </div> */}
-                </div>
+                {/* </div> */}
                 {/* <!-- FIM DA PUBLICAÇAO --> */}
 
                 {/* ///////////////////////////////////////////////////////////////////////// */}
