@@ -332,11 +332,11 @@ const CadastroCompleto: React.FC = () => {
     <>
       <Header_feed />
       <main className='main1'>
-        <div className="container mx-auto p-4 w-full flex">
-          <div>
+        <div className="mx-auto p-2 w-full flex">
+          <div className='w-full'>
             <Image alt="" src={planetilson3} width={800} id="planetilson3"></Image>
           </div>
-          <div className='p-2  bg-header rounded-2 text-center w-80'>
+          <div className='p-2 mb-2 bg-header rounded-2 text-center w-80'>
             <h1 className="text-xl font-bold mb-4">Cadastro Completo</h1>
             <div className="flex  mb-2 flex-full w-full justify-center sm: flex-wrap flex-column  ">
               
@@ -350,8 +350,8 @@ const CadastroCompleto: React.FC = () => {
               ))}
             </div>
           </div>
-          <div className="bg-white p-4 rounded shadow w-75">{renderForm()}</div>
-          <div>
+          <div className="bg-white p-4 mb-2 rounded shadow w-75">{renderForm()}</div>
+          <div className='w-full'>
             <Image alt="" src={planetilson3} width={800} id="planetilson3"></Image>
           </div>
         </div>
