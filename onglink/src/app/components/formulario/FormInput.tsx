@@ -22,7 +22,7 @@ const FormInput: React.FC<FormInputProps> = ({ formik, name, label, type = 'text
         value={formik.values[name]}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        className="w-full border rounded p-2"
+        className="w-full border rounded p-2 border-black"
       />
       {formik.touched[name] && formik.errors[name] && (
         <div className="text-red-500 text-sm mt-1">{formik.errors[name]}</div>

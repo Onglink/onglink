@@ -8,6 +8,7 @@ import FormRadioGroup from '@/app/components/formulario/FormRadioGroup';
 import ImageUpload from '@/app/components/formulario/ImageUpload';
 import FileUpload from '@/app/components/formulario/FileUpload';
 import StepButton from '@/app/components/formulario/StepButton';
+import FormGroup from '@/app/components/formulario/FormGroup';
 import { getCepData } from '@/app/services/cep';
 
 import '@/app/CSS/home.css'
@@ -16,12 +17,12 @@ import '@/app/CSS/menu.css'
 import '@/app/CSS/main.css'
 import '@/app/CSS/body.css'
 
-
 interface BasicFormValues {
   razaoSocial: string;
   cnpj: string;
   email: string;
   pessoaResponsavel: string;
+  cpf: string;
   telefone01: string;
   telefone02: string;
   causaSocial: string;
@@ -53,6 +54,7 @@ interface UploadFormValues {
 
 const CadastroCompleto: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
+  const [imagem, setImagem] = useState<File | null>(null);
 
   // ---------------- Formik Básico ----------------
   const formikBasico = useFormik<BasicFormValues>({
@@ -61,6 +63,7 @@ const CadastroCompleto: React.FC = () => {
       cnpj: '',
       email: '',
       pessoaResponsavel: '',
+      cpf: '',
       telefone01: '',
       telefone02: '',
       causaSocial: '',
@@ -71,6 +74,7 @@ const CadastroCompleto: React.FC = () => {
       cnpj: Yup.string().required('CNPJ é obrigatório'),
       email: Yup.string().email('Email inválido').required('Email é obrigatório'),
       pessoaResponsavel: Yup.string().required('Pessoa responsável é obrigatória'),
+      cpf: Yup.string().required('CPF é obrigatório'),
       telefone01: Yup.string().required('Telefone é obrigatório'),
       causaSocial: Yup.string().required('Causa social é obrigatória'),
     }),
@@ -129,7 +133,6 @@ const CadastroCompleto: React.FC = () => {
   });
 
   // ---------------- Formik Upload ----------------
-  const [imagem, setImagem] = useState<File | null>(null);
   const formikUpload = useFormik<UploadFormValues>({
     initialValues: {
       arquivo1: null,
@@ -171,11 +174,27 @@ const CadastroCompleto: React.FC = () => {
         return (
           <form onSubmit={formikBasico.handleSubmit}>
             <FormInput formik={formikBasico} name="razaoSocial" label="Razão Social" />
-            <FormInput formik={formikBasico} name="cnpj" label="CNPJ" />
-            <FormInput formik={formikBasico} name="email" label="Email" type="email" />
-            <FormInput formik={formikBasico} name="pessoaResponsavel" label="Pessoa Responsável" />
-            <FormInput formik={formikBasico} name="telefone01" label="Telefone 01" />
-            <FormInput formik={formikBasico} name="telefone02" label="Telefone 02" />
+            <FormGroup
+              formik={formikBasico}
+              fields={[
+                { name: "cnpj", label: "CNPJ", width: "w-1/2" },
+                { name: "email", label: "Email", width: "w-1/2" }
+              ]}
+            />
+            <FormGroup
+              formik={formikBasico}
+              fields={[
+                { name: "pessoaResponsavel", label: "Pessoa Responsável", width: "w-1/2" },
+                { name: "cpf", label: "CPF", width: "w-1/2" }
+              ]}
+            />
+            <FormGroup
+              formik={formikBasico}
+              fields={[
+                { name: "telefone01", label: "Telefone 01", width: "w-1/2" },
+                { name: "telefone02", label: "Telefone 02", width: "w-1/2" }
+              ]}
+            />
             <FormRadioGroup
               formik={formikBasico}
               name="causaSocial"
@@ -199,7 +218,7 @@ const CadastroCompleto: React.FC = () => {
                 className="w-full border rounded p-2"
               />
             </div>
-            <div className='flex justify-content-end'>
+            <div className='flex justify-end'>
               <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
             </div>
           </form>
@@ -207,13 +226,13 @@ const CadastroCompleto: React.FC = () => {
       case 1:
         return (
           <form onSubmit={formikEndereco.handleSubmit}>
-            <FormInput
+            <FormGroup 
               formik={formikEndereco}
-              name="cep"
-              label="CEP"
-              placeholder="00000-000"
-              type="text"
+              fields={[
+                { name: "cep", label:"CEP", placeholder:"00000-000", width:"w-1/4 md:w-1/6"}
+              ]}  
             />
+            
             <button
               type="button"
               onClick={() => buscarCep(formikEndereco.values.cep)}
@@ -221,13 +240,28 @@ const CadastroCompleto: React.FC = () => {
             >
               Buscar CEP
             </button>
-            <FormInput formik={formikEndereco} name="endereco" label="Endereço" />
-            <FormInput formik={formikEndereco} name="numero" label="Número" />
-            <FormInput formik={formikEndereco} name="complemento" label="Complemento" />
-            <FormInput formik={formikEndereco} name="bairro" label="Bairro" />
-            <FormInput formik={formikEndereco} name="cidade" label="Cidade" />
-            <FormInput formik={formikEndereco} name="estado" label="Estado" />
-            <div className="flex space-x-2 justify-content-end gap-4">
+            <FormGroup
+              formik={formikEndereco}
+              fields={[
+                { name: "endereco", label: "Endereço", width: "w-2/3" },
+                { name: "numero", label: "Número", width: "w-1/24 " }
+              ]}
+            />
+            <FormGroup
+              formik={formikEndereco}
+              fields={[
+                { name: "complemento", label: "Complemento", width: "w-1/2" },
+                { name: "bairro", label: "Bairro", width: "w-1/2" }
+              ]}
+            />
+            <FormGroup
+              formik={formikEndereco}
+              fields={[
+                { name: "cidade", label: "Cidade", width: "w-1/2" },
+                { name: "estado", label: "Estado", width: "w-1/10 sm:w-1/5" }
+              ]}
+            />
+            <div className="flex space-x-2 justify-end mt-4 gap-4">
               <button type="button" onClick={prevStep} className="px-4 py-2 bg-gray-400 text-white rounded">Voltar</button>
               <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
             </div>
@@ -236,11 +270,21 @@ const CadastroCompleto: React.FC = () => {
       case 2:
         return (
           <form onSubmit={formikSocial.handleSubmit}>
-            <FormInput formik={formikSocial} name="linkedin" label="LinkedIn" type="url" />
-            <FormInput formik={formikSocial} name="facebook" label="Facebook" type="url" />
-            <FormInput formik={formikSocial} name="instagram" label="Instagram" type="url" />
-            <FormInput formik={formikSocial} name="twitter" label="Twitter" type="url" />
-            <div className="flex space-x-2 justify-content-end gap-4">
+            <FormGroup
+              formik={formikSocial}
+              fields={[
+                { name: "linkedin", label: "LinkedIn",  width: "w-1/2" },
+                { name: "facebook", label: "Facebook",  width: "w-1/2" }
+              ]}
+            />
+            <FormGroup
+              formik={formikSocial}
+              fields={[
+                { name: "instagram", label: "Instagram",  width: "w-1/2" },
+                { name: "twitter", label: "Twitter",  width: "w-1/2" }
+              ]}
+            />
+            <div className="flex space-x-2 justify-end mt-4 gap-4">
               <button type="button" onClick={prevStep} className="px-4 py-2 bg-gray-400 text-white rounded">Voltar</button>
               <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
             </div>
@@ -261,8 +305,12 @@ const CadastroCompleto: React.FC = () => {
               setFile={(file) => formikUpload.setFieldValue('arquivo2', file)}
               accept=".pdf"
             />
-            <ImageUpload label="Imagem da ONG" image={imagem} setImage={(file) => { setImagem(file); formikUpload.setFieldValue('imagem', file); }} />
-            <div className="flex space-x-2 justify-content-end gap-4">
+            <ImageUpload
+              label="Imagem da ONG"
+              image={imagem}
+              setImage={(file) => { setImagem(file); formikUpload.setFieldValue('imagem', file); }}
+            />
+            <div className="flex space-x-2 justify-end mt-4 gap-4">
               <button type="button" onClick={prevStep} className="px-4 py-2 bg-gray-400 text-white rounded">Voltar</button>
               <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Enviar</button>
             </div>
@@ -276,20 +324,24 @@ const CadastroCompleto: React.FC = () => {
   return (
     <>
       <Header_feed />
-      <div className="container mx-auto p-4">
-        <h1 className="text-xl font-bold mb-4">Cadastro Completo</h1>
-        <div className="flex space-x-2 mb-4">
-          {steps.map((step, index) => (
-            <StepButton
-              key={step}
-              label={step}
-              active={activeStep === index}
-              onClick={() => setActiveStep(index)}
-            />
-          ))}
+      <main className='main1'>
+        <div className="container mx-auto p-4 w-75">
+          <div className='p-2 mb-2 bg-header rounded-2 text-center'>
+            <h1 className="text-xl font-bold mb-4">Cadastro Completo</h1>
+            <div className="flex  mb-2 flex-full w-full justify-center sm: flex-wrap ">
+              {steps.map((step, index) => (
+                <StepButton
+                  key={step}
+                  label={step}
+                  active={activeStep === index}
+                  onClick={() => setActiveStep(index)}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="bg-white p-4 rounded shadow">{renderForm()}</div>
         </div>
-        <div className="bg-white p-4 rounded shadow">{renderForm()}</div>
-      </div>
+      </main>
     </>
   );
 };
