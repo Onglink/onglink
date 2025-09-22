@@ -16,9 +16,9 @@ interface FormRadioGroupProps {
 
 const FormRadioGroup: React.FC<FormRadioGroupProps> = ({ formik, name, label, options }) => {
   return (
-    <div className="mb-4">
+    <div className="mb-4 ">
       <p className="block mb-2 font-medium">{label}</p>
-      <div className="flex space-x-4">
+      <div className="flex items-center justify-content-start space-x-4">
         {options.map(opt => (
           <label key={opt.value} className="flex items-center space-x-1">
             <input

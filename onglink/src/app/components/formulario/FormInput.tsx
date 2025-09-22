@@ -8,9 +8,10 @@ interface FormInputProps {
   label: string;
   type?: string;
   placeholder?: string;
+  readonly?:boolean;
 }
 
-const FormInput: React.FC<FormInputProps> = ({ formik, name, label, type = 'text', placeholder }) => {
+const FormInput: React.FC<FormInputProps> = ({ formik, name, label, type = 'text', placeholder, readonly }) => {
   return (
     <div className="mb-4">
       <label htmlFor={name} className="block mb-1 font-medium">{label}</label>
@@ -23,6 +24,7 @@ const FormInput: React.FC<FormInputProps> = ({ formik, name, label, type = 'text
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         className="w-full border rounded p-2 border-black"
+        readOnly={readonly}
       />
       {formik.touched[name] && formik.errors[name] && (
         <div className="text-red-500 text-sm mt-1">{formik.errors[name]}</div>

@@ -10,7 +10,8 @@ import FileUpload from '@/app/components/formulario/FileUpload';
 import StepButton from '@/app/components/formulario/StepButton';
 import FormGroup from '@/app/components/formulario/FormGroup';
 import { getCepData } from '@/app/services/cep';
-
+import Image from "next/image"
+import planetilson3 from '@/app/img/gb3.png'
 import '@/app/CSS/home.css'
 import '@/app/CSS/header_alt.css'
 import '@/app/CSS/menu.css'
@@ -77,6 +78,7 @@ const CadastroCompleto: React.FC = () => {
       cpf: Yup.string().required('CPF é obrigatório'),
       telefone01: Yup.string().required('Telefone é obrigatório'),
       causaSocial: Yup.string().required('Causa social é obrigatória'),
+      sobreOng: Yup.string().required('Sobre a ONG é obrigatória'),
     }),
     onSubmit: () => nextStep(),
   });
@@ -215,8 +217,11 @@ const CadastroCompleto: React.FC = () => {
                 value={formikBasico.values.sobreOng}
                 onChange={formikBasico.handleChange}
                 onBlur={formikBasico.handleBlur}
-                className="w-full border rounded p-2"
+                className="w-full border-1 rounded p-2"
               />
+              {formikBasico.touched["sobreOng"] && formikBasico.errors["sobreOng"] && (
+              <div className="text-red-500 text-sm mt-1">{formikBasico.errors["sobreOng"]}</div>
+              )}
             </div>
             <div className='flex justify-end'>
               <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
@@ -229,7 +234,7 @@ const CadastroCompleto: React.FC = () => {
             <FormGroup 
               formik={formikEndereco}
               fields={[
-                { name: "cep", label:"CEP", placeholder:"00000-000", width:"w-1/4 md:w-1/6"}
+                { name: "cep", label:"CEP", placeholder:"00000-000", width:"w-1/2"}
               ]}  
             />
             
@@ -243,22 +248,24 @@ const CadastroCompleto: React.FC = () => {
             <FormGroup
               formik={formikEndereco}
               fields={[
-                { name: "endereco", label: "Endereço", width: "w-2/3" },
-                { name: "numero", label: "Número", width: "w-1/24 " }
+                { name: "endereco", label: "Endereço", width: "w-full", readonly: true },
+                
               ]}
             />
             <FormGroup
               formik={formikEndereco}
               fields={[
-                { name: "complemento", label: "Complemento", width: "w-1/2" },
-                { name: "bairro", label: "Bairro", width: "w-1/2" }
+                { name: "numero", label: "Número", width: "flex-1" },
+                { name: "complemento", label: "Complemento", width: "w-full" },
+                
               ]}
             />
             <FormGroup
               formik={formikEndereco}
               fields={[
-                { name: "cidade", label: "Cidade", width: "w-1/2" },
-                { name: "estado", label: "Estado", width: "w-1/10 sm:w-1/5" }
+                { name: "bairro", label: "Bairro", width: "w-1/2", readonly: true },
+                { name: "cidade", label: "Cidade", width: "w-1/2", readonly: true },
+                { name: "estado", label: "Estado", width: "w-1/10 sm:w-1/5", readonly: true}
               ]}
             />
             <div className="flex space-x-2 justify-end mt-4 gap-4">
@@ -306,7 +313,7 @@ const CadastroCompleto: React.FC = () => {
               accept=".pdf"
             />
             <ImageUpload
-              label="Imagem da ONG"
+              label="Logo da ONG"
               image={imagem}
               setImage={(file) => { setImagem(file); formikUpload.setFieldValue('imagem', file); }}
             />
@@ -325,10 +332,14 @@ const CadastroCompleto: React.FC = () => {
     <>
       <Header_feed />
       <main className='main1'>
-        <div className="container mx-auto p-4 w-75">
-          <div className='p-2 mb-2 bg-header rounded-2 text-center'>
+        <div className="container mx-auto p-4 w-full flex">
+          <div>
+            <Image alt="" src={planetilson3} width={800} id="planetilson3"></Image>
+          </div>
+          <div className='p-2  bg-header rounded-2 text-center w-80'>
             <h1 className="text-xl font-bold mb-4">Cadastro Completo</h1>
-            <div className="flex  mb-2 flex-full w-full justify-center sm: flex-wrap ">
+            <div className="flex  mb-2 flex-full w-full justify-center sm: flex-wrap flex-column  ">
+              
               {steps.map((step, index) => (
                 <StepButton
                   key={step}
@@ -339,7 +350,10 @@ const CadastroCompleto: React.FC = () => {
               ))}
             </div>
           </div>
-          <div className="bg-white p-4 rounded shadow">{renderForm()}</div>
+          <div className="bg-white p-4 rounded shadow w-75">{renderForm()}</div>
+          <div>
+            <Image alt="" src={planetilson3} width={800} id="planetilson3"></Image>
+          </div>
         </div>
       </main>
     </>

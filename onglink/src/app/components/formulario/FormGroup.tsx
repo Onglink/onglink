@@ -7,6 +7,7 @@ interface FieldConfig {
   label: string;
   placeholder?: string,
   width?: string; // largura flexível (ex: "w-1/3", "flex-1", "w-1/2")
+  readonly?:boolean;
 }
 
 interface FormGroupProps {
@@ -24,6 +25,7 @@ const FormGroup: React.FC<FormGroupProps> = ({ formik, fields }) => {
             name={field.name}
             label={field.label}
             placeholder={field.placeholder}
+            readonly={field.readonly}
           />
         </div>
       ))}
