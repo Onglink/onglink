@@ -44,32 +44,7 @@ export default function Footer() {
             </div>
             {/* Coluna 2 - Links rápidos */}
             <div id='div_ul'>
-            
-            <ul id= 'ul_footer' className="space-y-2 text-center">
-                <li>
-                <Link 
-                    onClick={() => {router.push("/legislacao")}}
-                    href="/legislacao" className=" hover:text-blue-600 transition-colors">
-                    Legislação
-                </Link>
-                </li>
 
-                <li>
-                <Link 
-                    onClick={() => {router.push("/nossa_historia")}}
-                    href="/nossa_historia" className=" hover:text-blue-600 transition-colors">
-                    Nossa história
-                </Link>
-                </li>
-
-                <li>
-                <Link 
-                    onClick={() => {router.push("/parceiros")}}
-                    href="/parceiros" className="hover:text-blue-600 transition-colors">
-                    Parceiros
-                </Link>
-                </li>
-            </ul>
             </div>
 
             {/* Coluna 3 - Newsletter */}
