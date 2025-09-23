@@ -7,7 +7,7 @@
 }
 
 #main_feed {
-    background-color: white;
+    background-color: #D0E2E9;
 }
 
 #div_botoes, #div_botoes_publi{
@@ -26,7 +26,7 @@
 
 
 #div_botoes svg:hover {
-    stroke: #20df15;
+    stroke: #01086d;
 }
 
 #div_perfil span, #div_perfil svg{
@@ -46,7 +46,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color:#84a454 ;
+    background-color:#95CF93 ;
 }
 
 #post1, #post2, #subdiv_post1, #subdiv_post2{
@@ -62,10 +62,16 @@
 #subdiv_post2 {
     width: 845px;
 }
-
+#componente_feedpage{
+    background-color:#95CF93;
+    border-color: #95CF93;
+    border-bottom-color: #01086d;
+    border-width: 3px;
+    
+}
 
 #subdiv_post1, #subdiv_post2, #subdiv_publicar{
-    background-color:#3b481dc4;
+    background-color:#95CF93;
     padding: 20px;
     padding-right: 30px;
     border-radius: 20px;
@@ -81,4 +87,15 @@
     border-color: lightgrey;
     height: 150px;
     width: 70%;
+}
+#menu_perfil{
+    background-color: #95CF93;
+}
+#div_feed{
+    background-color: #95CF93;
+     border-radius: 35px;
+}
+#divisoria{
+    width: 5;
+    background-color: #01086d;
 }

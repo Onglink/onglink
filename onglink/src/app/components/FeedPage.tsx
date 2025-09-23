@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import PublicarForm from "@/app/components/PublicarForm";
 import FeedPost from "@/app/components/FeedPost";
+import { Row } from "react-bootstrap";
+
+
 
 interface Post {
   title: string;
@@ -17,17 +20,19 @@ const FeedPage: React.FC = () => {
   };
 
   return (
-    <div className="container-fluid col-12 vstack gap-4 p-0">
-      <div id="subdiv_publicar" className="p-3">
+    <div className="container-fluid col-12 vstack gap-1 p-0">
+      <div id="componente_feedpage" className="p-3">
         <PublicarForm onPublish={addPost} />
       </div>
-      <div className="mt-4" id="div_pub">
+      
+      <div className="mt-2" id="div_pub">
         {posts.length === 0 ? (
           <p className="text-center"></p>
         ) : (
           posts.map((post, index) => <FeedPost key={index} post={post} />)
         )}
       </div>
+      
     </div>
   );
 };

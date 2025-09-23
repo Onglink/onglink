@@ -61,7 +61,7 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
   return (
   <>
       <ModalDenuncia show={modalShow} onHide={() => setModalShow(false)} />
- <div style={{ backgroundColor: "#3b481dc4" }}  className="container-fluid col-12 vstack gap-4 p-3 rounded-4">
+ <div style={{ backgroundColor: "#D0E2E9" }}  className="container-fluid col-11 vstack gap-4 p-3 rounded-4 ">
       
     <div className="feed-item mb-3 d-flex align-items-start">
       {/* Avatar */}
@@ -93,7 +93,7 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
           </div>
         )}
         <div id="div_botoes" className=" h-100 w-100 justify-content-center">
-                        <Button variant="success" title="Curtir">
+                        {/* <Button variant="success" title="Curtir">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="35"
@@ -108,8 +108,8 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
                           >
                             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                           </svg>
-                        </Button>
-                        <Button variant="success" title="Compartilhar">
+                        </Button> */}
+                        <Button variant="info" title="Compartilhar">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="35"
@@ -129,7 +129,7 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
                             <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
                           </svg>
                         </Button>
-                        <Button variant="success" title="Comentar">
+                        {/* <Button variant="success" title="Comentar">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="35"
@@ -144,8 +144,8 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
                           >
                             <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
                           </svg>
-                        </Button>
-                        <Button variant="success" title="Apoiar">
+                        </Button> */}
+                        {/* <Button variant="success" title="Apoiar">
                           <a href="/apoio">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -165,8 +165,8 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
                               <path d="m15 18-2-2" />
                             </svg>
                           </a>
-                        </Button>
-                        <Button title="Denunciar" onClick={() => setModalShow(true)}>
+                        </Button> */}
+                        <Button title="Denunciar" variant="info" onClick={() => setModalShow(true)}>
                             <svg 
                               xmlns="http://www.w3.org/2000/svg"
                               width="35" height="35"
@@ -186,7 +186,7 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
       </div>
                       
     </div>
-    <div className="b-example-divider mt-3 mb-3"></div>
+    <div id="componente_feedpage"></div>
     </>
   );
 };

@@ -1,18 +1,29 @@
 'use client';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { CepResponse, getCepData } from '@/app/services/cep';
-import Header_feed from '../components/header_feed';
+import Header_feed from '@/app/components/header_feed';
+import FormInput from '@/app/components/formulario/FormInput';
+import FormRadioGroup from '@/app/components/formulario/FormRadioGroup';
+import ImageUpload from '@/app/components/formulario/ImageUpload';
+import FileUpload from '@/app/components/formulario/FileUpload';
+import StepButton from '@/app/components/formulario/StepButton';
+import FormGroup from '@/app/components/formulario/FormGroup';
+import { getCepData } from '@/app/services/cep';
+import Image from "next/image"
+import planetilson3 from '@/app/img/gb3.png'
+import '@/app/CSS/home.css'
 import '@/app/CSS/header_alt.css'
-import '@/app/CSS/cadastro.css'
+import '@/app/CSS/menu.css'
+import '@/app/CSS/main.css'
+import '@/app/CSS/body.css'
 
-// Tipos para os dados dos formulários
 interface BasicFormValues {
-  razãoSocial: string;
+  razaoSocial: string;
   cnpj: string;
   email: string;
   pessoaResponsavel: string;
+  cpf: string;
   telefone01: string;
   telefone02: string;
   causaSocial: string;
@@ -39,261 +50,41 @@ interface SocialFormValues {
 interface UploadFormValues {
   arquivo1: File | null;
   arquivo2: File | null;
+  imagem: File | null;
 }
 
-// Componente do formulário básico
-const BasicForm: React.FC = () => {
-    
-  
+const CadastroCompleto: React.FC = () => {
+  const [activeStep, setActiveStep] = useState<number>(0);
+  const [imagem, setImagem] = useState<File | null>(null);
 
-  const [causaSelecionada, setCausaSelecionada] = useState<number | null>(null);
-
-  const handleCausaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCausaSelecionada(parseInt(e.target.value));
-  };
-
-  const validationSchema = Yup.object({
-    razãoSocial: Yup.string().required('Razão Social é obrigatória'),
-    cnpj: Yup.string().required('CNPJ é obrigatório'),
-    email: Yup.string().email('Email inválido').required('Email é obrigatório'),
-    pessoaResponsavel: Yup.string().required('Pessoa responsável é obrigatória'),
-    telefone01: Yup.string().required('Telefone é obrigatório'),
-    causaSocial: Yup.string().required('Causa social é obrigatória'),
-  });
-
-  const formik = useFormik<BasicFormValues>({
+  // ---------------- Formik Básico ----------------
+  const formikBasico = useFormik<BasicFormValues>({
     initialValues: {
-      razãoSocial: '',
+      razaoSocial: '',
       cnpj: '',
       email: '',
       pessoaResponsavel: '',
+      cpf: '',
       telefone01: '',
       telefone02: '',
       causaSocial: '',
       sobreOng: '',
     },
-    validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    validationSchema: Yup.object({
+      razaoSocial: Yup.string().required('Razão Social é obrigatória'),
+      cnpj: Yup.string().required('CNPJ é obrigatório'),
+      email: Yup.string().email('Email inválido').required('Email é obrigatório'),
+      pessoaResponsavel: Yup.string().required('Pessoa responsável é obrigatória'),
+      cpf: Yup.string().required('CPF é obrigatório'),
+      telefone01: Yup.string().required('Telefone é obrigatório'),
+      causaSocial: Yup.string().required('Causa social é obrigatória'),
+      sobreOng: Yup.string().required('Sobre a ONG é obrigatória'),
+    }),
+    onSubmit: () => nextStep(),
   });
 
-  return (
-    
-    <div className="form-container border-5 ">
-      <h2>Informações Básicas</h2>
-      <form onSubmit={formik.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="razãoSocial">Razão Social</label>
-          <input
-            id="razãoSocial"
-            name="razãoSocial"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.razãoSocial}
-          />
-          {formik.touched.razãoSocial && formik.errors.razãoSocial ? (
-            <div className="error">{formik.errors.razãoSocial}</div>
-          ) : null}
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="cnpj">CNPJ</label>
-          <input
-            id="cnpj"
-            name="cnpj"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.cnpj}
-          />
-          {formik.touched.cnpj && formik.errors.cnpj ? (
-            <div className="error">{formik.errors.cnpj}</div>
-          ) : null}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <div className="error">{formik.errors.email}</div>
-          ) : null}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="pessoaResponsavel">Pessoa Responsável</label>
-          <input
-            id="pessoaResponsavel"
-            name="pessoaResponsavel"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.pessoaResponsavel}
-          />
-          {formik.touched.pessoaResponsavel && formik.errors.pessoaResponsavel ? (
-            <div className="error">{formik.errors.pessoaResponsavel}</div>
-          ) : null}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="telefone01">Telefone 01</label>
-          <input
-            id="telefone01"
-            name="telefone01"
-            type="tel"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.telefone01}
-          />
-          {formik.touched.telefone01 && formik.errors.telefone01 ? (
-            <div className="error">{formik.errors.telefone01}</div>
-          ) : null}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="telefone02">Telefone 02</label>
-          <input
-            id="telefone02"
-            name="telefone02"
-            type="tel"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.telefone02}
-          />
-          {formik.touched.telefone02 && formik.errors.telefone02 ? (
-            <div className="error">{formik.errors.telefone02}</div>
-          ) : null}
-        </div>
-
-        {/* Seleção de causa (obrigatório) */}
-        <div className="form-group">
-          <h3 className="text-lg font-semibold mb-3">Escolha a causa principal da sua organização:</h3>
-          
-          <div className="causas-container flex justify-center items-center border-4 rounded-2xl space-x-5 p-4 ">
-            <div className="causa-option">
-              <input 
-                type="radio" 
-                name="causaSocial" 
-                id="causaAmbiental" 
-                value="1"
-                onChange={handleCausaChange}
-                checked={causaSelecionada === 1}
-                className="mr-1"
-              />
-              <label htmlFor="causaAmbiental">Ambiental</label>
-            </div>
-            
-            <div className="causa-option">
-              <input 
-                type="radio" 
-                name="causaSocial" 
-                id="causaAnimal" 
-                value="2"
-                onChange={handleCausaChange}
-                checked={causaSelecionada === 2}
-                className="mr-1"
-              />
-              <label htmlFor="causaAnimal">Animal</label>
-            </div>
-            
-            <div className="causa-option">
-              <input 
-                type="radio" 
-                name="causaSocial" 
-                id="causaEducacao" 
-                value="3"
-                onChange={handleCausaChange}
-                checked={causaSelecionada === 3}
-                className="mr-1"
-              />
-              <label htmlFor="causaEducacao">Educação</label>
-            </div>
-            
-            <div className="causa-option">
-              <input 
-                type="radio" 
-                name="causaSocial" 
-                id="causaSaude" 
-                value="4"
-                onChange={handleCausaChange}
-                checked={causaSelecionada === 4}
-                className="mr-1"
-              />
-              <label htmlFor="causaSaude">Saúde</label>
-            </div>
-            
-            <div className="causa-option">
-              <input 
-                type="radio" 
-                name="causaSocial" 
-                id="causaSocial" 
-                value="5"
-                onChange={handleCausaChange}
-                checked={causaSelecionada === 5}
-                className="mr-1"
-              />
-              <label htmlFor="causaSocial">Social</label>
-            </div>
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="sobreOng">Conte mais sobre a ONG</label>
-          <textarea
-            id="sobreOng"
-            name="sobreOng"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.sobreOng}
-            rows={4}
-          />
-          {formik.touched.sobreOng && formik.errors.sobreOng ? (
-            <div className="error">{formik.errors.sobreOng}</div>
-          ) : null}
-        </div>
-
-        <button className=' border-2 rounded-5 bg-green-400 p-4' type="submit">Enviar</button>
-      </form>
-    </div>
-
-  );
-};
-
-// Componente do formulário de endereço
-const AddressForm: React.FC = () => {
-  const handleBuscarCep = async (cep: string, setFieldValue: (field: string, value: any) => void) => {
-    try {
-      const cepDados = await getCepData(cep.replace(/\D/g, ''));
-      
-      // Atualiza os campos do formulário com os dados do CEP
-      setFieldValue('cidade', cepDados.localidade);
-      setFieldValue('estado', cepDados.uf);
-      setFieldValue('endereco', cepDados.logradouro);
-      setFieldValue('bairro', cepDados.bairro);
-      
-    } catch (error) {
-      console.error("Erro ao buscar CEP:", error);
-    }
-  };
-
-  const validationSchema = Yup.object({
-    cep: Yup.string().required('CEP é obrigatório'),
-    endereco: Yup.string().required('Endereço é obrigatório'),
-    numero: Yup.string().required('Número é obrigatório'),
-    bairro: Yup.string().required('Bairro é obrigatório'),
-    cidade: Yup.string().required('Cidade é obrigatória'),
-    estado: Yup.string().required('Estado é obrigatório'),
-  });
-
-  const formik = useFormik<AddressFormValues>({
+  // ---------------- Formik Endereço ----------------
+  const formikEndereco = useFormik<AddressFormValues>({
     initialValues: {
       cep: '',
       endereco: '',
@@ -303,369 +94,270 @@ const AddressForm: React.FC = () => {
       cidade: '',
       estado: '',
     },
-    validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    validationSchema: Yup.object({
+      cep: Yup.string().required('CEP é obrigatório'),
+      endereco: Yup.string().required('Endereço é obrigatório'),
+      numero: Yup.string().required('Número é obrigatório'),
+      bairro: Yup.string().required('Bairro é obrigatório'),
+      cidade: Yup.string().required('Cidade é obrigatória'),
+      estado: Yup.string().required('Estado é obrigatório'),
+    }),
+    onSubmit: () => nextStep(),
   });
 
-  return (
-    <div className="form-container">
-      <h2>Endereço</h2>
-      <form onSubmit={formik.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="cep">CEP</label>
-          <input
-            id="cep"
-            name="cep"
-            type="text"
-            placeholder="00000-000"
-            onChange={formik.handleChange}
-            onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-              formik.handleBlur(e);
-              const cep = e.target.value.replace(/\D/g, '');
-              if (cep.length === 8) {
-                handleBuscarCep(cep, formik.setFieldValue);
-              }
-            }}
-            value={formik.values.cep}
-          />
-          {formik.touched.cep && formik.errors.cep ? (
-            <div className="error">{formik.errors.cep}</div>
-          ) : null}
-        </div>
+  const buscarCep = async (cep: string) => {
+    try {
+      const data = await getCepData(cep.replace(/\D/g, ''));
+      formikEndereco.setFieldValue('endereco', data.logradouro || '');
+      formikEndereco.setFieldValue('bairro', data.bairro || '');
+      formikEndereco.setFieldValue('cidade', data.localidade || '');
+      formikEndereco.setFieldValue('estado', data.uf || '');
+    } catch (error) {
+      console.error('Erro ao buscar CEP:', error);
+    }
+  };
 
-        <div className="form-group">
-          <label htmlFor="endereco">Endereço</label>
-          <input
-            id="endereco"
-            name="endereco"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.endereco}
-          />
-          {formik.touched.endereco && formik.errors.endereco ? (
-            <div className="error">{formik.errors.endereco}</div>
-          ) : null}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="numero">Número</label>
-          <input
-            id="numero"
-            name="numero"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.numero}
-          />
-          {formik.touched.numero && formik.errors.numero ? (
-            <div className="error">{formik.errors.numero}</div>
-          ) : null}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="complemento">Complemento</label>
-          <input
-            id="complemento"
-            name="complemento"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.complemento}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="bairro">Bairro</label>
-          <input
-            id="bairro"
-            name="bairro"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.bairro}
-          />
-          {formik.touched.bairro && formik.errors.bairro ? (
-            <div className="error">{formik.errors.bairro}</div>
-          ) : null}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="cidade">Cidade</label>
-          <input
-            id="cidade"
-            name="cidade"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.cidade}
-          />
-          {formik.touched.cidade && formik.errors.cidade ? (
-            <div className="error">{formik.errors.cidade}</div>
-          ) : null}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="estado">Estado</label>
-          <input
-            id="estado"
-            name="estado"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.estado}
-          />
-          {formik.touched.estado && formik.errors.estado ? (
-            <div className="error">{formik.errors.estado}</div>
-          ) : null}
-        </div>
-
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
-  );
-};
-
-// Componente do formulário de redes sociais
-const SocialForm: React.FC = () => {
-  const validationSchema = Yup.object({
-    linkedin: Yup.string().url('URL inválida'),
-    facebook: Yup.string().url('URL inválida'),
-    instagram: Yup.string().url('URL inválida'),
-    twitter: Yup.string().url('URL inválida'),
-  });
-
-  const formik = useFormik<SocialFormValues>({
+  // ---------------- Formik Redes Sociais ----------------
+  const formikSocial = useFormik<SocialFormValues>({
     initialValues: {
       linkedin: '',
       facebook: '',
       instagram: '',
       twitter: '',
     },
-    validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    validationSchema: Yup.object({
+      linkedin: Yup.string().url('URL inválida'),
+      facebook: Yup.string().url('URL inválida'),
+      instagram: Yup.string().url('URL inválida'),
+      twitter: Yup.string().url('URL inválida'),
+    }),
+    onSubmit: () => nextStep(),
   });
 
-  return (
-    <div className="form-container">
-      <h2>Redes Sociais</h2>
-      <form onSubmit={formik.handleSubmit}>
-        <div className="social-grid">
-          <div className="form-group">
-            <label htmlFor="linkedin">LinkedIn</label>
-            <input
-              id="linkedin"
-              name="linkedin"
-              type="url"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.linkedin}
-              placeholder="https://linkedin.com/in/seu-perfil"
-            />
-            {formik.touched.linkedin && formik.errors.linkedin ? (
-              <div className="error">{formik.errors.linkedin}</div>
-            ) : null}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="facebook">Facebook</label>
-            <input
-              id="facebook"
-              name="facebook"
-              type="url"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.facebook}
-              placeholder="https://facebook.com/seu-perfil"
-            />
-            {formik.touched.facebook && formik.errors.facebook ? (
-              <div className="error">{formik.errors.facebook}</div>
-            ) : null}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="instagram">Instagram</label>
-            <input
-              id="instagram"
-              name="instagram"
-              type="url"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.instagram}
-              placeholder="https://instagram.com/seu-perfil"
-            />
-            {formik.touched.instagram && formik.errors.instagram ? (
-              <div className="error">{formik.errors.instagram}</div>
-            ) : null}
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="twitter">Twitter</label>
-            <input
-              id="twitter"
-              name="twitter"
-              type="url"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.twitter}
-              placeholder="https://twitter.com/seu-perfil"
-            />
-            {formik.touched.twitter && formik.errors.twitter ? (
-              <div className="error">{formik.errors.twitter}</div>
-            ) : null}
-          </div>
-        </div>
-
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
-  );
-};
-
-// Componente do formulário de upload
-const UploadForm: React.FC = () => {
-  const [fileName1, setFileName1] = useState<string>('');
-  const [fileName2, setFileName2] = useState<string>('');
-  
-  const formik = useFormik<UploadFormValues>({
+  // ---------------- Formik Upload ----------------
+  const formikUpload = useFormik<UploadFormValues>({
     initialValues: {
       arquivo1: null,
-      arquivo2: null
+      arquivo2: null,
+      imagem: null,
     },
     onSubmit: (values) => {
-      alert('Arquivos selecionados:\n' + 
-            (values.arquivo1 ? values.arquivo1.name : 'Nenhum') + '\n' + 
-            (values.arquivo2 ? values.arquivo2.name : 'Nenhum'));
+      alert('Cadastro completo!\n\n' + JSON.stringify({
+        basico: formikBasico.values,
+        endereco: formikEndereco.values,
+        social: formikSocial.values,
+        upload: values,
+      }, null, 2));
     },
   });
-  
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, fieldName: keyof UploadFormValues, setFileName: React.Dispatch<React.SetStateAction<string>>) => {
-    const file = event.currentTarget.files?.[0] || null;
-    formik.setFieldValue(fieldName, file);
-    setFileName(file ? file.name : '');
-  };
 
-  return (
-    <div className="form-container">
-      <h2>Upload de Arquivos PDF</h2>
-      <form onSubmit={formik.handleSubmit}>
-        <div className="form-group">
-          <label>Primeiro Arquivo PDF</label>
-          <div className="file-upload">
-            <p>Arraste o arquivo ou clique para selecionar</p>
-            <input
-              id="arquivo1"
-              name="arquivo1"
-              type="file"
-              accept=".pdf"
-              className="file-input"
-              onChange={(e) => handleFileChange(e, 'arquivo1', setFileName1)}
-            />
-            <label htmlFor="arquivo1" className="upload-button">Selecionar Arquivo</label>
-            {fileName1 && <p className="file-name">Arquivo selecionado: {fileName1}</p>}
-          </div>
-        </div>
+  const nextStep = () => setActiveStep(prev => Math.min(prev + 1, 3));
+  const prevStep = () => setActiveStep(prev => Math.max(prev - 1, 0));
 
-        <div className="form-group">
-          <label>Segundo Arquivo PDF</label>
-          <div className="file-upload">
-            <p>Arraste o arquivo ou clique para selecionar</p>
-            <input
-              id="arquivo2"
-              name="arquivo2"
-              type="file"
-              accept=".pdf"
-              className="file-input"
-              onChange={(e) => handleFileChange(e, 'arquivo2', setFileName2)}
-            />
-            <label htmlFor="arquivo2" className="upload-button">Selecionar Arquivo</label>
-            {fileName2 && <p className="file-name">Arquivo selecionado: {fileName2}</p>}
-          </div>
-        </div>
+  const steps = ['Básico', 'Endereço', 'Rede Social', 'Documentos'];
 
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
-  );
-};
+  // Salvamento automático
+  useEffect(() => {
+    localStorage.setItem('basico', JSON.stringify(formikBasico.values));
+    localStorage.setItem('endereco', JSON.stringify(formikEndereco.values));
+    localStorage.setItem('social', JSON.stringify(formikSocial.values));
+    localStorage.setItem('upload', JSON.stringify(formikUpload.values));
+  }, [
+    formikBasico.values,
+    formikEndereco.values,
+    formikSocial.values,
+    formikUpload.values
+  ]);
 
-// Componente principal
-const FormPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('basico');
-
+  // ---------------- Render Form ----------------
   const renderForm = () => {
-    switch(activeTab) {
-      case 'basico':
-        return <BasicForm />;
-      case 'endereco':
-        return <AddressForm />;
-      case 'social':
-        return <SocialForm />;
-      case 'upload':
-        return <UploadForm />;
+    switch(activeStep) {
+      case 0:
+        return (
+          <form onSubmit={formikBasico.handleSubmit}>
+            <FormInput formik={formikBasico} name="razaoSocial" label="Razão Social" />
+            <FormGroup
+              formik={formikBasico}
+              fields={[
+                { name: "cnpj", label: "CNPJ", width: "w-1/2" },
+                { name: "email", label: "Email", width: "w-1/2" }
+              ]}
+            />
+            <FormGroup
+              formik={formikBasico}
+              fields={[
+                { name: "pessoaResponsavel", label: "Pessoa Responsável", width: "w-1/2" },
+                { name: "cpf", label: "CPF", width: "w-1/2" }
+              ]}
+            />
+            <FormGroup
+              formik={formikBasico}
+              fields={[
+                { name: "telefone01", label: "Telefone 01", width: "w-1/2" },
+                { name: "telefone02", label: "Telefone 02", width: "w-1/2" }
+              ]}
+            />
+            <FormRadioGroup
+              formik={formikBasico}
+              name="causaSocial"
+              label="Escolha a causa principal da sua organização"
+              options={[
+                { label: 'Ambiental', value: '1' },
+                { label: 'Animal', value: '2' },
+                { label: 'Educação', value: '3' },
+                { label: 'Saúde', value: '4' },
+                { label: 'Social', value: '5' },
+              ]}
+            />
+            <div className="mb-4">
+              <label className="block mb-1 font-medium">Conte mais sobre a ONG</label>
+              <textarea
+                name="sobreOng"
+                rows={4}
+                value={formikBasico.values.sobreOng}
+                onChange={formikBasico.handleChange}
+                onBlur={formikBasico.handleBlur}
+                className="w-full border-1 rounded p-2"
+              />
+              {formikBasico.touched["sobreOng"] && formikBasico.errors["sobreOng"] && (
+              <div className="text-red-500 text-sm mt-1">{formikBasico.errors["sobreOng"]}</div>
+              )}
+            </div>
+            <div className='flex justify-end'>
+              <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
+            </div>
+          </form>
+        );
+      case 1:
+        return (
+          <form onSubmit={formikEndereco.handleSubmit}>
+            <FormGroup 
+              formik={formikEndereco}
+              fields={[
+                { name: "cep", label:"CEP", placeholder:"00000-000", width:"w-1/2"}
+              ]}  
+            />
+            
+            <button
+              type="button"
+              onClick={() => buscarCep(formikEndereco.values.cep)}
+              className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
+            >
+              Buscar CEP
+            </button>
+            <FormGroup
+              formik={formikEndereco}
+              fields={[
+                { name: "endereco", label: "Endereço", width: "w-full", readonly: true },
+                
+              ]}
+            />
+            <FormGroup
+              formik={formikEndereco}
+              fields={[
+                { name: "numero", label: "Número", width: "flex-1" },
+                { name: "complemento", label: "Complemento", width: "w-full" },
+                
+              ]}
+            />
+            <FormGroup
+              formik={formikEndereco}
+              fields={[
+                { name: "bairro", label: "Bairro", width: "w-1/2", readonly: true },
+                { name: "cidade", label: "Cidade", width: "w-1/2", readonly: true },
+                { name: "estado", label: "Estado", width: "w-1/10 sm:w-1/5", readonly: true}
+              ]}
+            />
+            <div className="flex space-x-2 justify-end mt-4 gap-4">
+              <button type="button" onClick={prevStep} className="px-4 py-2 bg-gray-400 text-white rounded">Voltar</button>
+              <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
+            </div>
+          </form>
+        );
+      case 2:
+        return (
+          <form onSubmit={formikSocial.handleSubmit}>
+            <FormGroup
+              formik={formikSocial}
+              fields={[
+                { name: "linkedin", label: "LinkedIn",  width: "w-1/2" },
+                { name: "facebook", label: "Facebook",  width: "w-1/2" }
+              ]}
+            />
+            <FormGroup
+              formik={formikSocial}
+              fields={[
+                { name: "instagram", label: "Instagram",  width: "w-1/2" },
+                { name: "twitter", label: "Twitter",  width: "w-1/2" }
+              ]}
+            />
+            <div className="flex space-x-2 justify-end mt-4 gap-4">
+              <button type="button" onClick={prevStep} className="px-4 py-2 bg-gray-400 text-white rounded">Voltar</button>
+              <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Próximo</button>
+            </div>
+          </form>
+        );
+      case 3:
+        return (
+          <form onSubmit={formikUpload.handleSubmit}>
+            <FileUpload
+              label="Primeiro Arquivo"
+              file={formikUpload.values.arquivo1}
+              setFile={(file) => formikUpload.setFieldValue('arquivo1', file)}
+              accept=".pdf"
+            />
+            <FileUpload
+              label="Segundo Arquivo"
+              file={formikUpload.values.arquivo2}
+              setFile={(file) => formikUpload.setFieldValue('arquivo2', file)}
+              accept=".pdf"
+            />
+            <ImageUpload
+              label="Logo da ONG"
+              image={imagem}
+              setImage={(file) => { setImagem(file); formikUpload.setFieldValue('imagem', file); }}
+            />
+            <div className="flex space-x-2 justify-end mt-4 gap-4">
+              <button type="button" onClick={prevStep} className="px-4 py-2 bg-gray-400 text-white rounded">Voltar</button>
+              <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">Enviar</button>
+            </div>
+          </form>
+        );
       default:
-        return <BasicForm />;
+        return null;
     }
   };
 
   return (
-    <> 
-    <Header_feed/> 
-    <div className="container text-center">
-      
-      
-        <div className="flex justify-center items-center border-4 rounded-2xl space-x-5 p-4 ">
-
-          <div className=' border-2 rounded-full bg-green-400 p-4' >
-            <button 
-            className={`nav-button ${activeTab === 'basico' ? 'active' : ''}` }
-            onClick={() => setActiveTab('basico')}
-          >
-            Básico
-          </button>
+    <>
+      <Header_feed />
+      <main className='main1'>
+        <div className="mx-auto p-2 w-full flex">
+          <div className='w-full'>
+            <Image alt="" src={planetilson3} width={800} id="planetilson3"></Image>
           </div>
-
-          <div className=' border-2 rounded-full bg-green-400 p-4'>
-          <button 
-            className={`nav-button ${activeTab === 'endereco' ? 'active' : ''}`}
-            onClick={() => setActiveTab('endereco')}
-          >
-            Endereço
-          </button>
+          <div className='p-2 mb-2 bg-header rounded-2 text-center w-80'>
+            <h1 className="text-xl font-bold mb-4">Cadastro Completo</h1>
+            <div className="flex  mb-2 flex-full w-full justify-center sm: flex-wrap flex-column  ">
+              
+              {steps.map((step, index) => (
+                <StepButton
+                  key={step}
+                  label={step}
+                  active={activeStep === index}
+                  onClick={() => setActiveStep(index)}
+                />
+              ))}
+            </div>
           </div>
-          
-          <div className=' border-2 rounded-full bg-green-400 p-4'>
-          <button 
-            className={`nav-button ${activeTab === 'social' ? 'active' : ''}`}
-            onClick={() => setActiveTab('social')}
-          >
-            Rede Social
-          </button>
-
+          <div className="bg-white p-4 mb-2 rounded shadow w-75">{renderForm()}</div>
+          <div className='w-full'>
+            <Image alt="" src={planetilson3} width={800} id="planetilson3"></Image>
           </div>
-
-          <div className=' border-2 rounded-full bg-green-400 p-4'>
-          <button 
-            className={`nav-button ${activeTab === 'upload' ? 'active' : ''}`}
-            onClick={() => setActiveTab('upload')}
-          >
-            Upload PDF
-          </button>
-
-          </div>
-          
         </div>
-      
-      <div className="content">
-        {renderForm()}
-      </div>
-    </div>
+      </main>
     </>
   );
 };
 
-export default FormPage;
+export default CadastroCompleto;
