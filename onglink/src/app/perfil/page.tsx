@@ -1,14 +1,14 @@
 "use client"
 
 import Header_feed from "../components/header_feed";
-import '@/src/app/CSS/header_alt.css'
+import '@/app/CSS/header_alt.css'
 import Image from "next/image";
-import MuxnLogo1 from '@/src/app/img/MUXN_logo1.png'
+import MuxnLogo1 from '@/app/img/MUXN_logo1.png'
 import { Button } from "react-bootstrap";
-import Ceu from "@/src/app/img/ceu.jpeg";
-import '@/src/app/CSS/feed.css'
+import Ceu from "@/app/img/ceu.jpeg";
+import '@/app/CSS/feed.css'
 import FeedCarousel from "../components/carrousel/carousel";
-import '@/src/app/CSS/perfil.css'
+import '@/app/CSS/perfil.css'
 import UploadButton from "../components/button/UploadButton";
 import { useRef } from "react";
 

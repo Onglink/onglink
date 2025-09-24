@@ -4,14 +4,14 @@ import React, { useState, ChangeEvent } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/app/CSS/feed.css";
 import "@/app/CSS/header_alt.css";
-import FeedCarousel from "@/app/components/carrousel/carousel";
-import Arara from "@/app/img/arara.jpeg";
-import AraraAzul from "@/app/img/arara_azul.jpeg";
+// import FeedCarousel from "@/app/components/carrousel/carousel";
+// import Arara from "@/app/img/arara.jpeg";
+// import AraraAzul from "@/app/img/arara_azul.jpeg";
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
-import Capivara from "@/app/img/capivara.jpeg";
-import Ceu from "@/app/img/ceu.jpeg";
-import Mico from "@/app/img/mico.jpeg";
-import Tucano from "@/app/img/tucano.jpeg";
+// import Capivara from "@/app/img/capivara.jpeg";
+// import Ceu from "@/app/img/ceu.jpeg";
+// import Mico from "@/app/img/mico.jpeg";
+// import Tucano from "@/app/img/tucano.jpeg";
 import logo_instagram from "@/app/img/icons/instagram_6422200.png";
 import logo_twitter from "@/app/img/icons/twitter_5968830.png";
 import logo_facebook from "@/app/img/icons/social_12942738.png";
@@ -19,6 +19,7 @@ import { Button, Modal, Form, FormCheck, Alert } from "react-bootstrap";
 import Header_feed from "../components/header_feed";
 import UploadButton from "../components/button/UploadButton";
 import FeedPage from "../components/FeedPage";
+import FeedPost from "../components/FeedPost";
 import type { ModalProps } from "react-bootstrap";
 
 export default function Home() {
@@ -124,8 +125,8 @@ export default function Home() {
             <div className="col-lg-3 ml-5">
               <div className="offcanvas-body d-block px-2 px-lg-0">
                 <div className="card overflow-hidden">
-                  <div className="h-50px">
-                    <div id="menu_perfil" className="card-body pt-0">
+                  <div className="h-50px" id="menu_perfil">
+                    <div id="menu_perfil" className="card-body pt-0 mt-3">
                       <div className="text-center">
                         <div className="avatar avatar-lg mt-n5 mb-3">
                           <a href="/perfil">
@@ -212,16 +213,13 @@ export default function Home() {
                 </div>
               </div>
             </div>
-             {/*FIM DO MENU LATERAL*/}
+            {/*FIM DO MENU LATERAL*/}
 
             {/* </div>   *******************************************************************   */}
             <div className="col-md-8 col-lg-6 vstack gap-4">
-              <div id="div_feed">
-                              
-                {/* //PUBLICAR NO FEED */}
-                <div><FeedPage />
-              </div>
-                  
+              {/* //PUBLICAR NO FEED */}
+              <div>
+                <FeedPage />
               </div>
             </div>
           </div>
