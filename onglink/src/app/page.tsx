@@ -31,7 +31,7 @@ export default function Home() {
         
               <div className="main1">
                   
-                  <Row className="row mt-5 mb-8" id="row1">
+                  <Row className="row" id="row1">
         
                       <Col sm={6} id="div_imagem_home">
                         <Image alt="" src={planetilson} width={1000}></Image>
@@ -117,7 +117,15 @@ export default function Home() {
                           <img className="border-3 border-red-500 rounded-xl" src={"https://img.freepik.com/vetores-premium/modelo-do-logotipo-da-caixa-do-estudio_10399-28.jpg"} alt="Empresa 3" width="200" height="200"></img>
                           <img className="border-3 border-green-500 rounded-xl" src={"https://img.freepik.com/vetores-premium/logotipo-da-empresa_7436-14.jpg"} alt="Empresa 4" width="200" height="200"></img>
                       </div>
-          
+
+                      <Link href={"/parceiros"}>
+                          <Button
+                            id="botao_ver_todos"
+                          >
+                            Ver Todos
+                          </Button>
+                      </Link>
+                      
                 </div>
 
               </div>

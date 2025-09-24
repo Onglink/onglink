@@ -19,6 +19,14 @@
     height: 70px;
   }
 
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color:#AEF2AC ;
+    outline: 0;
+    box-shadow: none;
+}
+
   #botaoBuscar{
     background-color: rgba(4, 165, 44, 0.75);
     border: none;
@@ -30,22 +38,22 @@
   }
   
   #botao_login{
-    background-color: #01292E;
+    background-color: #05b3ca;
     border: none;
-    color: #05b3ca;
+    color: #01292E;
     font-weight: 700;
     box-shadow: 0px 6px #035b67
   }
 
   #botao_login:hover{
-    background-color: #05b3ca;
-    color: #01292E;
+    background-color: #01292E;
+    color: #05b3ca;
   }
 
   #botao_cadastro{
     background-color: rgba(4, 165, 44, 0.75);
     border: none;
-    color: #01292E;
+    color: #e8f3e8;
     font-weight: 700;
     box-shadow: 0px 6px rgba(2, 84, 23, 0.75)
   }
