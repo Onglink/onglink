@@ -60,10 +60,14 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
 
   return (
   <>
+  <div className="mb-2" id="div_feed">
       <ModalDenuncia show={modalShow} onHide={() => setModalShow(false)} />
- <div style={{ backgroundColor: "#D0E2E9" }}  className="container-fluid col-11 vstack gap-4 p-3 rounded-4 ">
+ <div style={{ backgroundColor: "#D0E2E9" }}  
+ className="container-fluid col-11 vstack gap-4 p-3 rounded-4 mt-2 mb-2"
+ id="borda">
       
     <div className="feed-item mb-3 d-flex align-items-start">
+      
       {/* Avatar */}
       <div className="avatar avatar-xs me-2 "
       style={{ minWidth: "60px" }}>
@@ -77,6 +81,7 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
           />
         </a>
       </div>
+
       {/* Conteúdo da Postagem */}
      <div className="feed-content h-100 w-100">
         <h3>{post.title}</h3>
@@ -186,7 +191,8 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
       </div>
                       
     </div>
-    <div id="componente_feedpage"></div>
+    {/* <div id="componente_feedpage"></div> */}
+    </div>
     </>
   );
 };

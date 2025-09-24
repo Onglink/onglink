@@ -65,7 +65,7 @@
 #componente_feedpage{
     background-color:#95CF93;
     border-color: #95CF93;
-    border-bottom-color: #01086d;
+    border-bottom-color: #8BC28A;
     border-width: 3px;
     
 }
@@ -93,9 +93,19 @@
 }
 #div_feed{
     background-color: #95CF93;
-     border-radius: 35px;
+     border-radius: 15px;
+     margin: 1rem;
+     border-width: 0.2rem;
+     border-color:#8BC28A;
+     
 }
 #divisoria{
     width: 5;
     background-color: #01086d;
+}
+#borda{
+    border-width: 0.5rem;
+    border-color: #C8D9E0;
+    
+    
 }
