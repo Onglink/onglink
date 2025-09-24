@@ -1,3 +1,7 @@
+#perfil{
+    background-color: rgba(120, 171, 191, 0.35);
+}
+
 
 #fundo_perfil {
     height: 200px;
@@ -6,18 +10,6 @@
     width: 100%;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-}
-
-#perfil{
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-}
-
-#titulo_perfil{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 20px;
 }
 
 #MUXN_certificado{
@@ -31,23 +23,52 @@
     margin-right: 5px;
 }
 
-#container_perfil{
-    margin-bottom: 30px;
-}
-
 #div1_perfil{
     display: flex;
     flex-direction: row;
     align-items: center;
+    background-color: white;
+    padding: 20px;
 }
 
-#div_nome_perfil{
+#info_perfil{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-left: 50px;
 }
 
-#div_publi{
+#info_perfil input{
+    margin-left: 10px;
+}
+
+#info_perfil .col{
+    width: 350px;
+    text-align: left;
+}
+
+#info_e_btn{
+    border: 1px black;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#btn_editar_perfil{
+    background-color: rgba(4, 165, 44, 0.75);
+    border: none;
+    color: white;
+    width: 250px;
+    font-weight: 700;
+    box-shadow: 0px 7px rgba(2, 84, 23, 0.75)
+}
+
+#btn_editar_perfil:hover{
+    background-color: rgba(3, 62, 18, 0.85);
+    color: #AEF2AC;
+}
+
+
+#subdiv_publi{
     overflow: scroll;
     overflow-x: hidden;
     display: flex;
@@ -55,14 +76,18 @@
     padding-right: 0px;
     height: 600px;
     padding: 20px;
+    width:80%;
+    margin-left: 140px;
+    border: 10px black;
 }
 
+#title_publi{
+    color: #05b3ca;
+    font-weight: 900;
+}
 
 #borda_publi{
-    border-radius: 10px;
-    border-color:#789186;
-    background-color: #99b4a8;
-    width: 80%;
+    padding: 50px;
 }
 
 .img-overlay-wrap:hover #logo_MUXN{
