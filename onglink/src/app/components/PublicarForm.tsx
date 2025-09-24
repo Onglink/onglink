@@ -3,7 +3,14 @@ import React, { FC, useState } from "react";
 import Image from "next/image";
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import NeWUploadButton from "./button/NewUploadButton";
-import { Button, Modal, Form, FormCheck, Alert, ModalProps } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  Form,
+  FormCheck,
+  Alert,
+  ModalProps,
+} from "react-bootstrap";
 
 interface PublicarFormProps {
   onPublish: (post: {
@@ -82,8 +89,7 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
       <div className="container-fluid col-12 vstack gap-4 p-0">
         <div className="d-flex mt-3 mb-3">
           {/* Avatar */}
-          <div className="avatar avatar-xs me-2"
-          style={{ minWidth: "60px" }}>
+          <div className="avatar avatar-xs me-2" style={{ minWidth: "60px" }}>
             <a href="#">
               <Image
                 className="avatar-img rounded-circle"
@@ -96,10 +102,14 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
           </div>
           <div className="container mt-0">
             <div className="mb-2">
+              <label htmlFor="titulo" className="form-label fw-bold">
+                Título da publicação
+              </label>
+
               <textarea
                 className="form-control"
                 rows={1}
-                placeholder="Título"
+                // placeholder="Título"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 onInput={(e) => {
@@ -107,13 +117,18 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
                   target.style.height = "auto";
                   target.style.height = `${target.scrollHeight}px`;
                 }}
+                style={{ resize: "none", overflow: "hidden" }}
               />
             </div>
             <div className="mb-2">
+              <label htmlFor="Conteúdo" className="form-label fw-bold">
+                Conteúdo da publicação
+              </label>
+
               <textarea
                 className="form-control"
                 rows={5}
-                placeholder="Descrição"
+                // placeholder="Descrição"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onInput={(e) => {
@@ -121,12 +136,16 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
                   target.style.height = "auto";
                   target.style.height = `${target.scrollHeight}px`;
                 }}
+                style={{ resize: "none", overflow: "hidden" }}
               />
             </div>
           </div>
         </div>
       </div>
-      <div id="div_botoes_publi" className=" d-flex align-items-center gap-3 mt-3">
+      <div
+        id="div_botoes_publi"
+        className=" d-flex align-items-center gap-3 mt-3"
+      >
         <button type="submit" className="btn btn-success" title="Enviar">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +161,7 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
         </button>
         <NeWUploadButton
           title="Selecionar imagem"
-                    label={
+          label={
             <span className="d-flex align-items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -21,8 +21,22 @@ import UploadButton from "../components/button/UploadButton";
 import FeedPage from "../components/FeedPage";
 import FeedPost from "../components/FeedPost";
 import type { ModalProps } from "react-bootstrap";
+import PublicarForm from "@/app/components/PublicarForm";
+
+interface Post {
+  title: string;
+  message: string;
+  image?: File | null;
+}
+
 
 export default function Home() {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  const addPost = (post: Post) => {
+    setPosts((prevPosts) => [post, ...prevPosts]);
+  };
+
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [showSucesso, setShowSucesso] = useState(false);
@@ -218,9 +232,16 @@ export default function Home() {
             {/* </div>   *******************************************************************   */}
             <div className="col-md-8 col-lg-6 vstack gap-4">
               {/* //PUBLICAR NO FEED */}
-              <div>
-                <FeedPage />
-              </div>
+                <div id="div_feed">
+                 <div className="p-3">
+                <PublicarForm onPublish={addPost} />
+                </div>
+                </div>
+
+                <FeedPage posts={posts} />
+
+                {/* <FeedPage /> */}
+              
             </div>
           </div>
         </div>

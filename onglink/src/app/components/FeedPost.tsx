@@ -62,7 +62,9 @@ const FeedPost: FC<FeedPostProps> = ({ post }) => {
   <>
   <div className="mb-2" id="div_feed">
       <ModalDenuncia show={modalShow} onHide={() => setModalShow(false)} />
- <div style={{ backgroundColor: "#D0E2E9" }}  className="container-fluid col-11 vstack gap-4 p-3 rounded-4 ">
+ <div style={{ backgroundColor: "#D0E2E9" }}  
+ className="container-fluid col-11 vstack gap-4 p-3 rounded-4 mt-2 mb-2"
+ id="borda">
       
     <div className="feed-item mb-3 d-flex align-items-start">
       
