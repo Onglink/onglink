@@ -3,18 +3,20 @@
 import Image from "next/image";
 import Link from "next/link"
 import {Button, Col, Row, Form, FormLabel, FormControl} from "react-bootstrap"
-import logo_onglink_01 from '@/src/app/img/LOGO_ONGLINK_1.png'
-import image_home from '@/src/app/img/image_home.jpg'
-import logo_muxn from '@/src/app/img/MUXN_logo1.png'
+import logo_onglink_01 from '@/app/img/LOGO_ONGLINK_1.png'
+import image_home from '@/app/img/image_home.jpg'
+import logo_muxn from '@/app/img/MUXN_logo1.png'
 import React from "react";
 import { useRouter } from "next/navigation";
-import '@/src/app/CSS/home.css'
-import '@/src/app/CSS/header_alt.css'
-import '@/src/app/CSS/menu.css'
-import '@/src/app/CSS/main.css'
-import '@/src/app/CSS/body.css'
-import '@/src/app/CSS/parceiros.css'
+import '@/app/CSS/home.css'
+import '@/app/CSS/header_alt.css'
+import '@/app/CSS/menu.css'
+import '@/app/CSS/main.css'
+import '@/app/CSS/body.css'
+import '@/app/CSS/parceiros.css'
 import Header_home from "@/app/components/header_home"
+import Card from 'react-bootstrap/Card';
+
 
 export default function Parceiros() {
 
@@ -33,18 +35,22 @@ export default function Parceiros() {
       {/* <!--Main--> */}
       
       <main id="main_parceiros">
-
+        <div className=""id="page_title"><h1>NOSSOS PARCEIROS</h1></div>
+        
         <div className="container-fluid" id="div_cad_ong_tela_1">
+          
+          
 
           <div id="fundo_navbar">
             <div className="row">
 
               <div className="col-12">
                 <nav id="navbar">
-                  <ul>
-                    <Link href="/legislacao"><li>Legislação</li></Link>
-                    <Link href="/nossa_historia"><li>Nossa História</li></Link>
-                    <Link href="/parceiros"><li className="bg-green-700">Parceiros</li></Link>
+                  <ul id="items_list">
+                    <Link href="/"><li>Meio ambiente</li></Link>
+                    <Link href="/"><li>Saúde</li></Link>
+                    <Link href="/"><li>Educação</li></Link>
+                    <Link href="/"><li >Exibir todos</li></Link>
                   </ul>
                 </nav>
               </div>

@@ -1,15 +1,16 @@
 
 #main_parceiros
 {
-    background-image: url("https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-    background-repeat: no-repeat;
+    /* background-image: url("https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); */
+    /* background-repeat: no-repeat; */
+    background-color: #D0E2E9;
     background-size: cover;
     padding: 20px;
 }
 
 #navbar
 {
-    background-color: #2b3710c4;
+    /* background-color: #2b3710c4; */
     color: white;
     padding: 20px;
     width: 100%;
@@ -29,15 +30,15 @@
 
 #navbar li:hover
 {
-    background-color: oklch(52.7% .154 150.069);
-    color: #48f718;
+    background-color: #95CF93 ;
+    color: #01086d;
 }
 
 #fundo_navbar
 {
     padding: 20px;
     margin-bottom: 30px;
-    background-color: #283903a6
+    /* background-color: #283903a6 */
 }
 
 #navbar ul
@@ -55,7 +56,7 @@
 
 #div_parceiros
 {
-    background-color: #283903a6;
+    /* background-color: #283903a6; */
     color: white;
     padding: 30px;
 }
@@ -86,4 +87,14 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
+}
+#page_title{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+   
+}
+#items_list{
+    color: grey;
 }
