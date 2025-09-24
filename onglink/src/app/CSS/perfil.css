@@ -2,6 +2,19 @@
     background-color: rgba(120, 171, 191, 0.35);
 }
 
+#div_nome_perfil{
+    display: flex;
+    flex-direction: row;
+}
+
+#titulo_perfil{
+    margin-left: 15px;
+    padding-top: 10px;
+}
+
+#logo_MUXN{
+    margin-top: -80px;
+}
 
 #fundo_perfil {
     height: 200px;
@@ -28,7 +41,6 @@
     flex-direction: row;
     align-items: center;
     background-color: white;
-    padding: 20px;
 }
 
 #info_perfil{
