@@ -10,9 +10,9 @@ import '@/app/CSS/feed.css'
 import FeedCarousel from "../components/carrousel/carousel";
 import '@/app/CSS/perfil.css'
 import UploadButton from "../components/button/UploadButton";
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Script from "next/script";
-import Editar_Perfil from "@/app/perfil/editar_perfil"
+import Modal_Editar_Perfil from "@/app/perfil/editar_perfil"
 
 
 export default function Perfil(){
@@ -38,7 +38,7 @@ export default function Perfil(){
                     
 
 
-                    <div id="info_e_btn" className="border p-3 flex flex-column items-center">
+                    <div id="info_e_btn" className="p-3 flex flex-column items-start">
 
                       <div id="info_perfil" className="flex mb-4">
                             <div>
@@ -47,7 +47,7 @@ export default function Perfil(){
                                   
                                     <div className="img-overlay-wrap">
                                       <input type="file" ref={inputFile} className="hidden" />
-                                      <Image onClick={onImageClick} id="logo_MUXN" className="avatar-img rounded-circle border d-inline"src={MuxnLogo1} alt="logo_muxn" width={150} height={100}/>
+                                      <Image onClick={onImageClick} id="logo_MUXN" className="avatar-img rounded-circle border-5 d-inline"src={MuxnLogo1} alt="logo_muxn" width={150} height={100}/>
                                       <svg onClick={onImageClick} id="svg_mudar_pfp" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>
                                     </div>
 
@@ -60,8 +60,6 @@ export default function Perfil(){
 
 
                                         <p className="text-md">Projetos Sociais</p>
-
-                                        <p>"Por um planeta melhor, através da Tecnologia."</p>
 {/* 
                                         <div id="estrelas_rating" className="d-flex">
 
@@ -90,6 +88,8 @@ export default function Perfil(){
                                                   
                                 <div id="descricao_perfil">
                                     <p className="w-75">
+                                    <p>"Por um planeta melhor, através da Tecnologia."</p>
+
                                       A MUXN Technology surgiu a partir da necessidade de atender à sociedade por meio da tecnologia. 
                                       Em 2024, um pequeno grupo de estudantes viu no setor social uma oportunidade de implementar o 
                                       Desenvolvimento de Software Multiplataforma para facilitar a formação de parcerias entre ONGs e 
@@ -102,9 +102,7 @@ export default function Perfil(){
                             </div>
                       </div>
                             
-                      <Button id="btn_editar_perfil" onClick={Editar_Perfil}> Editar Dados do Perfil</Button>
-
-                      <div id="div_editar_perfil"></div>
+                      <Modal_Editar_Perfil/>
 
                     </div>
 
