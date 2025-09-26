@@ -57,7 +57,7 @@
 #div_parceiros
 {
     /* background-color: #283903a6; */
-    color: white;
+    color: #000000 ;
     padding: 30px;
 }
 
@@ -67,11 +67,12 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     padding: 15px;
-    background-color: #2b3710c4;
+    /* background-color: #95CF93 ; */
     border-radius: 30px;
     margin-bottom: 30px;
     margin-top: 10px;
     width:fit-content;
+    font-weight: 700;
 }
 
 #img_empresas
@@ -97,4 +98,39 @@
 }
 #items_list{
     color: grey;
+}
+#educacao{
+    border-color: blue;
+    border-width: 0.2rem;
+    border-radius: 2rem;
+}
+#fome{
+    border-color: grey;
+   border-width: 0.2rem;
+    border-radius: 2rem;
+}
+#saude{
+    border-color: orange;
+   border-width: 0.2rem;
+    border-radius: 2rem;
+}
+#meio_ambiente{
+    border-color: green;
+   border-width: 0.2rem;
+    border-radius: 2rem;
+}
+#animais{
+    border-color: rgb(235, 22, 57);
+   border-width: 0.2rem;
+    border-radius: 2rem;
+}
+#sociedade{
+    border-color: grey;
+   border-width: 0.2rem;
+    border-radius: 2rem;
+}
+#criancas{
+    border-color: red;
+   border-width: 0.2rem;
+    border-radius: 2rem;
 }
