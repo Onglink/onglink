@@ -11,3 +11,16 @@
 #btn_entrar {
     width: 200px;
 }
+
+#esqueci_senha{
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.form_control{
+    border-color: rgb(184, 182, 182);
+}
+
+#bg_login{
+    background-color: rgba(120, 171, 191, .35);
+}

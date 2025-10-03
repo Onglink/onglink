@@ -26,10 +26,10 @@ export default function Header_home() {
           <form className="w-100 me-3" role="search">
             <InputGroup className="mb-3" id="searchONG">
               <Form.Control
+                id="inputONG"
                 placeholder="Procurar ONG"
                 aria-label="Procurar ONG"
                 aria-describedby="basic-addon2"
-                
               />
               <Button id="botaoBuscar">
                 Buscar

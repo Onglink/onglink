@@ -28,7 +28,9 @@ header#header_header.py-3.mb-3.border-bottom{
            
         }
     
-    
+  #bg_cadastro{
+    background-color: rgba(120, 171, 191, .35);
+  }
     
         #par_sep{
     
@@ -70,6 +72,29 @@ header#header_header.py-3.mb-3.border-bottom{
 
 /*Divisão dentro container*/
 
+.form-control{
+  border-color: rgb(184, 182, 182);
+}
+
+#btn_enviar_cad, #btn_entrar{
+  background-color: #05b3ca;
+  border: none;
+  color: white;
+  font-weight: 700;
+  width: 120px;
+  box-shadow: 0px 6px #035b67
+}
+
+#btn_enviar_cad:hover, #btn_entrar:hover{
+  background-color: #01292E;
+  color: #05b3ca;
+}
+
+#h1_cadastro, #h1_login{
+    font-weight: 900;
+    font-size: xx-large;
+    color: #05b3ca;
+}
 
 #main_recSenha{
   display: flex;
@@ -307,7 +332,7 @@ text-align: center;
 }
 
 #esqueci_senha{
-  color: darkgreen;
+  color: rgba(7, 113, 33, 0.75);
 }
 
 #btn_continuar{
@@ -326,9 +351,7 @@ text-align: center;
   }
 
 /* Adiciona borda preta aos inputs */
-input.form-control {
-    border: 1px solid black;
-  }
+
   
   /* Adiciona borda preta ao textarea */
   textarea.form-control {
@@ -374,9 +397,7 @@ input.form-control {
   }
 
   /* Estilização de bordas pretas */
-  input.form-control, textarea.form-control, select.form-select {
-    border: 1px solid black;
-  }
+
 
   /* Feedback visual */
   .is-invalid {

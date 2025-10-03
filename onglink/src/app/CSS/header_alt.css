@@ -15,6 +15,7 @@
     margin-left: 100px;
     padding-top: 20px;
     height: 70px;
+    border: none;
   }
 
   #ong_busca{
@@ -25,7 +26,7 @@
     /* border-radius:  */
     }
 
-.form-control:focus {
+  #inputONG:focus {
     color: var(--bs-body-color);
     background-color: var(--bs-body-bg);
     border-color:#AEF2AC ;
