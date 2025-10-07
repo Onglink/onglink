@@ -23,15 +23,15 @@ export default function Login() {
   
       
         
-      <main className="min-h-screen flex items-center justify-center p-4 " id="main_login">
+      <main id="bg_login" className="min-h-screen flex items-center justify-center">
         {/* <!--Main--> */}
         
       
                     {/*<!--Formulario de  cadastro de ONG--> */}
-      <div className="bg-white rounded-3xl border-4 p-6 w-full max-w-4xl">
+      <div id="caixa_login" className="bg-white rounded-3xl p-6 w-full max-w-4xl">
 
         <div className="m-4" id="div_login">
-          <h1>Faça seu Login</h1>
+          <h1 id="h1_login">Faça seu Login</h1>
              
           
           {/* <!--Divisão email/senha--> */}
@@ -39,14 +39,14 @@ export default function Login() {
               <div id="div_email">
                 <Form.Label htmlFor="email">Digite seu e-mail:</Form.Label>
                 <p></p>
-                <Form.Control type="text" name="nemail" id="email" ></Form.Control>
+                <Form.Control className="border-2" type="text" name="nemail" id="email"></Form.Control>
               </div>
           </div>
 
             <div className="rowlogin">
               <div id="div_senha">
                 <Form.Label htmlFor="senha">Digite Senha:</Form.Label>
-                <Form.Control type="text" name="senha" id="senha" ></Form.Control>
+                <Form.Control className="border-2" type="text" name="senha" id="senha" ></Form.Control>
                 <a id="esqueci_senha" href="/recuperar_senha">Esqueci minha senha</a>
               </div>
             </div>
@@ -65,7 +65,7 @@ export default function Login() {
     
             <div className="col-10" id="div_btn_entrar">
             
-              <Link href={"/feed"}> <Button id="btn_entrar" variant="success">Entrar</Button> </Link>
+              <Link href={"/feed"}> <Button id="btn_entrar">Entrar</Button> </Link>
             </div>
           </div>
 

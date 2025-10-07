@@ -3,7 +3,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Header_home from "@/app/components/header_home";
 import '@/app/CSS/home.css'
+import '@/app/CSS/cadastro.css'
 import '@/app/CSS/header_alt.css'
+import { Button } from 'react-bootstrap';
 import { CepResponse, getCepData } from '../services/cep';
 import { Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
@@ -38,9 +40,9 @@ export default function Cad_pj() {
         <>
         <Header_home/>
         <body className='bg-verde1'>
-            <main className="bg-verde2 min-h-screen flex items-center justify-center p-4 mt-4 mb-4">
-                <div className="bg-white rounded-3xl border-4 p-6 w-full max-w-4xl">   
-                    <h1 className="text-center">Cadastro</h1>
+            <main id='bg_cadastro' className="min-h-screen flex items-center justify-center">
+                <div id='caixa_cadastro' className="bg-white rounded-3xl p-6 w-full max-w-4xl">   
+                    <h1 className="text-center" id='h1_cadastro'>Cadastro</h1>
                     <Formik 
                         initialValues={initialValues}
                         onSubmit={values => {
@@ -51,7 +53,7 @@ export default function Cad_pj() {
                         validationSchema={validationSchema}
                     >
                         {({ handleSubmit, setFieldValue, values }) => (
-                            <Form onSubmit={handleSubmit}>  
+                            <Form className='p-3' onSubmit={handleSubmit}>  
                                 <div>
                                     {/* Razão Social */}
                                     <div className="mb-4">
@@ -62,7 +64,7 @@ export default function Cad_pj() {
                                             type="text" 
                                             name="razao_social" 
                                             placeholder="Razão Social"
-                                            className="border-1 rounded w-full p-2 border-gray-600"
+                                            className="border-2 form-control"
                                         />
                                         <ErrorMessage name="razao_social" component="div" className="error"/>
                                     </div>
@@ -78,7 +80,7 @@ export default function Cad_pj() {
                                                 name="cnpj" 
                                                 maxLength={18}
                                                 placeholder="00.000.000/0000-00"
-                                                className="border-1 rounded w-full p-2 border-gray-600"
+                                                className="border-2 form-control"
                                             />
                                             <ErrorMessage name="cnpj" component="div" className="error"/>
                                         </div>
@@ -92,7 +94,7 @@ export default function Cad_pj() {
                                                 type="email" 
                                                 name="email" 
                                                 placeholder="exemplo@email.com"
-                                                className="border-1 rounded w-full p-2 border-gray-600"
+                                                className="border-2 form-control"
                                             />
                                             <ErrorMessage name="email" component="div" className="error"/>
                                         </div>
@@ -108,7 +110,7 @@ export default function Cad_pj() {
                                                 type="password" 
                                                 name="senha" 
                                                 
-                                                className="border-1 rounded w-full p-2 border-gray-600"
+                                                className="border-2 form-control"
                                             />
                                             <ErrorMessage name="password" component="div" className="error"/>
                                         </div>
@@ -122,7 +124,7 @@ export default function Cad_pj() {
                                                 type="password" 
                                                 name="confirmarSenha" 
                                                 
-                                                className="border-1 rounded w-full p-2 border-gray-600"
+                                                className="border-2 form-control"
                                             />
                                             <ErrorMessage name="password" component="div" className="error"/>
                                         </div>
@@ -133,13 +135,13 @@ export default function Cad_pj() {
                                 
 
                                     {/* Botão de Enviar */}
-                                    <div className="text-center">
-                                        <button 
+                                    <div className="text-center pt-3">
+                                        <Button
                                             type="submit" 
-                                            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                                            id="btn_enviar_cad"
                                         >
                                             Enviar
-                                        </button>
+                                        </Button>
                                     </div>
                                 </div>
                             </Form>

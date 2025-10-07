@@ -84,7 +84,7 @@ export default function Home() {
                           Venha fazer parte da ONGLink, e se junte com os nossos outros parceiros na plataforma.
                         </p>
 
-                        <Link href={"/cad_pj"}>
+                        <Link href={"/cad_simples"}>
                           <Button
                               id="botao_cadastro2"
                             >
