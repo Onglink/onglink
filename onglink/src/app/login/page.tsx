@@ -10,6 +10,7 @@ import '@/app/CSS/main.css'
 import '@/app/CSS/body.css'
 import '@/app/CSS/cadastro.css'
 import Header_home from "@/app/components/header_home"
+import '@/app/CSS/feed.css'
 
 export default function Login() {
    
@@ -22,7 +23,7 @@ export default function Login() {
   
       
         
-      <main className="bg-verde2 min-h-screen flex items-center justify-center p-4 mt-4 mb-4">
+      <main className="min-h-screen flex items-center justify-center p-4 " id="main_login">
         {/* <!--Main--> */}
         
       

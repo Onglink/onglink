@@ -103,34 +103,41 @@
     border-color: blue;
     border-width: 0.2rem;
     border-radius: 2rem;
+    color: blue;
 }
 #fome{
     border-color: grey;
    border-width: 0.2rem;
     border-radius: 2rem;
+    color: grey;
 }
 #saude{
     border-color: orange;
    border-width: 0.2rem;
     border-radius: 2rem;
+    color: orange
 }
 #meio_ambiente{
     border-color: green;
    border-width: 0.2rem;
     border-radius: 2rem;
+    color: green
 }
 #animais{
     border-color: rgb(235, 22, 57);
    border-width: 0.2rem;
     border-radius: 2rem;
+    color: rgb(235,22,57)
 }
 #sociedade{
     border-color: grey;
    border-width: 0.2rem;
     border-radius: 2rem;
+    color: grey
 }
 #criancas{
     border-color: red;
    border-width: 0.2rem;
     border-radius: 2rem;
+    color: red;
 }

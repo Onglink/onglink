@@ -85,7 +85,7 @@ export default function Parceiros() {
               <div className="container-fluid">
                 <h2>PARCEIROS DA EDUCAÇÃO</h2>
                 <div className="d-flex " id="educacao">
-                    <CardsParceiros
+                  <CardsParceiros
                     titulo="Outra ONG"
                     imagem={arara}
                     resumo="prévia."
@@ -98,12 +98,22 @@ export default function Parceiros() {
                     resumo="prévia."
                     link="/"
                   />
-                  <div className="d-flex align-items-center justify-content-end">
-                  <button id="educacao"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-plus-circle" viewBox="0 0 16 16">
-  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-</svg></button>
-</div>
+                  <div className="d-flex align-items-center justify-content-end w-100">
+                    <button id="educacao">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        className="bi bi-plus-circle"
+                        viewBox="0 0 16 16"
+                        stroke="currentColor"
+                      >
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
 
                 <h2>PARCEIROS CONTRA A FOME</h2>
@@ -121,6 +131,22 @@ export default function Parceiros() {
                     resumo="prévia."
                     link="/"
                   />
+                  <div className="d-flex align-items-center justify-content-end w-100">
+                    <button id="fome">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        className="bi bi-plus-circle"
+                        viewBox="0 0 16 16"
+                        stroke="currentColor"
+                      >
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
 
                 <h2>PARCEIROS DA SAÚDE</h2>
@@ -138,6 +164,22 @@ export default function Parceiros() {
                     resumo="prévia."
                     link="/"
                   />
+                  <div className="d-flex align-items-center justify-content-end w-100">
+                    <button id="saude">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        className="bi bi-plus-circle"
+                        viewBox="0 0 16 16"
+                        stroke="currentColor"
+                      >
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
 
                 <h2>PARCEIROS DO MEIO AMBIENTE</h2>
@@ -155,6 +197,22 @@ export default function Parceiros() {
                     resumo="prévia."
                     link="/"
                   />
+                  <div className="d-flex align-items-center justify-content-end w-100">
+                    <button id="meio_ambiente">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        className="bi bi-plus-circle"
+                        viewBox="0 0 16 16"
+                        stroke="currentColor"
+                      >
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
 
                 <h2>PARCEIROS DOS ANIMAIS</h2>
@@ -172,6 +230,22 @@ export default function Parceiros() {
                     resumo="prévia."
                     link="/"
                   />
+                  <div className="d-flex align-items-center justify-content-end w-100">
+                    <button id="animais">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        className="bi bi-plus-circle"
+                        viewBox="0 0 16 16"
+                        stroke="currentColor"
+                      >
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
 
                 <h2>PARCEIROS DA SOCIEDADE</h2>
@@ -189,6 +263,22 @@ export default function Parceiros() {
                     resumo="prévia."
                     link="/"
                   />
+                  <div className="d-flex align-items-center justify-content-end w-100">
+                    <button id="sociedade">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        className="bi bi-plus-circle"
+                        viewBox="0 0 16 16"
+                        stroke="currentColor"
+                      >
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
 
                 <h2>PARCEIROS DAS CRIANÇAS</h2>
@@ -206,6 +296,22 @@ export default function Parceiros() {
                     resumo="prévia."
                     link="/"
                   />
+                  <div className="d-flex align-items-center justify-content-end w-100">
+                    <button id="criancas">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        fill="currentColor"
+                        className="bi bi-plus-circle"
+                        viewBox="0 0 16 16"
+                        stroke="currentColor"
+                      >
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
