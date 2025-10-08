@@ -1,0 +1,25 @@
+.menu-lat {
+  position: sticky;
+  top: 180px;
+  
+  left: 20px;
+  z-index: 1;
+  overflow-y: auto;
+  width: 300px;
+    border-radius: 8px;
+  padding: 10px;
+
+}
+
+@media (max-width: 992px) {
+  .menu-lat {
+    display: none;
+  }
+}
+.card{
+     background-color: #95CF93;
+}
+.menu-wrapper {
+  position: relative;
+  min-height: 100vh; /* garante que o menu tenha espaço */
+}
