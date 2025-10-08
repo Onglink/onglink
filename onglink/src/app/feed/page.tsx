@@ -22,6 +22,7 @@ import FeedPage from "../components/FeedPage";
 import FeedPost from "../components/FeedPost";
 import type { ModalProps } from "react-bootstrap";
 import PublicarForm from "@/app/components/PublicarForm";
+import MenuLat from "../components/menu_lat/menu_lat";
 
 interface Post {
   title: string;
@@ -133,10 +134,20 @@ export default function Home() {
         {/* <!--Main-->  */}
 
         <ModalDenuncia show={modalShow} onHide={() => setModalShow(false)} />
+     
 
+<div className="menu-wrapper">
         <div className="container-fluid">
           <div className="row g-4">
-            <div className="col-lg-3 ml-5">
+                <div className="col-lg-3">
+  <div className="menu-lat">
+    <MenuLat />
+  </div>
+</div>
+
+ 
+
+            {/* <div className="col-lg-3 ml-5x gap-4">
               <div className="offcanvas-body d-block px-2 px-lg-0">
                 <div className="card overflow-hidden">
                   <div className="h-50px" id="menu_perfil">
@@ -226,7 +237,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/*FIM DO MENU LATERAL*/}
 
             {/* </div>   *******************************************************************   */}
@@ -244,6 +255,7 @@ export default function Home() {
               
             </div>
           </div>
+        </div>
         </div>
       </main>
     </>
