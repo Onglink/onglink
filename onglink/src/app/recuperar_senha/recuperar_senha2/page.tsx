@@ -1,9 +1,9 @@
-import Header_home from "@/src/app/components/header_home"
-import '@/src/app/CSS/header_alt.css'
-import '@/src/app/CSS/menu.css'
-import '@/src/app/CSS/main.css'
-import '@/src/app/CSS/body.css'
-import '@/src/app/CSS/cadastro.css'
+import Header_home from "@/app/components/header_home"
+import '@/app/CSS/header_alt.css'
+import '@/app/CSS/menu.css'
+import '@/app/CSS/main.css'
+import '@/app/CSS/body.css'
+import '@/app/CSS/cadastro.css'
 import { Button, FormControl, FormLabel } from "react-bootstrap"
 
 export default function RecSenha() {
