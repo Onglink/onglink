@@ -70,6 +70,8 @@ No projeto ONGLink foram utilizadas as seguintes ferramentas, linguagens, biblio
 
 <a href="#topo"> → [Voltar ao topo] </a>
 
+<span id="equipe">
+
 ## 👥 Equipe
 
 <table>
