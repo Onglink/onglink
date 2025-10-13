@@ -51,7 +51,7 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
 
 ## 📌 Backlog e User Stories
 
-------------------- Incluir Imagens ----------------------
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/src/app/img/img_backlog_readme.png">
 
 <span id="tecnologias">
 
@@ -89,5 +89,7 @@ No projeto ONGLink foram utilizadas as seguintes ferramentas, linguagens, biblio
   </tr>
   
 </table>
+
+<a href="#topo"> → [Voltar ao topo] </a>
 
 
