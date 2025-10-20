@@ -1,5 +1,6 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
+import { listarPublicacoes } from "./publicacaoService";
 
 export default function FeedPublicacoes() {
   const [publicacoes, setPublicacoes] = useState([]);
@@ -16,14 +17,32 @@ export default function FeedPublicacoes() {
     <div>
       <h1>📢 Publicações</h1>
       {publicacoes.map((publi: any) => (
-        <div key={publi._id} style={{ border: '1px solid #ccc', marginBottom: '1rem', padding: '1rem' }}>
+        <div
+          key={publi._id}
+          style={{
+            border: "1px solid #ccc",
+            marginBottom: "1rem",
+            padding: "1rem",
+          }}
+        >
           <h2>{publi.Titulo}</h2>
           <p>{publi.Texto}</p>
           {publi.Imagens?.map((img: string, i: number) => (
             <img key={i} src={img} alt={`Imagem ${i}`} width={300} />
           ))}
-          <p><strong>Autor:</strong> {publi.CodUsuario}</p>
-          <p><strong>Data:</strong> {new Date(publi.DataPublicacao).toLocaleDateString()}</p>
+          <p>
+            <strong>Autor:</strong> {publi.CodUsuario}
+          </p>
+          <p>
+            <strong>Data:</strong>{" "}
+            {publi.DataPublicacao
+              ? new Date(publi.DataPublicacao).toLocaleDateString("pt-BR", {
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+                })
+              : "Data não disponível"}
+          </p>
         </div>
       ))}
     </div>

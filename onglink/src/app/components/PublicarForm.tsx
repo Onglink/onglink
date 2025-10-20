@@ -5,6 +5,7 @@ import { Button, Form, Modal, FormCheck, ModalProps } from 'react-bootstrap';
 import MuxnLogo1 from '@/app/img/MUXN_logo1.png';
 import NeWUploadButton from './button/NewUploadButton';
 import { criarPublicacao } from '@/app/feed/publicacaoService';
+import { uploadImagemParaCloudinary } from '@/app/components/uploadImage/uploadImage';
 
 interface PublicarFormProps {
   onPublish: (post: any) => void;
@@ -18,28 +19,39 @@ export default function PublicarForm({ onPublish }: PublicarFormProps) {
   const [sucesso, setSucesso] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!titulo.trim() || !texto.trim()) return;
+  e.preventDefault();
+
+  let imagemUrl = '';
+  if (imagem) {
+    try {
+      imagemUrl = await uploadImagemParaCloudinary(imagem);
+    } catch (err) {
+      console.error('Erro ao fazer upload da imagem:', err);
+    }
+  
+
 
     const novaPublicacao = {
-      CodPubli: Math.floor(Math.random() * 100000),
-      Titulo: titulo,
-      Texto: texto,
-      Imagens: imagem ? [`https://fakeupload.com/${imagem.name}`] : [],
-      CodUsuario: 9999,
-    };
+    CodPubli: Math.floor(Math.random() * 100000),
+    Titulo: titulo,
+    Texto: texto,
+    Imagens: imagemUrl ? [imagemUrl] : [],
+    CodUsuario: 9999,
+  };
 
-    try {
-      const resultado = await criarPublicacao(novaPublicacao);
-      onPublish(resultado);
-      setTitulo('');
-      setTexto('');
-      setImagem(null);
-      setSucesso(true);
-      setTimeout(() => setSucesso(false), 3000);
-    } catch (err) {
-      console.error('Erro ao publicar:', err);
-    }
+  try {
+    const resultado = await criarPublicacao(novaPublicacao);
+    onPublish(resultado);
+    setTitulo('');
+    setTexto('');
+    setImagem(null);
+    setSucesso(true);
+    setTimeout(() => setSucesso(false), 3000);
+  } catch (err) {
+    console.error('Erro ao publicar:', err);
+  }
+};
+
   };
 
   function ModalDenuncia(props: ModalProps) {
