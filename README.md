@@ -51,7 +51,10 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
 
 ## 📌 Backlog e User Stories
 
-<img src="https://github.com/Onglink/onglink/blob/main/onglink/src/app/img/img_backlog_readme.png">
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/src/app/img/product_backlog1.png">
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/src/app/img/product_backlog2.png">
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/src/app/img/product_backlog3.png">
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/src/app/img/product_backlog4.png">
 
 <span id="tecnologias">
 
