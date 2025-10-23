@@ -26,9 +26,16 @@ const FormInput: React.FC<FormInputProps> = ({ formik, name, label, type = 'text
         className="w-full border rounded p-2 border-black"
         readOnly={readonly}
       />
-      {formik.touched[name] && formik.errors[name] && (
+
+      {/* --------------- VERIFICAR CAUSA DO ERRO  ------------------ */}
+
+      {/*  ↓ ↓ Comentado para fazer deploy no Vercel  ↓ ↓ */}
+
+      {/* {formik.touched[name] && formik.errors[name] && (
         <div className="text-red-500 text-sm mt-1">{formik.errors[name]}</div>
-      )}
+      )} */} 
+
+
     </div>
   );
 };
