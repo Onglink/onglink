@@ -8,7 +8,7 @@ import { criarPublicacao } from '@/app/feed/publicacaoService';
 import { uploadImagemParaCloudinary } from '@/app/components/uploadImage/uploadImage';
 
 interface PublicarFormProps {
-  onPublish: (post: any) => void;
+  onPublish: (post: unknown) => void;
 }
 
 export default function PublicarForm({ onPublish }: PublicarFormProps) {

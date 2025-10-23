@@ -88,7 +88,7 @@ export default function Perfil(){
                                                   
                                 <div id="descricao_perfil">
                                     <p className="w-75">
-                                    <p>"Por um planeta melhor, através da Tecnologia."</p>
+                                    <p>&quot; Por um planeta melhor, através da Tecnologia. &quot;</p>
 
                                       A MUXN Technology surgiu a partir da necessidade de atender à sociedade por meio da tecnologia. 
                                       Em 2024, um pequeno grupo de estudantes viu no setor social uma oportunidade de implementar o 
