@@ -34,9 +34,9 @@ const FormRadioGroup: React.FC<FormRadioGroupProps> = ({ formik, name, label, op
           </label>
         ))}
       </div>
-      {formik.touched[name] && formik.errors[name] && (
+      {/* {formik.touched[name] && formik.errors[name] && (
         <div className="text-red-500 text-sm mt-1">{formik.errors[name]}</div>
-      )}
+      )} */}
     </div>
   );
 };
