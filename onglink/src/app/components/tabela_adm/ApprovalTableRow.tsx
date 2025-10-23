@@ -1,5 +1,5 @@
 import { Button } from 'react-bootstrap';
-import { ICadastro } from "@/src/app/ADM_aprovacao/ICadastro";
+import { ICadastro } from "@/app/ADM_aprovacao/ICadastro";
 
 interface ApprovalTableRowProps {
   data: {
