@@ -52,7 +52,7 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
 
 ## 📌 Documentação do Projeto
 
-<img src="https://github.com/Onglink/onglink/blob/main/onglink/src/app/img/useCase_diagram">
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/src/app/img/useCase_diagram.jpg">
 <img src="https://github.com/Onglink/onglink/blob/main/onglink/src/app/img/product_backlog1.png">
 
 <span id="sprints">
