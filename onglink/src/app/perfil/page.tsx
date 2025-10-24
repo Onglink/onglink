@@ -20,7 +20,8 @@ export default function Perfil(){
     const inputFile = useRef(null);
 
     const onImageClick = () => {
-      inputFile.current.click();
+      /* --------------- VERIFICAR CAUSA DO ERRO  ----------------- */
+      // inputFile.current.click(); 
     }
 
     return(
