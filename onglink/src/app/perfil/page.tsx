@@ -84,13 +84,17 @@ export default function Perfil(){
                                           <p className="ml-2 fs-5 pt-0.5">4.5 </p>
                                         </div> */}
                                     </div>
+
+                                    <Modal_Editar_Perfil/>
+                                    
                                 </div>
 
                                                   
                                 <div id="descricao_perfil">
-                                    <p className="w-75">
+                                    
                                     <p>&quot; Por um planeta melhor, através da Tecnologia. &quot;</p>
 
+                                    <p>
                                       A MUXN Technology surgiu a partir da necessidade de atender à sociedade por meio da tecnologia. 
                                       Em 2024, um pequeno grupo de estudantes viu no setor social uma oportunidade de implementar o 
                                       Desenvolvimento de Software Multiplataforma para facilitar a formação de parcerias entre ONGs e 
@@ -103,7 +107,7 @@ export default function Perfil(){
                             </div>
                       </div>
                             
-                      <Modal_Editar_Perfil/>
+                      
 
                     </div>
 
@@ -112,7 +116,7 @@ export default function Perfil(){
                 </div>
 
                 
-            <div className="flex justify-center">
+            <div id="div_publi" className="flex justify-center">
                 <div id="borda_publi">
                   
                   <h3 className="mb-4 text-center" id="title_publi">Publicações</h3>

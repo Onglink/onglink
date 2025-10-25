@@ -1,5 +1,12 @@
 #perfil{
     background-color: rgba(120, 171, 191, 0.35);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+#container_perfil{
+    padding: 30px;
+    background-color: rgba(120, 171, 191, 0.35);
 }
 
 #div_nome_perfil{
@@ -40,6 +47,7 @@
 #descricao_perfil{
     padding-left: 20px;
     font-weight: 500;
+    width: 600px;
     font-size: medium;
 }
 
@@ -82,7 +90,10 @@
     border: none;
     color: white;
     width: 250px;
+    height: 50px;
     margin-left: 70px;
+    margin-top: 25px;
+    margin-left: 530px;
     font-weight: 700;
     box-shadow: 0px 7px rgba(2, 84, 23, 0.75)
 }
