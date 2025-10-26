@@ -12,8 +12,8 @@ import * as Yup from 'yup';
 import { ErrorMessage } from "formik";
 
 const validationSchema = Yup.object().shape({
-    razao_social: Yup.string().required('Campo obrigatório'),
-    cnpj: Yup.string().required('Campo Obrigatório'),
+    nome: Yup.string().required('Campo obrigatório'),
+    cpf: Yup.string().required('Campo Obrigatório'),
     email: Yup.string().email('Digite o email válido').required('Campo Obrigatório'),
     senha: Yup.string().required('Campo Obrigatório'),
     confirmarSenha: Yup.string().required('Campo Obrigatório')
@@ -23,11 +23,11 @@ const validationSchema = Yup.object().shape({
 
 
 
-export default function Cad_pj() {
+export default function CadastroSimplesPessoaFisica() {
     const router = useRouter();
     const initialValues = {
-        razao_social: '',
-        cnpj: '',
+        nome: '',
+        cpf: '',
         email: '',
         senha: '',
         confirmarSenha: ''
@@ -55,34 +55,34 @@ export default function Cad_pj() {
                         {({ handleSubmit, setFieldValue, values }) => (
                             <Form className='p-3' onSubmit={handleSubmit}>  
                                 <div>
-                                    {/* Razão Social */}
+                                    {/* Nome do Usuário */}
                                     <div className="mb-4">
-                                        <label htmlFor="razao_social" className="block mb-1">
-                                            Razão Social <span className="text-red-500">*</span>
+                                        <label htmlFor="nome" className="block mb-1">
+                                            Nome do usuario <span className="text-red-500">*</span>
                                         </label>
                                         <Field 
                                             type="text" 
-                                            name="razao_social" 
-                                            placeholder="Razão Social"
+                                            name="nome" 
+                                            placeholder="Exemplo: João da Silva"
                                             className="border-2 form-control"
                                         />
-                                        <ErrorMessage name="razao_social" component="div" className="error"/>
+                                        <ErrorMessage name="nome" component="div" className="error"/>
                                     </div>
 
-                                    {/* Email e CNPJ */}
+                                    {/* Email e CPF */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                         <div>
-                                            <label htmlFor="cnpj" className="block mb-1">
-                                                CNPJ <span className="text-red-500">*</span>
+                                            <label htmlFor="cpf" className="block mb-1">
+                                                CPF <span className="text-red-500">*</span>
                                             </label>
                                             <Field 
                                                 type="text" 
-                                                name="cnpj" 
-                                                maxLength={18}
-                                                placeholder="00.000.000/0000-00"
+                                                name="cpf" 
+                                                maxLength={11}
+                                                placeholder="000.000.000-00"
                                                 className="border-2 form-control"
                                             />
-                                            <ErrorMessage name="cnpj" component="div" className="error"/>
+                                            <ErrorMessage name="cpf" component="div" className="error"/>
                                         </div>
 
                                         {/* Email */}
