@@ -12,7 +12,7 @@ import * as Yup from 'yup';
 import { ErrorMessage } from "formik";
 
 const validationSchema = Yup.object().shape({
-    nome: Yup.string().required('Campo obrigatório'),
+    pessoaResponsavel: Yup.string().required('Campo obrigatório'),
     cpf: Yup.string().required('Campo Obrigatório'),
     email: Yup.string().email('Digite o email válido').required('Campo Obrigatório'),
     senha: Yup.string().required('Campo Obrigatório'),
@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
 export default function CadastroSimplesPessoaFisica() {
     const router = useRouter();
     const initialValues = {
-        nome: '',
+        pessoaResponsavel: '',
         cpf: '',
         email: '',
         senha: '',
@@ -57,7 +57,7 @@ export default function CadastroSimplesPessoaFisica() {
                                 <div>
                                     {/* Nome do Usuário */}
                                     <div className="mb-4">
-                                        <label htmlFor="nome" className="block mb-1">
+                                        <label htmlFor="pessoaResponsavel" className="block mb-1">
                                             Nome do usuario <span className="text-red-500">*</span>
                                         </label>
                                         <Field 
@@ -66,7 +66,7 @@ export default function CadastroSimplesPessoaFisica() {
                                             placeholder="Exemplo: João da Silva"
                                             className="border-2 form-control"
                                         />
-                                        <ErrorMessage name="nome" component="div" className="error"/>
+                                        <ErrorMessage name="pessoaResponsavel" component="div" className="error"/>
                                     </div>
 
                                     {/* Email e CPF */}
