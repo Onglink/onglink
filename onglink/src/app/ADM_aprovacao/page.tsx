@@ -1,18 +1,18 @@
 "use client";
 
-import Header_feed from "@/src/app/components/header_feed";
+import Header_feed from "@/app/components/header_feed";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "@/src/app/CSS/feed.css";
-import "@/src/app/CSS/header_alt.css";
+import "@/app/CSS/feed.css";
+import "@/app/CSS/header_alt.css";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from "next/navigation";
 import { ICadastro } from "./ICadastro";
-import { ApprovalTable } from '@/src/app/components/tabela_adm/ApprovalTable';
+import { ApprovalTable } from '@/app/components/tabela_adm/ApprovalTable';
 import { ApprovalTableRow } from '../components/tabela_adm/ApprovalTableRow';
-import { ImageModal } from '@/src/app/components/tabela_adm/ImageModal';
-import { FileModal } from '@/src/app/components/tabela_adm/FileModal';
-import { ApprovalModal } from '@/src/app/components/tabela_adm/ApprovalModal';
+import { ImageModal } from '@/app/components/tabela_adm/ImageModal';
+import { FileModal } from '@/app/components/tabela_adm/FileModal';
+import { ApprovalModal } from '@/app/components/tabela_adm/ApprovalModal';
 
 export default function ADM_aprovacao() {
     const [products, setProducts] = useState<ICadastro[]>([]);

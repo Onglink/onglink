@@ -3,7 +3,8 @@
 <br id="topo">
 <p align="center">
     <a href="#sobre">Sobre</a>  |  
-    <a href="#backlogs">Backlogs & User Stories</a>  |    
+    <a href="#doc">Documentação do Projeto</a>  |
+    <a href="#sprints">Entregas de Sprints</a>  |  
     <a href="#tecnologias">Tecnologias</a>  |  
     <a href="#equipe">Equipe</a>
 </p>
@@ -47,11 +48,20 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
 
 <a href="#topo"> → [Voltar ao topo] </a>
 
-<span id="backlogs">
+<span id="doc">
 
-## 📌 Backlog e User Stories
+## 📌 Documentação do Projeto
 
-<img src="https://github.com/Onglink/onglink/blob/main/onglink/src/app/img/img_backlog_readme.png">
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/imgs_readme/useCase_diagram.jpg">
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/imgs_readme/product_backlog1.png">
+
+<span id="sprints">
+
+## ☑️ Entregas de Sprints
+
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/imgs_readme/product_backlog2.png">
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/imgs_readme/product_backlog3.png">
+<img src="https://github.com/Onglink/onglink/blob/main/onglink/imgs_readme/product_backlog4.png">
 
 <span id="tecnologias">
 

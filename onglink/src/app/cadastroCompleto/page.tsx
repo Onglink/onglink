@@ -20,6 +20,7 @@ import '@/app/CSS/body.css'
 
 interface BasicFormValues {
   razaoSocial: string;
+  nomeFantasia: string;
   cnpj: string;
   email: string;
   pessoaResponsavel: string;
@@ -61,6 +62,7 @@ const CadastroCompleto: React.FC = () => {
   const formikBasico = useFormik<BasicFormValues>({
     initialValues: {
       razaoSocial: '',
+      nomeFantasia:'',
       cnpj: '',
       email: '',
       pessoaResponsavel: '',
@@ -176,6 +178,7 @@ const CadastroCompleto: React.FC = () => {
         return (
           <form onSubmit={formikBasico.handleSubmit}>
             <FormInput formik={formikBasico} name="razaoSocial" label="Razão Social" />
+            <FormInput formik={formikBasico} name="nomeFantasia" label="Nome Fantasia" />
             <FormGroup
               formik={formikBasico}
               fields={[
