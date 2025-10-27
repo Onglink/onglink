@@ -363,6 +363,4 @@ const CadastroCompleto: React.FC = () => {
   );
 };
 
-
-
 export default CadastroCompleto;
