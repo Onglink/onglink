@@ -41,6 +41,11 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
   <tr>
       <td> 03 </td>
       <td> 22/10/2025 </td>
+      <td> Concluída ✔️  </td>
+  </tr>
+    <tr>
+      <td> 04 </td>
+      <td> 05/11/2025 </td>
       <td> Em Andamento 🚧 </td>
   </tr>
   
