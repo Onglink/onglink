@@ -52,16 +52,16 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
 
 ## 📌 Documentação do Projeto
 
-<img src="https://github.com/Onglink/onglink/blob/main/onglink/imgs_readme/useCase_diagram.jpg">
-<img src="https://github.com/Onglink/onglink/blob/main/onglink/imgs_readme/product_backlog1.png">
+<img src="./onglink/imgs_readme/useCase_diagram.jpg">
+<img src="./onglink/imgs_readme/product_backlog1.png">
 
 <span id="sprints">
 
 ## ☑️ Entregas de Sprints
 
-<img src="https://github.com/Onglink/onglink/blob/main/onglink/imgs_readme/product_backlog2.png">
-<img src="https://github.com/Onglink/onglink/blob/main/onglink/imgs_readme/product_backlog3.png">
-<img src="https://github.com/Onglink/onglink/blob/main/onglink/imgs_readme/product_backlog4.png">
+<img src="./onglink/imgs_readme/product_backlog2.png">
+<img src="./onglink/imgs_readme/product_backlog3.png">
+<img src="./onglink/imgs_readme/product_backlog4.png">
 
 <span id="tecnologias">
 
