@@ -57,17 +57,18 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
 
 ## 📌 Documentação do Projeto
 
-<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg">
-<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_produto_ejtlli.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg" width="550">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_produto_ejtlli.png" width="500">
 
 <span id="sprints">
 
 ## ☑️ Entregas de Sprints
-
-<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692923/backlog_sprint1_tlfjr0.png">
-<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692921/backlog_sprint2_jwxshb.png">
-<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_sprint3_hxykil.png">
-<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_sprint4_cl7qnb.png">
+<ul>
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692923/backlog_sprint1_tlfjr0.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692921/backlog_sprint2_jwxshb.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_sprint3_hxykil.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761693718/backlog_sprint4_cl7qnb.png" width="500">
+</ul>
 
 <span id="tecnologias">
 
