@@ -57,16 +57,17 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
 
 ## 📌 Documentação do Projeto
 
-<img src="./onglink/imgs_readme/useCase_diagram.jpg">
-<img src="./onglink/imgs_readme/product_backlog1.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_produto_ejtlli.png">
 
 <span id="sprints">
 
 ## ☑️ Entregas de Sprints
 
-<img src="./onglink/imgs_readme/product_backlog2.png">
-<img src="./onglink/imgs_readme/product_backlog3.png">
-<img src="./onglink/imgs_readme/product_backlog4.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692923/backlog_sprint1_tlfjr0.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692921/backlog_sprint2_jwxshb.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_sprint3_hxykil.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_sprint4_cl7qnb.png">
 
 <span id="tecnologias">
 
