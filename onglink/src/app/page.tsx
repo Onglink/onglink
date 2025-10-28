@@ -45,7 +45,7 @@ export default function Home() {
                             plataforma desenvolvida para você
                             poder consultar as entidades de 
                             apoio social e ONG’s.
-                            Nossa missão é ter aqui na plataforma, 
+                            Nossa missão é ter na plataforma, 
                             entidades certificadas e de real atuação 
                             no mercado.
                             Clique aqui para se cadastrar e nos 
@@ -60,9 +60,9 @@ export default function Home() {
                         <h4>Por que se juntar à ONGlink?</h4>
 
                         <ul id="vantagens">
-                            <li>Otimizar investimentos em organizações confiáveis</li>
-                            <li>Figurar entre as empresas que se preocupam com causas sociais</li>
-                            <li>Promover o bem estar social e o fortalecimento dos direitos sociais</li>
+                            <li>Se você está procurando uma instituição para poder contibuir</li>
+                            <li>e quer ter certeza de que essa organização tem seriedade e é confiável?</li>
+                            <li>Venha fazer parte da nossa plataforma e nunca mais preocupe-se com isso.</li>
                         </ul>
                       </Col>
                       
@@ -81,7 +81,7 @@ export default function Home() {
                         <h4>Junte-se à ONGlink!</h4>
 
                         <p>
-                          Venha fazer parte da ONGLink, e se junte com os nossos outros parceiros na plataforma.
+                          Seja mais um parceiro e ajude-nos a divulgar o link do bem!
                         </p>
 
                         <Link href={"/cad_simples"}>
