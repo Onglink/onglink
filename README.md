@@ -57,7 +57,7 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
 
 ## 📌 Documentação do Projeto
 
-<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg" width="550">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg" width="800">
 <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_produto_ejtlli.png" width="500">
 
 <span id="sprints">
