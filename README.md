@@ -1,4 +1,4 @@
------------------------ Incluir Banner -----------------------
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761699950/Projeto_Integrador_do_grupo_MUXN_zfdmpr.png">
 
 <br id="topo">
 <p align="center">
@@ -56,10 +56,14 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
 <span id="doc">
 
 ## 📌 Documentação do Projeto
+<ul>
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg" width="800">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761695872/backlog_produto_avvtvc.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761696045/backlog_produto2_fb1qba.png" width="500">
+</ul>
 
-<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg" width="800">
-<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_produto_ejtlli.png" width="500">
-
+<a href="#topo"> → [Voltar ao topo] </a>
+    
 <span id="sprints">
 
 ## ☑️ Entregas de Sprints
@@ -69,6 +73,8 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
     <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_sprint3_hxykil.png" width="500">
     <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761693718/backlog_sprint4_cl7qnb.png" width="500">
 </ul>
+
+<a href="#topo"> → [Voltar ao topo] </a>
 
 <span id="tecnologias">
 
