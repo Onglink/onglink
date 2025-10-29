@@ -16,8 +16,6 @@ import FeedPost from "../components/FeedPost";
 import type { ModalProps } from "react-bootstrap";
 import PublicarForm from "@/app/components/PublicarForm";
 import MenuLat from "../components/menu_lat/menu_lat";
-import { listarPublicacoes }  from "./publicacaoService";
-import FeedPublicacoes from './feedPublicacoes';
 
 interface Post {
   title: string;
@@ -146,16 +144,16 @@ export default function Home() {
             <div className="col-md-8 col-lg-6 vstack gap-4">
               {/* //PUBLICAR NO FEED */}
                 <div id="div_feed">
-                 <div className="p-3">
-                <PublicarForm onPublish={addPost} />
+                 {/* <div className="p-3"> */}
+                {/* <PublicarForm onPublish={addPost} /> */}
+                {/* </div> */}
+                {/* <FeedPublicacoes /> */}
+<FeedPage />
                 </div>
-                <FeedPublicacoes />
 
-                </div>
+                {/* <FeedPage posts={posts} /> */}
 
-                <FeedPage posts={posts} />
-
-                {/* <FeedPage /> */}
+                
               
             </div>
           </div>

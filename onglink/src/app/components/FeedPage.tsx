@@ -1,8 +1,9 @@
+// //esse é o antigo
 // "use client";
 // import React, { useState } from "react";
 // import PublicarForm from "@/app/components/PublicarForm";
 // import FeedPost from "@/app/components/FeedPost";
-// import { Row } from "react-bootstrap";
+// //import { Row } from "react-bootstrap";
 
 
 
@@ -38,8 +39,42 @@
 // };
 
 // export default FeedPage;
+
+
+// esse é o novo como teste
+// "use client";
+// import React from "react";
+// import FeedPost from "@/app/components/FeedPost";
+
+// interface Post {
+//   title: string;
+//   message: string;
+//   image?: File | null;
+// }
+
+// interface FeedPageProps {
+//   posts: Post[];
+// }
+
+// const FeedPage: React.FC<FeedPageProps> = ({ posts }) => {
+//   return (
+//     <div className="mt-2" id="div_pub">
+//       {posts.length === 0 ? (
+//         <p className="text-center">Nenhuma publicação ainda.</p>
+//       ) : (
+//         posts.map((post, index) => <FeedPost key={index} post={post} />)
+//       )}
+//     </div>
+//   );
+// };
+
+// export default FeedPage;
+
+
+// do semestre passado
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import PublicarForm from "@/app/components/PublicarForm";
 import FeedPost from "@/app/components/FeedPost";
 
 interface Post {
@@ -48,18 +83,25 @@ interface Post {
   image?: File | null;
 }
 
-interface FeedPageProps {
-  posts: Post[];
-}
+const FeedPage: React.FC = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
 
-const FeedPage: React.FC<FeedPageProps> = ({ posts }) => {
+  const addPost = (post: Post) => {
+    setPosts((prevPosts) => [post, ...prevPosts]);
+  };
+
   return (
-    <div className="mt-2" id="div_pub">
-      {posts.length === 0 ? (
-        <p className="text-center">Nenhuma publicação ainda.</p>
-      ) : (
-        posts.map((post, index) => <FeedPost key={index} post={post} />)
-      )}
+    <div className="container-fluid col-12 vstack gap-4 p-0">
+      <div id="subdiv_publicar" className="p-3">
+        <PublicarForm onPublish={addPost} />
+      </div>
+      <div className="mt-4" id="div_pub">
+        {posts.length === 0 ? (
+          <p className="text-center"></p>
+        ) : (
+          posts.map((post, index) => <FeedPost key={index} post={post} />)
+        )}
+      </div>
     </div>
   );
 };
