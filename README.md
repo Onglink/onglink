@@ -1,4 +1,4 @@
-<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761699950/Projeto_Integrador_do_grupo_MUXN_zfdmpr.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761755183/Banner_ONGlink_z6qxqe.png">
 
 <br id="topo">
 <p align="center">
@@ -14,10 +14,26 @@
 ## 📖 Sobre o Projeto
 
 
-Visando otimizar o uso de recursos financeiros de empresas e fomentar as organizações não governamentais, a plataforma ONGlink fornece os recursos e ferramentas ideais para criar a conexão necessária, onde ONGs podem publicar seus projetos sociais para ter mais visibilidade e atrair investimentos por parte das empresas, que poderão utilizar a plataforma para encontrar e apoiar facilmente a ONG que desejarem, fortalecendo assim o seu compromisso social.
+O nosso Projeto Interdisciplinar, Onglink, trata-se de uma plataforma cujo principal objetivo é facilitar e otimizar a divulgação de ONGs. Nela, os usuários poderão criar seu próprio perfil para sua organização, as ONGs poderão publicar suas atividades e campanhas sociais, e os usuários e visitantes poderão acompanhar o desenvolvimento dessas ONGs através de suas publicações, também terão em mãos ferramentas de busca de ONGs e poderão acessar o perfil da ONG escolhida para ter mais acesso a informações de contato. Nesse semestre nosso objetivo foi melhorar a nossa interface, aplicando técnicas de acessibilidade para os usuários e criamos o back-end, tornando a aplicação funcional.
 
-Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma, o que ajudará a divulgar tanto as empresas quanto as ONGs envolvidas, fomentando mais parcerias. Além disso, poderão contar com o know-how de outras empresas e ONGs ou se inspirar com as experiências já registradas na plataforma, também podem se informar e entender melhor sobre a Lei do Bem e a legislação que abrange seus projetos sociais.
+<br>
 
+<a href="#topo"> → [Voltar ao topo] </a>
+
+<span id="doc">
+
+## 📌 Documentação do Projeto
+<ul>
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg" width="800">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761695872/backlog_produto_avvtvc.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761696045/backlog_produto2_fb1qba.png" width="500">
+</ul>
+
+<a href="#topo"> → [Voltar ao topo] </a>
+    
+<span id="sprints">
+
+## ☑️ Entregas de Sprints
 
 <table>
   <tr>
@@ -51,22 +67,8 @@ Toda colaboração feita aparecerá em um feed de notícias dentro da plataforma
   
 </table>
 
-<a href="#topo"> → [Voltar ao topo] </a>
+<br>
 
-<span id="doc">
-
-## 📌 Documentação do Projeto
-<ul>
-    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg" width="800">
-    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761695872/backlog_produto_avvtvc.png" width="500">
-    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761696045/backlog_produto2_fb1qba.png" width="500">
-</ul>
-
-<a href="#topo"> → [Voltar ao topo] </a>
-    
-<span id="sprints">
-
-## ☑️ Entregas de Sprints
 <ul>
     <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692923/backlog_sprint1_tlfjr0.png" width="500">
     <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692921/backlog_sprint2_jwxshb.png" width="500">
