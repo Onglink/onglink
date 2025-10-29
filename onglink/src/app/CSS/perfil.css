@@ -93,7 +93,7 @@
     height: 50px;
     margin-left: 70px;
     margin-top: 25px;
-    margin-left: 530px;
+    margin-left: 500px;
     font-weight: 700;
     box-shadow: 0px 7px rgba(2, 84, 23, 0.75)
 }
@@ -147,7 +147,7 @@
 }
 
 #title_publi{
-    color: #05b3ca;
+    color: #0598ac;
     font-weight: 900;
 }
 
@@ -167,8 +167,8 @@
 
 .img-overlay-wrap svg{
     position: relative;
-    top: -115;
-    left: 88;
+    top: -140;
+    left: 122;
     opacity: 0;
 }
 

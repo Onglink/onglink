@@ -32,7 +32,7 @@ export default function RecSenha() {
             <FormLabel htmlFor="email">Digite seu e-mail:</FormLabel>
             <p></p>
             <FormControl type="text" name="nemail" id="email_recSenha"/>
-            <Link href="/recuperar_senha/recuperar_senha2">Não lembro meu e-mail</Link>
+            <Link id="esqueci_senha" href="/recuperar_senha/recuperar_senha2">Não lembro meu e-mail</Link>
           </div>
           <div className="col-1"></div>
         </div>
@@ -44,7 +44,7 @@ export default function RecSenha() {
 
         <div className="col-10" id="div_btn_entrar">
          
-          <Button variant="success" id="btn_entrar">  <a href="alterar_senha.html">Enviar </a></Button>
+          <Button variant="success" id="btn_entrar">  Enviar </Button>
         </div>
         </div>
         </div>

@@ -42,7 +42,7 @@ export default function RecSenha() {
 
         <div className="col-10" id="div_btn_entrar">
          
-          <Button variant="success" id="btn_entrar">  <a href="alterar_senha.html">Enviar </a></Button>
+          <Button variant="success" id="btn_entrar"> Enviar </Button>
         </div>
         </div>
         </div>

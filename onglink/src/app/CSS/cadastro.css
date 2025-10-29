@@ -126,7 +126,6 @@ header#header_header.py-3.mb-3.border-bottom{
 
 #div_email a{
   color: green;
-  font-size: small;
   margin-top: 10px;
   margin-bottom: 30px;
 }
@@ -329,10 +328,6 @@ text-align: center;
 
 #senha {
   margin-bottom: 20px;
-}
-
-#esqueci_senha{
-  color: rgba(7, 113, 33, 0.75);
 }
 
 #btn_continuar{
