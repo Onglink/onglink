@@ -98,6 +98,17 @@
     box-shadow: 0px 7px rgba(2, 84, 23, 0.75)
 }
 
+#btn_salvar{
+    background-color: rgba(4, 165, 44, 0.75);
+    border: none;
+    color: white;
+    width: 250px;
+    margin-left: 70px;
+    margin-left: 530px;
+    font-weight: 700;
+    box-shadow: 0px 7px rgba(2, 84, 23, 0.75)
+}
+
 #btn_cancelar{
     background-color: rgba(230, 15, 15, 0.75);
     border: none;
@@ -116,7 +127,7 @@
     box-shadow: 0px 7px rgba(165, 4, 4, 0.75)
 }
 
-#btn_editar_perfil:hover{
+#btn_editar_perfil:hover, #btn_salvar:hover{
     background-color: rgba(3, 62, 18, 0.85);
     color: #AEF2AC;
 }

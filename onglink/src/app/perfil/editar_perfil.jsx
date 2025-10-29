@@ -92,7 +92,7 @@ export default function Modal_Editar_Perfil() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-            <Button id="btn_editar_perfil" onClick={handleClose}> Salvar </Button>
+            <Button id="btn_salvar" onClick={handleClose}> Salvar </Button>
             <Button id="btn_cancelar" onClick={handleClose}> Cancelar </Button>
         </Modal.Footer>
       </Modal>
