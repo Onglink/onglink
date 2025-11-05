@@ -26,7 +26,9 @@ O nosso Projeto Interdisciplinar, Onglink, trata-se de uma plataforma cujo princ
 <ul>
     <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg" width="800">
     <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761695872/backlog_produto_avvtvc.png" width="500">
-    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761696045/backlog_produto2_fb1qba.png" width="500">
+    <br>
+    <br>
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1762385203/tmp_826e5f24-fbd0-4cd6-bd48-98a41f31eb2a_yrsioq.jpg" width="500">
 </ul>
 
 <a href="#topo"> → [Voltar ao topo] </a>
