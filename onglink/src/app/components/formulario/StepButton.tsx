@@ -9,8 +9,8 @@ interface StepButtonProps {
 const StepButton: React.FC<StepButtonProps> = ({ active, label, onClick }) => {
   return (
     <button
-      className={`px-4 py-2 rounded-4 border-2 m-1 ${
-        active ? 'bg-green-400 text-white border-2 border-black' : 'bg-blue-400 text-black'
+      className={`px-4 py-2 rounded-4 m-1 ${
+        active ? 'bg-[#024b14bf] text-white font-bold' : 'bg-[#04a52cbf] hover:bg-[#024b14bf] text-white font-bold'
       }`}
       onClick={onClick}
     >

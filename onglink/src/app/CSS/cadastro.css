@@ -6,7 +6,9 @@ header#header_header.py-3.mb-3.border-bottom{
     
     }
 
-    
+    #sideMenu_cadComp{
+      background-color: #95cf93;
+    }
     
     
     main{
@@ -21,12 +23,9 @@ header#header_header.py-3.mb-3.border-bottom{
             display: flex;
             flex-wrap: wrap;
             flex-direction: column;
-    
-            
-    
-    
            
         }
+        
     
   #bg_cadastro{
     background-color: rgba(120, 171, 191, .35);

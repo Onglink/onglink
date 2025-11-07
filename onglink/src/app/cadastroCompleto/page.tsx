@@ -17,6 +17,7 @@ import '@/app/CSS/header_alt.css'
 import '@/app/CSS/menu.css'
 import '@/app/CSS/main.css'
 import '@/app/CSS/body.css'
+import '@/app/CSS/cadastro.css'
 
 interface BasicFormValues {
   razaoSocial: string;
@@ -336,10 +337,8 @@ const CadastroCompleto: React.FC = () => {
       <Header_feed />
       <main className='main1'>
         <div className="mx-auto p-2 w-full flex">
-          <div className='w-full'>
-            <Image alt="" src={planetilson3} width={800} id="planetilson3"></Image>
-          </div>
-          <div className='p-2 mb-2 bg-header rounded-2 text-center w-80'>
+          <div className='w-full'></div>
+          <div id='sideMenu_cadComp' className='p-2 mb-2 bg-header rounded-2 text-center w-80'>
             <h1 className="text-xl font-bold mb-4">Cadastro Completo</h1>
             <div className="flex  mb-2 flex-full w-full justify-center sm: flex-wrap flex-column  ">
               
@@ -354,9 +353,7 @@ const CadastroCompleto: React.FC = () => {
             </div>
           </div>
           <div className="bg-white p-4 mb-2 rounded shadow w-75">{renderForm()}</div>
-          <div className='w-full'>
-            <Image alt="" src={planetilson3} width={800} id="planetilson3"></Image>
-          </div>
+          <div className='w-full'></div>
         </div>
       </main>
     </>
