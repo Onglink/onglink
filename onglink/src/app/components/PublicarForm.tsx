@@ -29,54 +29,6 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
   };
   const [modalShow, setModalShow] = React.useState(false);
 
-  function ModalDenuncia(props: any) {
-    function handleClose() {
-      setModalShow(false);
-      return alert("Denúncia Enviada com Sucesso!");
-    }
-
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Denunciar Publicação
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form className="mb-3">
-            <FormCheck
-              className="fs-5"
-              type="checkbox"
-              label="Conteúdo Ofensivo"
-            />
-            <FormCheck
-              className="fs-5"
-              type="checkbox"
-              label="Informações Falsas"
-            />
-            <FormCheck
-              className="fs-5"
-              type="checkbox"
-              label="Violação de Direitos Autorais"
-            />
-            <FormCheck className="fs-5" type="checkbox" label="Spam" />
-          </Form>
-
-          <h5>Diga-nos mais (opcional)</h5>
-          <textarea className="border-1" id="text_area_denuncia"></textarea>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={handleClose}> Enviar </Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-
   return (
     <form onSubmit={handlePost} className="mb-4">
       <div className="container-fluid col-12 vstack gap-4 p-0">
