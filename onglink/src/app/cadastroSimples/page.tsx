@@ -1,155 +1,298 @@
-'use client';
+// 'use client';
+// import { useRouter } from 'next/navigation';
+// import { useState } from 'react';
+// import Header_home from "@/app/components/header_home";
+// import '@/app/CSS/home.css'
+// import '@/app/CSS/cadastro.css'
+// import '@/app/CSS/header_alt.css'
+// import { Button } from 'react-bootstrap';
+// import { CepResponse, getCepData } from '../services/cep';
+// import { Field, Form, Formik } from "formik";
+// import * as Yup from 'yup';
+// import { ErrorMessage } from "formik";
+
+// const validationSchema = Yup.object().shape({
+//     pessoaResponsavel: Yup.string().required('Campo obrigatório'),
+//     cpf: Yup.string().required('Campo Obrigatório'),
+//     email: Yup.string().email('Digite o email válido').required('Campo Obrigatório'),
+//     senha: Yup.string().required('Campo Obrigatório'),
+//     confirmarSenha: Yup.string().required('Campo Obrigatório')
+   
+    
+// });
+
+
+
+// export default function CadastroSimplesPessoaFisica() {
+//     const router = useRouter();
+//     const initialValues = {
+//         pessoaResponsavel: '',
+//         cpf: '',
+//         email: '',
+//         senha: '',
+//         confirmarSenha: ''
+//     };
+
+    
+
+
+//     return (
+//         <>
+//         <Header_home/>
+//         <body className='bg-verde1'>
+//             <main id='bg_cadastro' className="min-h-screen flex items-center justify-center">
+//                 <div id='caixa_cadastro' className="bg-white rounded-3xl p-6 w-full max-w-4xl">   
+//                     <h1 className="text-center" id='h1_cadastro'>Cadastro</h1>
+//                     <Formik 
+//                         initialValues={initialValues}
+//                         onSubmit={values => {
+//                             console.log(values);
+//                             // Redireciona para a página de login após o cadastro
+//                             router.push('/login');
+//                         }}
+//                         validationSchema={validationSchema}
+//                     >
+//                         {({ handleSubmit, setFieldValue, values }) => (
+//                             <Form className='p-3' onSubmit={handleSubmit}>  
+//                                 <div>
+//                                     {/* Nome do Usuário */}
+//                                     <div className="mb-4">
+//                                         <label htmlFor="pessoaResponsavel" className="block mb-1">
+//                                             Nome do usuario <span className="text-red-500">*</span>
+//                                         </label>
+//                                         <Field 
+//                                             type="text" 
+//                                             name="nome" 
+//                                             placeholder="Exemplo: João da Silva"
+//                                             className="border-2 form-control"
+//                                         />
+//                                         <ErrorMessage name="pessoaResponsavel" component="div" className="error"/>
+//                                     </div>
+
+//                                     {/* Email e CPF */}
+//                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+//                                         <div>
+//                                             <label htmlFor="cpf" className="block mb-1">
+//                                                 CPF <span className="text-red-500">*</span>
+//                                             </label>
+//                                             <Field 
+//                                                 type="text" 
+//                                                 name="cpf" 
+//                                                 maxLength={11}
+//                                                 placeholder="000.000.000-00"
+//                                                 className="border-2 form-control"
+//                                             />
+//                                             <ErrorMessage name="cpf" component="div" className="error"/>
+//                                         </div>
+
+//                                         {/* Email */}
+//                                         <div>
+//                                             <label htmlFor="email" className="block mb-1">
+//                                                 Email <span className="text-red-500">*</span>
+//                                             </label>
+//                                             <Field 
+//                                                 type="email" 
+//                                                 name="email" 
+//                                                 placeholder="exemplo@email.com"
+//                                                 className="border-2 form-control"
+//                                             />
+//                                             <ErrorMessage name="email" component="div" className="error"/>
+//                                         </div>
+//                                     </div>
+
+//                                     {/* Senha */}
+//                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+//                                         <div>
+//                                             <label htmlFor="senha" className="block mb-1">
+//                                                 Senha <span className="text-red-500">*</span>
+//                                             </label>
+//                                             <Field 
+//                                                 type="password" 
+//                                                 name="senha" 
+                                                
+//                                                 className="border-2 form-control"
+//                                             />
+//                                             <ErrorMessage name="password" component="div" className="error"/>
+//                                         </div>
+
+//                                         {/*Confirmar senha */}
+//                                         <div>
+//                                             <label htmlFor="confirmarSenha" className="block mb-1">
+//                                                 Confirmar Senha <span className="text-red-500">*</span>
+//                                             </label>
+//                                             <Field 
+//                                                 type="password" 
+//                                                 name="confirmarSenha" 
+                                                
+//                                                 className="border-2 form-control"
+//                                             />
+//                                             <ErrorMessage name="password" component="div" className="error"/>
+//                                         </div>
+
+                                        
+//                                     </div>
+
+                                
+
+//                                     {/* Botão de Enviar */}
+//                                     <div className="text-center pt-3">
+//                                         <Button
+//                                             type="submit" 
+//                                             id="btn_enviar_cad"
+//                                         >
+//                                             Enviar
+//                                         </Button>
+//                                     </div>
+//                                 </div>
+//                             </Form>
+//                         )}
+//                     </Formik>
+//                 </div>
+//             </main>
+//         </body>            
+//         </>
+//     );
+// }
+
+// abaixo o codigo refatorado para inserir usuario no banco de dados, com os campos required corretos:
+"use client";
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { Button, Alert, Spinner } from 'react-bootstrap';
+import { Field, Form, Formik, ErrorMessage } from "formik";
+import * as Yup from 'yup';
 import Header_home from "@/app/components/header_home";
 import '@/app/CSS/home.css'
 import '@/app/CSS/cadastro.css'
 import '@/app/CSS/header_alt.css'
-import { Button } from 'react-bootstrap';
-import { CepResponse, getCepData } from '../services/cep';
-import { Field, Form, Formik } from "formik";
-import * as Yup from 'yup';
-import { ErrorMessage } from "formik";
+import usuarioService from "@/app/services/usuarioService";
+// =====================================================================
 
+
+// Esquema de Validação Yup
 const validationSchema = Yup.object().shape({
-    pessoaResponsavel: Yup.string().required('Campo obrigatório'),
-    cpf: Yup.string().required('Campo Obrigatório'),
-    email: Yup.string().email('Digite o email válido').required('Campo Obrigatório'),
-    senha: Yup.string().required('Campo Obrigatório'),
-    confirmarSenha: Yup.string().required('Campo Obrigatório')
-   
-    
+    nome: Yup.string().required('Campo obrigatório'), // Renomeado de pessoaResponsavel para nome
+    cpf: Yup.string()
+        .matches(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, 'CPF inválido (use o formato 000.000.000-00)')
+        .required('Campo Obrigatório'),
+    email: Yup.string().email('Email inválido').required('Campo Obrigatório'),
+    senha: Yup.string().min(6, 'A senha deve ter pelo menos 6 caracteres').required('Campo Obrigatório'),
+    confirmarSenha: Yup.string()
+        .oneOf([Yup.ref('senha')], 'As senhas devem ser iguais') // Validação de igualdade
+        .required('Campo Obrigatório')
 });
-
-
 
 export default function CadastroSimplesPessoaFisica() {
     const router = useRouter();
+    const [formError, setFormError] = useState(null);
+
     const initialValues = {
-        pessoaResponsavel: '',
+        nome: '',         // Ajustado para bater com o Schema do Mongoose
         cpf: '',
         email: '',
         senha: '',
         confirmarSenha: ''
     };
 
-    
+    const handleSubmit = async (values: any, { setSubmitting, resetForm }: any) => {
+        setFormError(null);
+        try {
+            // Prepara o objeto para envio (remove confirmarSenha, que não vai pro backend)
+            const dadosParaEnvio = {
+                nome: values.nome,
+                cpf: values.cpf,
+                email: values.email,
+                senha: values.senha,
+                status: 'user' // Opcional, já é o padrão no backend
+            };
 
+            // Chama o serviço real
+            await usuarioService.cadastrarUsuario(dadosParaEnvio);
+            
+            alert("Cadastro realizado com sucesso! Redirecionando para o login...");
+            router.push('/login'); // Redireciona após sucesso
+
+        } catch (error:any) {
+            console.error("Erro no cadastro:", error);
+            // Tenta pegar a mensagem de erro do backend, ou usa uma genérica
+            const mensagemErro = error.response?.data?.message || "Falha ao cadastrar. Verifique os dados e tente novamente.";
+            setFormError(mensagemErro);
+        } finally {
+            setSubmitting(false);
+        }
+    };
 
     return (
         <>
         <Header_home/>
-        <body className='bg-verde1'>
-            <main id='bg_cadastro' className="min-h-screen flex items-center justify-center">
-                <div id='caixa_cadastro' className="bg-white rounded-3xl p-6 w-full max-w-4xl">   
-                    <h1 className="text-center" id='h1_cadastro'>Cadastro</h1>
+        <div className='bg-verde1' style={{backgroundColor: '#f0fdf4', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <main id='bg_cadastro' className="w-100 d-flex justify-content-center align-items-center py-5">
+                <div id='caixa_cadastro' className="bg-white rounded-4 p-5 shadow w-100" style={{maxWidth: '600px'}}>   
+                    <h2 className="text-center mb-4 fw-bold text-success" id='h1_cadastro'>Criar Conta</h2>
+                    
+                    {formError && <Alert variant="danger" onClose={() => setFormError(null)} dismissible>{formError}</Alert>}
+
                     <Formik 
                         initialValues={initialValues}
-                        onSubmit={values => {
-                            console.log(values);
-                            // Redireciona para a página de login após o cadastro
-                            router.push('/login');
-                        }}
                         validationSchema={validationSchema}
+                        onSubmit={handleSubmit}
                     >
-                        {({ handleSubmit, setFieldValue, values }) => (
-                            <Form className='p-3' onSubmit={handleSubmit}>  
-                                <div>
-                                    {/* Nome do Usuário */}
-                                    <div className="mb-4">
-                                        <label htmlFor="pessoaResponsavel" className="block mb-1">
-                                            Nome do usuario <span className="text-red-500">*</span>
-                                        </label>
-                                        <Field 
-                                            type="text" 
-                                            name="nome" 
-                                            placeholder="Exemplo: João da Silva"
-                                            className="border-2 form-control"
-                                        />
-                                        <ErrorMessage name="pessoaResponsavel" component="div" className="error"/>
+                        {({ isSubmitting }) => (
+                            <Form>  
+                                {/* Nome */}
+                                <div className="mb-3">
+                                    <label htmlFor="nome" className="form-label fw-semibold">Nome Completo <span className="text-danger">*</span></label>
+                                    <Field type="text" name="nome" placeholder="Ex: João da Silva" className="form-control" />
+                                    <ErrorMessage name="nome" component="div" className="text-danger small mt-1"/>
+                                </div>
+
+                                {/* CPF e Email */}
+                                <div className="row">
+                                    <div className="col-md-6 mb-3">
+                                        <label htmlFor="cpf" className="form-label fw-semibold">CPF <span className="text-danger">*</span></label>
+                                        <Field type="text" name="cpf" placeholder="000.000.000-00" maxLength={14} className="form-control" />
+                                        <ErrorMessage name="cpf" component="div" className="text-danger small mt-1"/>
                                     </div>
-
-                                    {/* Email e CPF */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                        <div>
-                                            <label htmlFor="cpf" className="block mb-1">
-                                                CPF <span className="text-red-500">*</span>
-                                            </label>
-                                            <Field 
-                                                type="text" 
-                                                name="cpf" 
-                                                maxLength={11}
-                                                placeholder="000.000.000-00"
-                                                className="border-2 form-control"
-                                            />
-                                            <ErrorMessage name="cpf" component="div" className="error"/>
-                                        </div>
-
-                                        {/* Email */}
-                                        <div>
-                                            <label htmlFor="email" className="block mb-1">
-                                                Email <span className="text-red-500">*</span>
-                                            </label>
-                                            <Field 
-                                                type="email" 
-                                                name="email" 
-                                                placeholder="exemplo@email.com"
-                                                className="border-2 form-control"
-                                            />
-                                            <ErrorMessage name="email" component="div" className="error"/>
-                                        </div>
+                                    <div className="col-md-6 mb-3">
+                                        <label htmlFor="email" className="form-label fw-semibold">Email <span className="text-danger">*</span></label>
+                                        <Field type="email" name="email" placeholder="exemplo@email.com" className="form-control" />
+                                        <ErrorMessage name="email" component="div" className="text-danger small mt-1"/>
                                     </div>
+                                </div>
 
-                                    {/* Senha */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                        <div>
-                                            <label htmlFor="senha" className="block mb-1">
-                                                Senha <span className="text-red-500">*</span>
-                                            </label>
-                                            <Field 
-                                                type="password" 
-                                                name="senha" 
-                                                
-                                                className="border-2 form-control"
-                                            />
-                                            <ErrorMessage name="password" component="div" className="error"/>
-                                        </div>
-
-                                        {/*Confirmar senha */}
-                                        <div>
-                                            <label htmlFor="confirmarSenha" className="block mb-1">
-                                                Confirmar Senha <span className="text-red-500">*</span>
-                                            </label>
-                                            <Field 
-                                                type="password" 
-                                                name="confirmarSenha" 
-                                                
-                                                className="border-2 form-control"
-                                            />
-                                            <ErrorMessage name="password" component="div" className="error"/>
-                                        </div>
-
-                                        
+                                {/* Senhas */}
+                                <div className="row">
+                                    <div className="col-md-6 mb-3">
+                                        <label htmlFor="senha" className="form-label fw-semibold">Senha <span className="text-danger">*</span></label>
+                                        <Field type="password" name="senha" className="form-control" />
+                                        <ErrorMessage name="senha" component="div" className="text-danger small mt-1"/>
                                     </div>
-
-                                
-
-                                    {/* Botão de Enviar */}
-                                    <div className="text-center pt-3">
-                                        <Button
-                                            type="submit" 
-                                            id="btn_enviar_cad"
-                                        >
-                                            Enviar
-                                        </Button>
+                                    <div className="col-md-6 mb-3">
+                                        <label htmlFor="confirmarSenha" className="form-label fw-semibold">Confirmar Senha <span className="text-danger">*</span></label>
+                                        <Field type="password" name="confirmarSenha" className="form-control" />
+                                        <ErrorMessage name="confirmarSenha" component="div" className="text-danger small mt-1"/>
                                     </div>
+                                </div>
+
+                                {/* Botão de Enviar */}
+                                <div className="text-center mt-4">
+                                    <Button type="submit" variant="success" size="lg" className="w-100 fw-bold" disabled={isSubmitting} id="btn_enviar_cad">
+                                        {isSubmitting ? (
+                                            <>
+                                                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="me-2" />
+                                                Cadastrando...
+                                            </>
+                                        ) : (
+                                            "Criar Conta"
+                                        )}
+                                    </Button>
                                 </div>
                             </Form>
                         )}
                     </Formik>
                 </div>
             </main>
-        </body>            
+        </div>            
         </>
     );
 }
