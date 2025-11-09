@@ -16,12 +16,26 @@ import '@/app/CSS/menu.css'
 import '@/app/CSS/main.css'
 import '@/app/CSS/body.css'
 import Header_home from "@/app/components/header_home"
+import Script from 'next/script'
 
 
 export default function Home() {
 
   return (
         <>
+        <Script
+          id="microsoft-clarity-script" // Um ID único para o seu script
+          strategy="afterInteractive"  // A estratégia de carregamento recomendada
+          dangerouslySetInnerHTML={{ 
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "tvor3v73uk");
+            `,
+          }}
+        />
         
         <Header_home/>
         
