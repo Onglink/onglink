@@ -225,10 +225,10 @@ export default function CadastroSimplesPessoaFisica() {
     return (
         <>
         <Header_home/>
-        <div className='bg-verde1' style={{backgroundColor: '#f0fdf4', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div className='bg-verde1' style={{backgroundColor: '#D0E2E9', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
             <main id='bg_cadastro' className="w-100 d-flex justify-content-center align-items-center py-5">
-                <div id='caixa_cadastro' className="bg-white rounded-4 p-5 shadow w-100" style={{maxWidth: '600px'}}>   
-                    <h2 className="text-center mb-4 fw-bold text-success" id='h1_cadastro'>Criar Conta</h2>
+                <div id='caixa_cadastro' className="bg-white rounded-4 p-5 shadow w-100 mt-3 mb-5" style={{maxWidth: '600px'}}>   
+                    <h2 className="" id='h1_cadastro'>Criar Conta</h2>
                     
                     {formError && <Alert variant="danger" onClose={() => setFormError(null)} dismissible>{formError}</Alert>}
 
@@ -250,7 +250,7 @@ export default function CadastroSimplesPessoaFisica() {
                                 <div className="row">
                                     <div className="col-md-6 mb-3">
                                         <label htmlFor="cpf" className="form-label fw-semibold">CPF <span className="text-danger">*</span></label>
-                                        <Field type="text" name="cpf" placeholder="000.000.000-00" maxLength={14} className="form-control" />
+                                        <Field type="text" name="cpf" placeholder="00000000000" maxLength={14} className="form-control" />
                                         <ErrorMessage name="cpf" component="div" className="text-danger small mt-1"/>
                                     </div>
                                     <div className="col-md-6 mb-3">
@@ -283,7 +283,7 @@ export default function CadastroSimplesPessoaFisica() {
                                                 Cadastrando...
                                             </>
                                         ) : (
-                                            "Criar Conta"
+                                            "Enviar"
                                         )}
                                     </Button>
                                 </div>

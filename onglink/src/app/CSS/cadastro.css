@@ -26,9 +26,9 @@ header#header_header.py-3.mb-3.border-bottom{
            
         }
         
-    
+    /* rgba(120, 171, 191, .35) */
   #bg_cadastro{
-    background-color: rgba(120, 171, 191, .35);
+    background-color:   #D0E2E9;
   }
     
         #par_sep{
