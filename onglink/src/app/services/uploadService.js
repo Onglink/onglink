@@ -3,7 +3,7 @@
 const CLOUD_NAME = 'df48qk6bj';
 const UPLOAD_PRESET = 'onglinkCloud';
 
-export const uploadToCloudinary = async (file) => {
+const uploadService = async (file) => {
     if (!file) return null;
 
     const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/upload`;
@@ -29,3 +29,4 @@ export const uploadToCloudinary = async (file) => {
         return null;
     }
 };
+export default uploadService;
