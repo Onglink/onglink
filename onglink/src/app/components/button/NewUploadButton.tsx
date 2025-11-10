@@ -10,6 +10,8 @@ type NewUploadButtonProps = {
   variant?: string;
   label?: React.ReactNode;
   title?: string;
+  className?: string;
+  disabled?: boolean;
 };
 
 function NewUploadButton({
@@ -18,6 +20,8 @@ function NewUploadButton({
   variant = 'primary',
   label,
   title, // adicionando o prop title aqui
+  className = ' ',
+  disabled = false,
 }: NewUploadButtonProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -49,7 +53,13 @@ function NewUploadButton({
         ref={fileInputRef}
         onChange={handleFileChange}
       />
-      <Button title={title} variant={variant} onClick={handleClick}>
+      <Button 
+      title={title} 
+      variant={variant} 
+      onClick={handleClick}
+      className={className}
+      disabled={disabled}
+      >
         {label}
       </Button>
 
