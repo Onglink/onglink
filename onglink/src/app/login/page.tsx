@@ -120,7 +120,7 @@ export default function Login() {
             // Redireciona para o Feed
             router.push('/feed'); 
 
-        } catch (error) {
+        } catch (error:any) {
             console.error("Erro no login:", error);
             const mensagem = error.response?.data?.error || error.response?.data?.message || "Falha ao realizar login.";
             setLoginError(mensagem);
