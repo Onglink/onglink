@@ -108,7 +108,7 @@ export default function Login() {
     const router = useRouter();
     const [loginError, setLoginError] = useState(null);
 
-    const handleLogin = async (values, { setSubmitting }) => {
+    const handleLogin = async (values: any, { setSubmitting }: any) => {
         setLoginError(null);
         try {
             const response = await usuarioService.loginUsuario(values);
