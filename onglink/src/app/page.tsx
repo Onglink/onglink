@@ -98,7 +98,7 @@ export default function Home() {
                           Seja mais um parceiro e ajude-nos a divulgar o link do bem!
                         </p>
 
-                        <Link href={"/cad_simples"}>
+                        <Link href={"/cadastroSimples"}>
                           <Button
                               id="botao_cadastro2"
                             >
