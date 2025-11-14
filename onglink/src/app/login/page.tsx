@@ -115,6 +115,7 @@ export default function Login() {
             console.log("Login bem-sucedido:", response);
 
             // Salva os dados do usuário no localStorage
+            localStorage.setItem('authToken', response.token); // O token      
             localStorage.setItem('usuarioLogado', JSON.stringify(response.usuario));
             
             // Redireciona para o Feed
