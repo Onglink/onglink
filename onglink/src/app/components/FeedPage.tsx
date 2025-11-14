@@ -124,8 +124,20 @@ const FeedPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [userStatus, setUserStatus] = useState<string>(''); 
+  // Statuses que têm permissão para publicar
+  const STATUS_PUBLICADORES = ['admin', 'ong'];
+
   // 1. Carregar posts ao iniciar (GET)
   useEffect(() => {
+
+    // === Lógica para obter o STATUS do usuário ===
+    // Assumindo que o status foi salvo no localStorage após o login
+    const storedStatus = localStorage.getItem('user_status');
+    if (storedStatus) {
+        setUserStatus(storedStatus);
+    }
+
     const fetchPosts = async () => {
       setIsLoading(true);
       setError(null); // Limpa erros anteriores ao tentar carregar novamente
@@ -155,6 +167,8 @@ const FeedPage: React.FC = () => {
     setPosts((prevPosts) => [newPost, ...prevPosts]);
   };
 
+  const canPublish = STATUS_PUBLICADORES.includes(userStatus);
+
   return (
     <div className="container-fluid col-12 vstack gap-4 p-0">
       {/* Exibe alertas de erro de conexão */}
@@ -164,10 +178,18 @@ const FeedPage: React.FC = () => {
         </Alert>
       )}
 
-      {/* Formulário de Publicação */}
+      {/* Formulário de Publicação ANTIGO
       <div id="subdiv_publicar" className="p-3">
         <PublicarForm onPublish={addPost} />
-      </div>
+      </div> */}
+
+
+      {/*Formulário de Publicação com Renderização Condicional*/}
+      {canPublish && (
+        <div id="subdiv_publicar" className="p-3">
+            <PublicarForm onPublish={addPost} />
+        </div>
+      )}
 
       {/* Lista de Posts */}
       <div className="mt-4" id="div_pub">
