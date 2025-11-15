@@ -117,6 +117,7 @@ export default function Login() {
             // Salva os dados do usuário no localStorage
             localStorage.setItem('authToken', response.token); // O token      
             localStorage.setItem('usuarioLogado', JSON.stringify(response.usuario));
+            localStorage.setItem('user_status', response.usuario.status);
             
             // Redireciona para o Feed
             router.push('/feed'); 

@@ -144,11 +144,13 @@ const FeedPage: React.FC = () => {
     
     // 1. Lógica para obter o STATUS a partir do TOKEN
     const token = localStorage.getItem('authToken'); // Assumindo que você salva o token como 'authToken'
+    console.log("Token lido no mount:", token);
 
     if (token) {
         try {
             // Decodifica o token para acessar o payload
             const decoded = jwtDecode<JwtPayload>(token);
+            console.log("Status decodificado:", decoded.status);
             
             // Verifica se o token expirou (opcional, mas recomendado)
             if (decoded.exp * 1000 > Date.now()) {
