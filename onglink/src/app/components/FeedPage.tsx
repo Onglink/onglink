@@ -124,7 +124,7 @@ interface Post {
 interface JwtPayload {
     id: string;
     email: string;
-    status: string; // <-- O status do usuário
+    role: string; // <-- O status do usuário
     iat: number;
     exp: number;
 }
@@ -150,11 +150,11 @@ const FeedPage: React.FC = () => {
         try {
             // Decodifica o token para acessar o payload
             const decoded = jwtDecode<JwtPayload>(token);
-            console.log("Status decodificado:", decoded.status);
+            console.log("Status decodificado:", decoded.role);
             
             // Verifica se o token expirou (opcional, mas recomendado)
             if (decoded.exp * 1000 > Date.now()) {
-                setUserStatus(decoded.status); // <-- Extrai o status/role
+                setUserStatus(decoded.role); // <-- Extrai o status/role
             } else {
                 // Token expirado, limpa o status e força logout ou refresh
                 localStorage.removeItem('authToken');
