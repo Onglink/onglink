@@ -136,7 +136,7 @@ const FeedPage: React.FC = () => {
 
   const [userStatus, setUserStatus] = useState<string>(''); 
   // Statuses que têm permissão para publicar
-  const ROLES_PUBLICADORES = ['admin', 'ong'];
+  const ROLES_PUBLICADORES = ['admin', 'ong', 'ONG'];
 
 
 
