@@ -111,12 +111,22 @@ import { Alert, Spinner } from "react-bootstrap";
 import PublicarForm from "@/app/components/PublicarForm";
 import FeedPost from "@/app/components/FeedPost";
 import publicacaoService from "@/app/services/publicacaoService";
+import {jwtDecode} from 'jwt-decode'; // <-- Importação do decodificador JWT
 
 interface Post {
   _id: string;
   title: string;
   message: string;
   imageURL?: string;
+}
+
+// Interface para o payload do Token (o que você salvou no JWT no backend)
+interface JwtPayload {
+    id: string;
+    email: string;
+    status: string; // <-- O status do usuário
+    iat: number;
+    exp: number;
 }
 
 const FeedPage: React.FC = () => {
@@ -126,18 +136,37 @@ const FeedPage: React.FC = () => {
 
   const [userStatus, setUserStatus] = useState<string>(''); 
   // Statuses que têm permissão para publicar
-  const STATUS_PUBLICADORES = ['admin', 'ong'];
+  const ROLES_PUBLICADORES = ['admin', 'ong'];
 
-  // 1. Carregar posts ao iniciar (GET)
+
+
   useEffect(() => {
+    
+    // 1. Lógica para obter o STATUS a partir do TOKEN
+    const token = localStorage.getItem('authToken'); // Assumindo que você salva o token como 'authToken'
 
-    // === Lógica para obter o STATUS do usuário ===
-    // Assumindo que o status foi salvo no localStorage após o login
-    const storedStatus = localStorage.getItem('user_status');
-    if (storedStatus) {
-        setUserStatus(storedStatus);
-    }
+    if (token) {
+        try {
+            // Decodifica o token para acessar o payload
+            const decoded = jwtDecode<JwtPayload>(token);
+            
+            // Verifica se o token expirou (opcional, mas recomendado)
+            if (decoded.exp * 1000 > Date.now()) {
+                setUserStatus(decoded.status); // <-- Extrai o status/role
+            } else {
+                // Token expirado, limpa o status e força logout ou refresh
+                localStorage.removeItem('authToken');
+                setUserStatus('');
+                // Opcional: Redirecionar para login
+            }
 
+        } catch (e) {
+            console.error("Erro ao decodificar token:", e);
+            localStorage.removeItem('authToken');
+        }
+      }
+
+  // 2. Carregar posts ao iniciar (GET)
     const fetchPosts = async () => {
       setIsLoading(true);
       setError(null); // Limpa erros anteriores ao tentar carregar novamente
@@ -162,12 +191,12 @@ const FeedPage: React.FC = () => {
     fetchPosts();
   }, []);
 
-  // 2. Adicionar novo post à lista imediatamente após o sucesso do PublicarForm
+  // 3. Adicionar novo post à lista imediatamente após o sucesso do PublicarForm
   const addPost = (newPost: Post) => {
     setPosts((prevPosts) => [newPost, ...prevPosts]);
   };
 
-  const canPublish = STATUS_PUBLICADORES.includes(userStatus);
+  const canPublish = ROLES_PUBLICADORES.includes(userStatus);
 
   return (
     <div className="container-fluid col-12 vstack gap-4 p-0">
@@ -184,7 +213,7 @@ const FeedPage: React.FC = () => {
       </div> */}
 
 
-      {/*Formulário de Publicação com Renderização Condicional*/}
+      {/*------- Formulário de Publicação com Renderização Condicional -------*/}
       {canPublish && (
         <div id="subdiv_publicar" className="p-3">
             <PublicarForm onPublish={addPost} />
