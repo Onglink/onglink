@@ -85,7 +85,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button, Alert, Spinner, Form as BootstrapForm } from 'react-bootstrap'; // Renomeei Form para evitar conflito com Formik
-import { Field, Form, Formik, ErrorMessage } from "formik";
+import { Field, Form, Formik, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from 'yup';
 import Link from "next/link";
 
@@ -103,21 +103,31 @@ const validationSchema = Yup.object().shape({
     email: Yup.string().email('Email inválido').required('Campo obrigatório'),
     senha: Yup.string().required('Campo obrigatório')
 });
+type LoginFormValues = Yup.InferType<typeof validationSchema>;
+
+const initialValues: LoginFormValues = {
+  email: '',
+  senha: ''
+};
 
 export default function Login() {
     const router = useRouter();
-    const [loginError, setLoginError] = useState(null);
+    const [loginError, setLoginError] = useState<string | null>(null);
 
-    const handleLogin = async (values: any, { setSubmitting }: any) => {
-        setLoginError(null);
-        try {
-            const response = await usuarioService.loginUsuario(values);
-            console.log("Login bem-sucedido:", response);
+    const handleLogin = async (
+      values: LoginFormValues, 
+      { setSubmitting }: FormikHelpers<LoginFormValues>
+    ) => {
+    setLoginError(null);
+    try {
+      const response = await usuarioService.loginUsuario(values);
+      console.log("Login bem-sucedido:", response);
 
             // Salva os dados do usuário no localStorage
             localStorage.setItem('authToken', response.token); // O token      
             localStorage.setItem('usuarioLogado', JSON.stringify(response.usuario));
             localStorage.setItem('user_status', response.usuario.status);
+            localStorage.setItem('userId', response.usuario._id);
             
             // Redireciona para o Feed
             router.push('/feed'); 
@@ -144,7 +154,7 @@ export default function Login() {
                     {loginError && <Alert variant="danger" onClose={() => setLoginError(null)} dismissible>{loginError}</Alert>}
 
                     <Formik 
-                        initialValues={{ email: '', senha: '' }}
+                        initialValues={ initialValues }
                         validationSchema={validationSchema}
                         onSubmit={handleLogin}
                     >
