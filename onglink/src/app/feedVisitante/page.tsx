@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState, ChangeEvent, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "@/app/CSS/feed.css";
+import "@/app/CSS/feedVisitante.css";
 import "@/app/CSS/header_alt.css";
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import logo_instagram from "@/app/img/icons/instagram_6422200.png";
@@ -121,33 +121,33 @@ export default function Home() {
   return (
     <>
       <Header_home/>
-      <div className="pt-5" id="main_feed" />
+      <div className="pt-3" id="main_feed" />
       <main id="main_feed">
         {/* <!--Main-->  */}
 
         <ModalDenuncia show={modalShow} onHide={() => setModalShow(false)} />
 
-        <div className="menu-wrapper">
-          <div className="container-fluid">
-            <div className="row g-4">
-              <div >
-                <div className="menu-lat">
+        {/* <div className="menu-wrapper"> */}
+          <div className="container-fluid align-content-center col-7">
+            {/* <div className="row g-4"> */}
+              {/* <div > */}
+                {/* <div className="menu-lat"> */}
                     {/* <MenuLat /> */}
-                </div>
-              </div>
+                {/* </div> */}
+              {/* </div> */}
 
               {/*FIM DO MENU LATERAL*/}
 
               {/* </div>   *******************************************************************   */}
-              <div className="col-md-8 col-lg-6 vstack gap-4">
+              <div className="vstack gap-4 mb-3">
                 {/* //PUBLICAR NO FEED */}
-                <div id="div_feed">
+                <div id="div_feed" className="pr-4 pl-4">
                   <FeedPage />
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          {/* </div> */}
+        {/* </div> */} 
       </main>
     </>
   );

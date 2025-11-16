@@ -108,7 +108,7 @@ export default function Home() {
 
                           <p> ou </p>
 
-                        <Link className="mt-0" href={"/feed"}>
+                        <Link className="mt-0" href={"/feedVisitante"}>
                           <Button
                               id="botao_cadastro2"
                             >
