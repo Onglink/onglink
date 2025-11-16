@@ -188,128 +188,128 @@ import PublicarForm from "@/app/components/PublicarForm";
 import MenuLat from "../components/menu_lat/menu_lat"; // <-- ADICIONADO DE VOLTA
 
 interface Post {
-  title: string;
-  message: string;
-  image?: File | null;
+ title: string;
+ message: string;
+ image?: File | null;
 }
 
 // O nome da função era 'Home', mudei para 'Feed' (mais semântico)
 export default function Feed() { 
-  const [posts, setPosts] = useState<Post[]>([]);
+ const [posts, setPosts] = useState<Post[]>([]);
 
-  const addPost = (post: Post) => {
-    setPosts((prevPosts) => [post, ...prevPosts]);
-  };
+ const addPost = (post: Post) => {
+  setPosts((prevPosts) => [post, ...prevPosts]);
+ };
 
-  const [file, setFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [showSucesso, setShowSucesso] = useState(false);
+ const [file, setFile] = useState<File | null>(null);
+ const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+ const [showSucesso, setShowSucesso] = useState(false);
 
-  const handleArquivoSelecionado = (arquivo: File) => {
-    setFile(arquivo);
-    if (arquivo.type.startsWith("image/")) {
-      setPreviewUrl(URL.createObjectURL(arquivo));
-    }
-  };
-  const limparPreview = () => {
-    setFile(null);
-    setPreviewUrl(null);
-  };
+ const handleArquivoSelecionado = (arquivo: File) => {
+  setFile(arquivo);
+  if (arquivo.type.startsWith("image/")) {
+   setPreviewUrl(URL.createObjectURL(arquivo));
+  }
+ };
+ const limparPreview = () => {
+  setFile(null);
+  setPreviewUrl(null);
+ };
 
-  const confirmaArquivoSelecionado = (novoArquivo: File) => {
-    setFile(novoArquivo);
-    if (novoArquivo.type.startsWith("image/")) {
-      const url = URL.createObjectURL(novoArquivo);
-      setPreviewUrl(url);
-    } else {
-      setPreviewUrl(null);
-    }
-  };
+ const confirmaArquivoSelecionado = (novoArquivo: File) => {
+  setFile(novoArquivo);
+  if (novoArquivo.type.startsWith("image/")) {
+   const url = URL.createObjectURL(novoArquivo);
+   setPreviewUrl(url);
+  } else {
+   setPreviewUrl(null);
+  }
+ };
 
-  const confirmarEnvio = () => {
-    if (!file) return;
-    setFile(null);
-    setPreviewUrl(null);
-    setShowSucesso(true); 
-    setTimeout(() => setShowSucesso(false), 3000);
-  };
+ const confirmarEnvio = () => {
+  if (!file) return;
+  setFile(null);
+  setPreviewUrl(null);
+  setShowSucesso(true); 
+  setTimeout(() => setShowSucesso(false), 3000);
+ };
 
-  const [modalShow, setModalShow] = React.useState(false);
+ const [modalShow, setModalShow] = React.useState(false);
 
-  function ModalDenuncia(props: ModalProps) {
-    function handleClose() {
-      setModalShow(false);
-      return alert("Denúncia Enviada com Sucesso!");
-    }
+ function ModalDenuncia(props: ModalProps) {
+  function handleClose() {
+   setModalShow(false);
+   return alert("Denúncia Enviada com Sucesso!");
+  }
 
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Denunciar Publicação
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form className="mb-3">
-            <FormCheck
-              className="fs-5"
-              type="checkbox"
-              label="Conteúdo Ofensivo"
-            />
-            <FormCheck
-              className="fs-5"
-              type="checkbox"
-              label="Informações Falsas"
-            />
-            <FormCheck
-              className="fs-5"
-              type="checkbox"
-            	label="Violação de Direitos Autorais"
-            />
-          	<FormCheck className="fs-5" type="checkbox" label="Spam" />
-        	</Form>
-        	<h5>Diga-nos mais (opcional)</h5>
-        	<textarea className="border-1" id="text_area_denuncia"></textarea>
-      	</Modal.Body>
-      	<Modal.Footer>
-        	<Button onClick={handleClose}> Enviar </Button>
-      	</Modal.Footer>
-      </Modal>
-    );
-  }
+  return (
+   <Modal
+    {...props}
+    size="lg"
+    aria-labelledby="contained-modal-title-vcenter"
+    centered
+   >
+    <Modal.Header closeButton>
+     <Modal.Title id="contained-modal-title-vcenter">
+      Denunciar Publicação
+     </Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+     <Form className="mb-3">
+      <FormCheck
+       className="fs-5"
+       type="checkbox"
+       label="Conteúdo Ofensivo"
+      />
+      <FormCheck
+       className="fs-5"
+       type="checkbox"
+       label="Informações Falsas"
+      />
+      <FormCheck
+       className="fs-5"
+       type="checkbox"
+      	label="Violação de Direitos Autorais"
+      />
+     	<FormCheck className="fs-5" type="checkbox" label="Spam" />
+    	</Form>
+    	<h5>Diga-nos mais (opcional)</h5>
+    	<textarea className="border-1" id="text_area_denuncia"></textarea>
+   	</Modal.Body>
+   	<Modal.Footer>
+    	<Button onClick={handleClose}> Enviar </Button>
+   	</Modal.Footer>
+    </Modal>
+  );
+ }
 
-  const handleArquivo = (file: File) => {
-    console.log("Arquivo recebido:", file.name);
-  };
+ const handleArquivo = (file: File) => {
+  console.log("Arquivo recebido:", file.name);
+ };
 
-  // --- O JSX AGORA INCLUI O LAYOUT COMPLETO ---
-  return (
-    <>
-      <Header_feed /> {/* <-- HEADER ADICIONADO DE VOLTA */}
+ // --- O JSX AGORA INCLUI O LAYOUT COMPLETO ---
+ return (
+  <>
+   <Header_feed /> {/* <-- HEADER ADICIONADO DE VOLTA */}
 
-      <main id="main_feed">
-      	{/* O Modal não é visível, pode ficar aqui */}
-      	<ModalDenuncia show={modalShow} onHide={() => setModalShow(false)} />
-     
+   <main id="main_feed">
+   	{/* O Modal não é visível, pode ficar aqui */}
+   	<ModalDenuncia show={modalShow} onHide={() => setModalShow(false)} />
+  
 		{/* ESTRUTURA DE COLUNAS ADICIONADA DE VOLTA */}
 		<div className="menu-wrapper">
-        	<div className="container-fluid">
-        	  <div className="row g-4">
+    	<div className="container-fluid">
+    	  <div className="row g-4">
 			
 				{/* Coluna da Esquerda (Menu) */}
-          		<div className="col-lg-3">
-  					<div className="menu-lat">
-    					  <MenuLat /> {/* <-- MENU ADICIONADO DE VOLTA */}
-  					</div>
+     		<div className="col-lg-3">
+ 					<div className="menu-lat">
+  					  <MenuLat /> {/* <-- MENU ADICIONADO DE VOLTA */}
+ 					</div>
 				</div>
 
-          		{/* Coluna Central (Feed) */}
-          		<div className="col-md-8 col-lg-6 vstack gap-4">
+     		{/* Coluna Central (Feed) */}
+     		<div className="col-md-8 col-lg-6 vstack gap-4">
 					
 					{/* Este era o conteúdo que já estava no page.tsx */}
 					<div id="div_feed" className="pr-3 pl-3">
@@ -320,12 +320,12 @@ export default function Feed() {
 						<FeedPage />
 					</div>
 					{/* <FeedPage posts={posts} /> */}
-          		</div>
+     		</div>
 
-        	  </div>
-      	</div>
-      </div>
-    </main>
-   </>
-  );
+    	  </div>
+   	</div>
+    </div>
+  </main>
+ </>
+ );
 }
