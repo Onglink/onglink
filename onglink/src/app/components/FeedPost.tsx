@@ -170,46 +170,7 @@
 import React, { FC, useState } from "react";
 import { Button, Modal, Form, FormCheck, Alert, Spinner } from "react-bootstrap";
 
-// =====================================================================
-// ⚠️ ÁREA DE MOCKS (PARA VISUALIZAÇÃO ONLINE) ⚠️
-// -> NO SEU VS CODE: Apague/Comente esta seção e descomente os IMPORTS REAIS abaixo.
-// =====================================================================
 
-// MOCK para Image (Next.js) e Logo
-// const MuxnLogo1 = "https://placehold.co/48x48/95CF93/ffffff?text=MUXN";
-// const Image = ({ src, alt, className, width, height }) => (
-//   <img src={src} alt={alt} className={className} style={{ width, height, objectFit: 'cover' }} />
-// );
-
-// MOCK para denunciaService
-// const denunciaService = {
-//     cadastrarDenuncia: async (dadosDenuncia) => {
-//         console.log("🚨 [MOCK] Enviando denúncia:", dadosDenuncia);
-//         await new Promise(resolve => setTimeout(resolve, 1500)); // Simula delay de rede
-//         // Retorna sucesso simulado
-//         return { success: true, message: "Denúncia recebida (MOCK)" };
-//     }
-// };
-
-// MOCK de estilos CSS (apenas os essenciais se feed.css não puder ser carregado)
-// const mockStyles = {
-//     feedItem: {
-//         display: 'flex',
-//         alignItems: 'flex-start',
-//     },
-//     avatar: {
-//         minWidth: '60px',
-//         marginRight: '1rem'
-//     }
-// };
-// =====================================================================
-// FIM DA ÁREA DE MOCKS
-// =====================================================================
-
-
-// =====================================================================
-// 👇 IMPORTS REAIS (DESCOMENTE NO SEU VS CODE) 👇
-// =====================================================================
  import Image from "next/image";
  import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
  import denunciaService from "@/app/services/denunciaService"

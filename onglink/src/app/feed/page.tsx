@@ -173,14 +173,14 @@ import "@/app/CSS/feed.css";
 import "@/app/CSS/header_alt.css"; // <-- ADICIONADO DE VOLTA
 
 // Imagens e logos (mantidos caso o modal ou feed os usem)
-import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
-import logo_instagram from "@/app/img/icons/instagram_6422200.png";
-import logo_twitter from "@/app/img/icons/twitter_5968830.png";
-import logo_facebook from "@/app/img/icons/social_12942738.png";
+//import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
+//import logo_instagram from "@/app/img/icons/instagram_6422200.png";
+//import logo_twitter from "@/app/img/icons/twitter_5968830.png";
+//import logo_facebook from "@/app/img/icons/social_12942738.png";
 
 import { Button, Modal, Form, FormCheck, Alert } from "react-bootstrap";
 import Header_feed from "../components/header_feed"; // <-- ADICIONADO DE VOLTA
-import UploadButton from "../components/button/UploadButton";
+//import UploadButton from "../components/button/UploadButton";
 import FeedPage from "../components/FeedPage";
 import FeedPost from "../components/FeedPost";
 import type { ModalProps } from "react-bootstrap";

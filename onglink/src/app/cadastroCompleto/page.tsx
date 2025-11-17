@@ -680,11 +680,11 @@ const CadastroCompleto: React.FC = () => {
               name="causaSocial"
               label="Escolha a causa principal"
               options={[
-                { label: "Ambiental", value: "1" },
-                { label: "Animal", value: "2" },
-                { label: "Educação", value: "3" },
-                { label: "Saúde", value: "4" },
-                { label: "Social", value: "5" },
+                { label: "Ambiental", value: "ambiental" },
+                { label: "Animal", value: "animal" },
+                { label: "Educação", value: "educacao" },
+                { label: "Saúde", value: "saude" },
+                { label: "Social", value: "social" },
               ]}
             />
             <div className="mb-4">

@@ -129,61 +129,6 @@
 import React, { FC, useState } from "react";
 import { Alert, Spinner } from "react-bootstrap";
 
-// =====================================================================
-// ⚠️ ÁREA DE MOCKS (PARA VISUALIZAÇÃO ONLINE) ⚠️
-// -> NO SEU VS CODE: Apague/Comente esta seção e descomente os IMPORTS REAIS abaixo.
-// =====================================================================
-
-// MOCK para Image (Next.js) e Logo
-
-// const MuxnLogo1 = "https://placehold.co/60x60/95CF93/ffffff?text=MUXN";
-// const Image = ({ src, alt, className, width, height }) => (
-//   <img src={src} alt={alt} className={className} style={{ width, height, objectFit: 'cover' }} />
-// );
-
-// MOCK para NeWUploadButton
-// const NeWUploadButton = ({ onFileSelect, disabled, label, variant, className }) => (
-//   <div className={`d-inline-block ${className}`}>
-//     <label className={`btn btn-${variant} ${disabled ? 'disabled' : ''}`} style={{cursor: disabled ? 'not-allowed' : 'pointer'}}>
-//         {label}
-//         <input 
-//             type="file" 
-//             hidden 
-//             onChange={(e) => {
-//                 if (e.target.files && e.target.files[0]) {
-//                     onFileSelect(e.target.files[0]);
-//                 }
-//             }}
-//             disabled={disabled}
-//         />
-//     </label>
-//   </div>
-// );
-
-// MOCK para publicacaoService
-// const publicacaoService = {
-//     cadastrarPublicacao: async (formData) => {
-//         console.log("⚡ [MOCK] Enviando publicação...");
-//         await new Promise(resolve => setTimeout(resolve, 2000)); // Simula delay de rede
-        
-//         // Retorna um post falso como se tivesse sido criado no banco
-//         return {
-//             _id: 'mock-new-' + Date.now(),
-//             title: formData.get('title'),
-//             message: formData.get('message'),
-//             // Se tiver arquivo, finge que gerou uma URL. Se não, sem imagem.
-//             imageURL: formData.get('imageFile') ? URL.createObjectURL(formData.get('imageFile')) : null
-//         };
-//     }
-// };
-// =====================================================================
-// FIM DA ÁREA DE MOCKS
-// =====================================================================
-
-
-// =====================================================================
-// 👇 IMPORTS REAIS (DESCOMENTE NO SEU VS CODE) 👇
-// =====================================================================
 import Image from "next/image";
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import NeWUploadButton from "./button/NewUploadButton";
