@@ -105,26 +105,179 @@
 // export default FeedPage;
 
 //abaixo no novo código com backend:
+// "use client";
+// import React, { useState, useEffect } from "react";
+// import { Alert, Spinner } from "react-bootstrap";
+// import PublicarForm from "@/app/components/PublicarForm";
+// import FeedPost from "@/app/components/FeedPost";
+// import publicacaoService from "@/app/services/publicacaoService";
+// import {jwtDecode} from 'jwt-decode'; // <-- Importação do decodificador JWT
+
+// interface Post {
+//   _id: string;
+//   title: string;
+//   message: string;
+//   imageURL?: string;
+// }
+
+// // Interface para o payload do Token (o que você salvou no JWT no backend)
+// interface JwtPayload {
+//     id: string;
+//     email: string;
+//     role: string; // <-- O status do usuário
+//     iat: number;
+//     exp: number;
+// }
+
+// const FeedPage: React.FC = () => {
+//   const [posts, setPosts] = useState<Post[]>([]);
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [error, setError] = useState<string | null>(null);
+
+//   const [userStatus, setUserStatus] = useState<string>(''); 
+//   // Statuses que têm permissão para publicar
+//   const ROLES_PUBLICADORES = ['admin', 'ong', 'ONG'];
+
+
+
+//   useEffect(() => {
+    
+//     // 1. Lógica para obter o STATUS a partir do TOKEN
+//     const token = localStorage.getItem('authToken'); // Assumindo que você salva o token como 'authToken'
+//     console.log("Token lido no mount:", token);
+
+//     if (token) {
+//         try {
+//             // Decodifica o token para acessar o payload
+//             const decoded = jwtDecode<JwtPayload>(token);
+//             console.log("Status decodificado:", decoded.role);
+            
+//             // Verifica se o token expirou (opcional, mas recomendado)
+//             if (decoded.exp * 1000 > Date.now()) {
+//                 setUserStatus(decoded.role); // <-- Extrai o status/role
+//             } else {
+//                 // Token expirado, limpa o status e força logout ou refresh
+//                 localStorage.removeItem('authToken');
+//                 setUserStatus('');
+//                 // Opcional: Redirecionar para login
+//             }
+
+//         } catch (e) {
+//             console.error("Erro ao decodificar token:", e);
+//             localStorage.removeItem('authToken');
+//         }
+//       }
+
+//   // 2. Carregar posts ao iniciar (GET)
+//     const fetchPosts = async () => {
+//       setIsLoading(true);
+//       setError(null); // Limpa erros anteriores ao tentar carregar novamente
+//       try {
+//         const data = await publicacaoService.listarPublicacao();
+        
+//         if (Array.isArray(data)) {
+//            // Inverte a ordem para mostrar os mais novos primeiro
+//           setPosts(data.reverse());
+//         } else {
+//           // Se a API retornar algo inesperado (ex: objeto vazio em vez de array)
+//           console.warn("API não retornou um array:", data);
+//           setPosts([]);
+//         }
+//       } catch (err) {
+//         console.error("Erro ao carregar feed:", err);
+//         setError("Erro ao carregar publicações. Verifique a conexão com o servidor.");
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     };
+//     fetchPosts();
+//   }, []);
+
+//   // 3. Adicionar novo post à lista imediatamente após o sucesso do PublicarForm
+//   const addPost = (newPost: Post) => {
+//     setPosts((prevPosts) => [newPost, ...prevPosts]);
+//   };
+
+//   const canPublish = ROLES_PUBLICADORES.includes(userStatus);
+
+//   return (
+//     <div className="container-fluid col-12 vstack gap-4 p-0">
+//       {/* Exibe alertas de erro de conexão */}
+//       {error && (
+//         <Alert variant="danger" onClose={() => setError(null)} dismissible className="mt-3">
+//           {error}
+//         </Alert>
+//       )}
+
+//       {/* Formulário de Publicação ANTIGO
+//       <div id="subdiv_publicar" className="p-3">
+//         <PublicarForm onPublish={addPost} />
+//       </div> */}
+
+
+//       {/*------- Formulário de Publicação com Renderização Condicional -------*/}
+//       {canPublish && (
+//         <div id="subdiv_publicar" className="p-3">
+//             <PublicarForm onPublish={addPost} />
+//         </div>
+//       )}
+
+//       {/* Lista de Posts */}
+//       <div className="mt-4" id="div_pub">
+//         {isLoading ? (
+//           <div className="text-center p-5">
+//             <Spinner animation="border" variant="success" role="status">
+//               <span className="visually-hidden">Carregando...</span>
+//             </Spinner>
+//             <p className="text-muted mt-2">Carregando feed...</p>
+//           </div>
+//         ) : posts.length === 0 ? (
+//           <div className="text-center p-5 text-muted border rounded bg-light">
+//             <p className="mb-0 fs-5">Nenhuma publicação encontrada.</p>
+//             <small>Seja o primeiro a compartilhar algo!</small>
+//           </div>
+//         ) : (
+//           posts.map((post) => (
+//             // Usa _id ou um fallback para garantir uma key única
+//             <FeedPost key={post._id || Math.random().toString()} post={post} />
+//           ))
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default FeedPage;
+
+// /////////////////////////////
 "use client";
 import React, { useState, useEffect } from "react";
 import { Alert, Spinner } from "react-bootstrap";
-import PublicarForm from "@/app/components/PublicarForm";
-import FeedPost from "@/app/components/FeedPost";
-import publicacaoService from "@/app/services/publicacaoService";
-import {jwtDecode} from 'jwt-decode'; // <-- Importação do decodificador JWT
+import { jwtDecode } from 'jwt-decode'; 
 
+// --- IMPORTAÇÕES CORRETAS ---
+import PublicarForm from "../components/PublicarForm";
+import FeedPost from "../components/FeedPost"; // Agora usando o componente real
+import publicacaoService from "@/app/services/publicacaoService";
+
+// --- TIPOS ---
 interface Post {
   _id: string;
-  title: string;
-  message: string;
-  imageURL?: string;
+  titulo: string;
+  descricao: string;
+  imagem?: string[];
+  criadoPor?: {
+    _id: string;
+    nome: string;
+    email: string;
+  };
+  createdAt?: string;
 }
 
-// Interface para o payload do Token (o que você salvou no JWT no backend)
 interface JwtPayload {
     id: string;
     email: string;
-    role: string; // <-- O status do usuário
+    role: string; 
     iat: number;
     exp: number;
 }
@@ -133,67 +286,56 @@ const FeedPage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   const [userStatus, setUserStatus] = useState<string>(''); 
-  // Statuses que têm permissão para publicar
-  const ROLES_PUBLICADORES = ['admin', 'ong', 'ONG'];
-
-
+  
+  const ROLES_PUBLICADORES = ['admin', 'ong'];
 
   useEffect(() => {
+    // 1. VALIDAR TOKEN E ROLE
+    const token = localStorage.getItem('authToken');
     
-    // 1. Lógica para obter o STATUS a partir do TOKEN
-    const token = localStorage.getItem('authToken'); // Assumindo que você salva o token como 'authToken'
-    console.log("Token lido no mount:", token);
-
     if (token) {
         try {
-            // Decodifica o token para acessar o payload
             const decoded = jwtDecode<JwtPayload>(token);
-            console.log("Status decodificado:", decoded.role);
             
-            // Verifica se o token expirou (opcional, mas recomendado)
             if (decoded.exp * 1000 > Date.now()) {
-                setUserStatus(decoded.role); // <-- Extrai o status/role
+                setUserStatus(decoded.role);
             } else {
-                // Token expirado, limpa o status e força logout ou refresh
+                console.warn("Token expirado.");
                 localStorage.removeItem('authToken');
                 setUserStatus('');
-                // Opcional: Redirecionar para login
             }
-
         } catch (e) {
             console.error("Erro ao decodificar token:", e);
-            localStorage.removeItem('authToken');
         }
       }
 
-  // 2. Carregar posts ao iniciar (GET)
+    // 2. CARREGAR POSTS
     const fetchPosts = async () => {
       setIsLoading(true);
-      setError(null); // Limpa erros anteriores ao tentar carregar novamente
+      setError(null);
       try {
         const data = await publicacaoService.listarPublicacao();
         
         if (Array.isArray(data)) {
-           // Inverte a ordem para mostrar os mais novos primeiro
-          setPosts(data.reverse());
+           // O backend já deve trazer ordenado, mas por segurança:
+          setPosts(data);
         } else {
-          // Se a API retornar algo inesperado (ex: objeto vazio em vez de array)
           console.warn("API não retornou um array:", data);
           setPosts([]);
         }
       } catch (err) {
         console.error("Erro ao carregar feed:", err);
-        setError("Erro ao carregar publicações. Verifique a conexão com o servidor.");
+        setError("Não foi possível carregar as publicações.");
       } finally {
         setIsLoading(false);
       }
     };
+    
     fetchPosts();
   }, []);
 
-  // 3. Adicionar novo post à lista imediatamente após o sucesso do PublicarForm
+  // Adiciona o post novo no topo da lista
   const addPost = (newPost: Post) => {
     setPosts((prevPosts) => [newPost, ...prevPosts]);
   };
@@ -201,29 +343,23 @@ const FeedPage: React.FC = () => {
   const canPublish = ROLES_PUBLICADORES.includes(userStatus);
 
   return (
-    <div className="container-fluid col-12 vstack gap-4 p-0">
-      {/* Exibe alertas de erro de conexão */}
+    <div className="container-fluid col-12 p-0" style={{ maxWidth: '800px', margin: '0 auto' }}>
+      
       {error && (
         <Alert variant="danger" onClose={() => setError(null)} dismissible className="mt-3">
           {error}
         </Alert>
       )}
 
-      {/* Formulário de Publicação ANTIGO
-      <div id="subdiv_publicar" className="p-3">
-        <PublicarForm onPublish={addPost} />
-      </div> */}
-
-
-      {/*------- Formulário de Publicação com Renderização Condicional -------*/}
+      {/* Formulário só aparece para ONG/Admin */}
       {canPublish && (
-        <div id="subdiv_publicar" className="p-3">
+        <div className="mb-4 mt-3">
             <PublicarForm onPublish={addPost} />
         </div>
       )}
 
       {/* Lista de Posts */}
-      <div className="mt-4" id="div_pub">
+      <div className="mt-4">
         {isLoading ? (
           <div className="text-center p-5">
             <Spinner animation="border" variant="success" role="status">
@@ -232,15 +368,17 @@ const FeedPage: React.FC = () => {
             <p className="text-muted mt-2">Carregando feed...</p>
           </div>
         ) : posts.length === 0 ? (
-          <div className="text-center p-5 text-muted border rounded bg-light">
+          <div className="text-center p-5 text-muted border rounded bg-white shadow-sm">
             <p className="mb-0 fs-5">Nenhuma publicação encontrada.</p>
             <small>Seja o primeiro a compartilhar algo!</small>
           </div>
         ) : (
-          posts.map((post) => (
-            // Usa _id ou um fallback para garantir uma key única
-            <FeedPost key={post._id || Math.random().toString()} post={post} />
-          ))
+          <div className="vstack gap-4">
+            {posts.map((post) => (
+               // AQUI ESTÁ A CORREÇÃO: Chamando o componente FeedPost importado
+               <FeedPost key={post._id || Math.random().toString()} post={post} />
+            ))}
+          </div>
         )}
       </div>
     </div>
