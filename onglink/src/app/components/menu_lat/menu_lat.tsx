@@ -348,7 +348,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import usuarioService from "@/app/services/usuarioService"; 
 
-// Imagens (Seus caminhos originais)
+// Imagens
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import logo_instagram from "@/app/img/icons/instagram_6422200.png";
 import logo_facebook from "@/app/img/icons/social_12942738.png";
@@ -371,6 +371,7 @@ type Ong = {
   email: string;
   redeSocial: RedeSocial;
   projetosApoiados?: number;
+  situacaoCadastral?: string; // Adicionado para verificação extra se necessário
 };
 
 type Usuario = {
@@ -420,7 +421,9 @@ export default function MenuLat() {
            throw new Error("ID do usuário não encontrado no storage");
         }
 
+        // Busca dados atualizados (incluindo o assignedTo populado)
         const data = await usuarioService.buscarPorId(userId);
+        
         const usuarioFinal = data.usuario || data;
         setUsuario(usuarioFinal);
         
@@ -437,9 +440,10 @@ export default function MenuLat() {
   if (loading) return <MenuLoading />;
   if (!usuario) return null; 
 
-  // --- RENDERIZAÇÃO ---
+  // --- LÓGICA DE EXIBIÇÃO (3 OPÇÕES) ---
 
-  // CASO 1: Perfil Completo de ONG
+  // OPÇÃO 1: Status 'ong' (Aprovado pelo Admin)
+  // Mostra dados da ONG + Botão Editar
   if (usuario.status === 'ong' && usuario.assignedTo) {
     const ong = usuario.assignedTo;
 
@@ -463,11 +467,20 @@ export default function MenuLat() {
             <small className="text-muted d-block mb-2">{ong.causaSocial}</small>
             <p className="mt-3 small">{ong.descricao ? ong.descricao.substring(0, 80) + '...' : 'Descrição...'}</p>
             
-            <div className="mt-2">
-                <span className="badge bg-success bg-opacity-10 text-success">
+            {/* Badge de Aprovado */}
+            <div className="mt-2 mb-3">
+                <span className="badge bg-success bg-opacity-10 text-success border border-success">
                     ONG Verificada
                 </span>
             </div>
+
+            {/* Botão Editar Informações (Novo Requisito) */}
+            <Link 
+              href={`/editar-ong/${ong._id}`} 
+              className="btn btn-outline-primary btn-sm w-100 mb-3"
+            >
+              Editar Informações
+            </Link>
 
             <hr />
             
@@ -489,7 +502,7 @@ export default function MenuLat() {
     );
   }
 
-  // CASO 2: Admin
+  // OPÇÃO 2: Status 'admin'
   if (usuario.status === 'admin') {
     return (
       <div className="menu-lat">
@@ -507,8 +520,7 @@ export default function MenuLat() {
              <h5 className="text-danger">Administrador</h5>
              <p className="small text-muted">Painel de Controle</p>
              <hr/>
-             {/* CORREÇÃO AQUI: Removido 'block', mantido 'flex' para centralizar ícone e texto */}
-             <Link href="/admin" className="w-full py-2 px-4 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium flex items-center justify-center gap-2">
+             <Link href="/admin" className="w-full py-2 px-4 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium flex items-center justify-center gap-2 text-decoration-none">
                Acessar Painel
              </Link>
           </div>
@@ -517,7 +529,46 @@ export default function MenuLat() {
     );
   }
 
-  // CASO 3 (DEFAULT): Usuário Comum OU ONG Pendente
+  // LÓGICA PARA USUÁRIO COMUM (Status 'user')
+  // Aqui dividimos em "Em Análise" vs "Novo Usuário"
+  
+  // OPÇÃO 3: Status 'user' MAS já enviou cadastro (assignedTo existe) -> EM ANÁLISE
+  if (usuario.status === 'user' && usuario.assignedTo) {
+    return (
+        <div className="menu-lat">
+        <div className="card overflow-hidden">
+          <div className="card-body pt-0 mt-3 text-center">
+            <div className="avatar avatar-lg mt-n5 mb-3">
+                {/* Mostra Avatar do Usuário (não da ONG ainda) */}
+                <Image
+                  className="avatar-img rounded-circle border d-inline"
+                  src={usuario.avatar || MuxnLogo1}
+                  alt="Avatar"
+                  width={100}
+                  height={100}
+                  style={{ objectFit: "cover" }}
+                />
+            </div>
+            <h5 className="mb-0">{usuario.nome}</h5>
+            
+            {/* Mensagem de Em Análise */}
+            <div className="alert alert-warning border border-warning mt-4 p-3 small">
+              <h6 className="alert-heading fw-bold mb-1">Cadastro em Análise</h6>
+              <p className="mb-0">
+                Por favor, aguarde a validação dos seus dados pela nossa equipe.
+              </p>
+            </div>
+            
+            {/* Sem botão de completar cadastro, pois já enviou */}
+            
+            <hr />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // OPÇÃO 4: Status 'user' e SEM cadastro de ONG -> COMPLETAR CADASTRO
   return (
     <div className="menu-lat">
       <div className="card overflow-hidden">
@@ -536,15 +587,12 @@ export default function MenuLat() {
           </div>
           <h5 className="mb-0">{usuario.nome}</h5>
           
-          <div className="alert alert-light border mt-3 p-2 small text-primary">
-            {usuario.status === 'ong' 
-                ? "Você tem perfil de ONG! Finalize o cadastro da sua organização abaixo."
-                : "Complete seu perfil para cadastrar sua ONG!"
-            }
-          </div>
+          <p className="mt-3 text-muted small">
+            Complete seu perfil para cadastrar sua ONG e começar a ajudar!
+          </p>
           
-          <Link href="/cadastro-ong" className="block w-full py-3 px-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-md transition-all hover:shadow-lg transform hover:-translate-y-0.5 text-decoration-none">
-            {usuario.status === 'ong' ? "Cadastrar Minha ONG" : "Quero Cadastrar uma ONG"}
+          <Link href="/cadastroCompleto" className="block w-full py-3 px-4 bg-primary hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition-all hover:shadow-lg transform hover:-translate-y-0.5 text-decoration-none">
+            Completar Cadastro
           </Link>
           
           <hr />
