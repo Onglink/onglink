@@ -254,10 +254,9 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Spinner } from "react-bootstrap";
 import { jwtDecode } from 'jwt-decode'; 
-
-// --- IMPORTAÇÕES CORRETAS ---
+import AutoLogout from "../components/AutoLogout";
 import PublicarForm from "../components/PublicarForm";
-import FeedPost from "../components/FeedPost"; // Agora usando o componente real
+import FeedPost from "../components/FeedPost";
 import publicacaoService from "@/app/services/publicacaoService";
 
 // --- TIPOS ---
@@ -344,7 +343,7 @@ const FeedPage: React.FC = () => {
 
   return (
     <div className="container-fluid col-12 p-0" style={{ maxWidth: '800px', margin: '0 auto' }}>
-      
+      <AutoLogout />
       {error && (
         <Alert variant="danger" onClose={() => setError(null)} dismissible className="mt-3">
           {error}

@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/router";
 import {Button, Col, Row} from "react-bootstrap"
 import logo_onglink_01 from '@/app/img/LOGO_ONGLINK_1.png'
 import image_home from '@/app/img/image_home.jpg'
@@ -17,6 +18,7 @@ import '@/app/CSS/main.css'
 import '@/app/CSS/body.css'
 import Header_home from "@/app/components/header_home"
 import Script from 'next/script'
+import BotaoVisitante from "./components/BotaoVisitante";
 
 
 export default function Home() {
@@ -108,13 +110,14 @@ export default function Home() {
 
                           <p> ou </p>
 
-                        <Link className="mt-0" href={"/feedVisitante"}>
+                        {/* <Link className="mt-0" href={"/feedVisitante"}>
                           <Button
                               id="botao_cadastro2"
                             >
                               Entre como visitante
                           </Button>
-                        </Link>
+                        </Link> */}
+                        <BotaoVisitante />
                           
                       </div>
                     </Col>
