@@ -1,5 +1,5 @@
 import api from './api';
-import axios from 'axios';
+//import axios from 'axios';
 
 const publicacaoSevice = {
     listarPublicacao: async () => (await api.get('/publicacoes')).data,
