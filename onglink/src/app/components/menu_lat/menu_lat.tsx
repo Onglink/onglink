@@ -78,7 +78,6 @@
 // import logo_facebook from "@/app/img/icons/social_12942738.png";
 // import "@/app/CSS/menu_lat.css";
 
-
 // // --- DEFINIÇÃO DE TIPOS ---
 // // ... (tipos RedeSocial, Ong, Usuario existentes) ...
 // // 1. Tipo para a Rede Social (baseado no sub-schema)
@@ -115,7 +114,6 @@
 //   assignedTo: Ong | null; // O campo "populado"
 // };
 
-
 // // (Opcional) Um componente de "Carregando" para uma melhor UX
 // const MenuLoading = () => (
 
@@ -146,7 +144,7 @@
 
 //   useEffect(() => {
 //     const carregarDadosUsuario = async () => {
-      
+
 //       try {
 
 //         // [SUPOSIÇÃO 1] Pegando o ID do localStorage
@@ -165,14 +163,14 @@
 //         const data = await usuarioService.buscarPorId(userId);
 //         setUsuario(data);
 //         console.log("DADOS DO USUÁRIO RECEBIDOS PELA API:", data);
-        
+
 //       } catch (error) {
 
 //         console.error("Erro ao carregar dados do menu lateral:", error);
 //       } finally {
 //         setLoading(false);
 //       }
-      
+
 //     };
 
 //     carregarDadosUsuario();
@@ -251,7 +249,7 @@
 //             <h5 className="mb-0">{ong.nomeFantasia}</h5> {/* <-- CORRIGIDO (era ong.nome) */}
 //             <small>{ong.causaSocial || 'Organização'}</small> {/* <-- CORRIGIDO (era ong.segmento) */}
 //             <p className="mt-3">{ong.descricao || 'Por um planeta melhor.'}</p> {/* <-- CORRIGIDO (era ong.descricaoCurta) */}
-            
+
 //             <div className="hstack gap-2 gap-xl-3 justify-content-center">
 
 //               <div>
@@ -268,7 +266,7 @@
 
 //             {/* Redes Sociais Dinâmicas (Corrigidas) */}
 //             <ul className="list-unstyled d-flex justify-content-center mt-2">
-             
+
 //               {/* CORREÇÃO: Acessando o sub-schema 'redeSocial' */}
 //               {ong.redeSocial.instagram && (
 //                 <li className="ms-3">
@@ -314,9 +312,9 @@
 //             <small className="badge bg-danger bg-opacity-10 text-danger">
 //               Administrador
 //             </small>
-            
+
 //             <p className="mt-3">Acesso total ao sistema.</p>
-            
+
 //             {/* Links específicos do Admin (Ajuste os 'href' para suas rotas) */}
 //             <div className="d-grid gap-2">
 //               <Link href="/admin/dashboard" className="btn btn-outline-danger">
@@ -326,7 +324,7 @@
 //                 Aprovar ONGs
 //               </Link>
 //             </div>
-            
+
 //             <hr />
 //           </div>
 //         </div>
@@ -335,7 +333,7 @@
 //   }
 
 //   // Se o status não for nenhum dos 3 (ou algo der errado)
- 
+
 //   return null;
 // };
 
@@ -346,7 +344,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import usuarioService from "@/app/services/usuarioService"; 
+import usuarioService from "@/app/services/usuarioService";
 
 // Imagens
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
@@ -378,7 +376,7 @@ type Usuario = {
   _id: string;
   nome: string;
   avatar?: string;
-  status: 'user' | 'admin' | 'ong';
+  status: "user" | "admin" | "ong";
   assignedTo: Ong | null;
 };
 
@@ -405,28 +403,30 @@ export default function MenuLat() {
   useEffect(() => {
     const carregarDadosUsuario = async () => {
       try {
-        const usuarioLogadoJson = localStorage.getItem('usuarioLogado');
-        
+        const usuarioLogadoJson = localStorage.getItem("usuarioLogado");
+
         if (!usuarioLogadoJson) {
           console.warn("Nenhum usuário logado encontrado.");
-          router.push('/login');
+          router.push("/login");
           return;
         }
 
         const usuarioLogado = JSON.parse(usuarioLogadoJson);
-        const userId = usuarioLogado._id || usuarioLogado.id || (usuarioLogado.usuario && usuarioLogado.usuario._id);
+        const userId =
+          usuarioLogado._id ||
+          usuarioLogado.id ||
+          (usuarioLogado.usuario && usuarioLogado.usuario._id);
 
         if (!userId) {
-           console.error("ID não encontrado no localStorage:", usuarioLogado);
-           throw new Error("ID do usuário não encontrado no storage");
+          console.error("ID não encontrado no localStorage:", usuarioLogado);
+          throw new Error("ID do usuário não encontrado no storage");
         }
 
         // Busca dados atualizados (incluindo o assignedTo populado)
         const data = await usuarioService.buscarPorId(userId);
-        
+
         const usuarioFinal = data.usuario || data;
         setUsuario(usuarioFinal);
-        
       } catch (error) {
         console.error("Erro no menu lateral:", error);
       } finally {
@@ -438,13 +438,13 @@ export default function MenuLat() {
   }, [router]);
 
   if (loading) return <MenuLoading />;
-  if (!usuario) return null; 
+  if (!usuario) return null;
 
   // --- LÓGICA DE EXIBIÇÃO (3 OPÇÕES) ---
 
   // OPÇÃO 1: Status 'ong' (Aprovado pelo Admin)
   // Mostra dados da ONG + Botão Editar
-  if (usuario.status === 'ong' && usuario.assignedTo) {
+  if (usuario.status === "ong" && usuario.assignedTo) {
     const ong = usuario.assignedTo;
 
     return (
@@ -455,45 +455,73 @@ export default function MenuLat() {
               <Link href="/perfil">
                 <Image
                   className="avatar-img rounded-circle border d-inline"
-                  src={ong.logo || MuxnLogo1} 
+                  src={ong.logo || MuxnLogo1}
                   alt={`Logo ${ong.nomeFantasia}`}
                   width={100}
                   height={100}
-                  style={{ objectFit: "cover" }}
+                  style={{
+                    objectFit: "cover",
+                    width: "100px",
+                    height: "100px",
+                    minWidth: "100px",
+                    minHeight: "100px",
+                  }}
                 />
               </Link>
             </div>
             <h5 className="mb-0">{ong.nomeFantasia}</h5>
             <small className="text-muted d-block mb-2">{ong.causaSocial}</small>
-            <p className="mt-3 small">{ong.descricao ? ong.descricao.substring(0, 80) + '...' : 'Descrição...'}</p>
-            
+            <p className="mt-3 small">
+              {ong.descricao
+                ? ong.descricao.substring(0, 80) + "..."
+                : "Descrição..."}
+            </p>
+
             {/* Badge de Aprovado */}
             <div className="mt-2 mb-3">
-                <span className="badge bg-success bg-opacity-10 text-success border border-success">
-                    ONG Verificada
-                </span>
+              <span className="badge bg-success bg-opacity-10 text-success border border-success">
+                ONG Verificada
+              </span>
             </div>
 
             {/* Botão Editar Informações (Novo Requisito) */}
-            <Link 
-              href={`/editar-ong/${ong._id}`} 
+            <Link
+              href={`/editar-ong/${ong._id}`}
               className="btn btn-outline-primary btn-sm w-100 mb-3"
             >
               Editar Informações
             </Link>
 
             <hr />
-            
+
             <div className="d-flex justify-content-center gap-3 mt-2">
               {ong.redeSocial?.instagram && (
-                  <a href={ong.redeSocial.instagram} target="_blank" rel="noopener noreferrer">
-                    <Image src={logo_instagram} alt="Instagram" width={24} height={24} />
-                  </a>
+                <a
+                  href={ong.redeSocial.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src={logo_instagram}
+                    alt="Instagram"
+                    width={24}
+                    height={24}
+                  />
+                </a>
               )}
               {ong.redeSocial?.facebook && (
-                  <a href={ong.redeSocial.facebook} target="_blank" rel="noopener noreferrer">
-                    <Image src={logo_facebook} alt="Facebook" width={24} height={24} />
-                  </a>
+                <a
+                  href={ong.redeSocial.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src={logo_facebook}
+                    alt="Facebook"
+                    width={24}
+                    height={24}
+                  />
+                </a>
               )}
             </div>
           </div>
@@ -503,26 +531,29 @@ export default function MenuLat() {
   }
 
   // OPÇÃO 2: Status 'admin'
-  if (usuario.status === 'admin') {
+  if (usuario.status === "admin") {
     return (
       <div className="menu-lat">
         <div className="card overflow-hidden border-danger">
           <div className="card-body pt-0 mt-3 text-center">
-             <div className="avatar avatar-lg mt-n5 mb-3">
-                <Image 
-                    src={usuario.avatar || MuxnLogo1} 
-                    alt="Admin" 
-                    width={100} 
-                    height={100} 
-                    className="rounded-circle border"
-                />
-             </div>
-             <h5 className="text-danger">Administrador</h5>
-             <p className="small text-muted">Painel de Controle</p>
-             <hr/>
-             <Link href="/admin" className="w-full py-2 px-4 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium flex items-center justify-center gap-2 text-decoration-none">
-               Acessar Painel
-             </Link>
+            <div className="avatar avatar-lg mt-n5 mb-3">
+              <Image
+                src={usuario.avatar || MuxnLogo1}
+                alt="Admin"
+                width={100}
+                height={100}
+                className="rounded-circle border"
+              />
+            </div>
+            <h5 className="text-danger">Administrador</h5>
+            <p className="small text-muted">Painel de Controle</p>
+            <hr />
+            <Link
+              href="/admin"
+              className="w-full py-2 px-4 border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition-colors font-medium flex items-center justify-center gap-2 text-decoration-none"
+            >
+              Acessar Painel
+            </Link>
           </div>
         </div>
       </div>
@@ -531,36 +562,44 @@ export default function MenuLat() {
 
   // LÓGICA PARA USUÁRIO COMUM (Status 'user')
   // Aqui dividimos em "Em Análise" vs "Novo Usuário"
-  
+
   // OPÇÃO 3: Status 'user' MAS já enviou cadastro (assignedTo existe) -> EM ANÁLISE
-  if (usuario.status === 'user' && usuario.assignedTo) {
+  if (usuario.status === "user" && usuario.assignedTo) {
     return (
-        <div className="menu-lat">
+      <div className="menu-lat">
         <div className="card overflow-hidden">
           <div className="card-body pt-0 mt-3 text-center">
             <div className="avatar avatar-lg mt-n5 mb-3">
-                {/* Mostra Avatar do Usuário (não da ONG ainda) */}
-                <Image
-                  className="avatar-img rounded-circle border d-inline"
-                  src={usuario.avatar || MuxnLogo1}
-                  alt="Avatar"
-                  width={100}
-                  height={100}
-                  style={{ objectFit: "cover" }}
-                />
+              {/* Mostra Avatar do Usuário (não da ONG ainda) */}
+              <Image
+                className="avatar-img rounded-circle border d-inline"
+                src={usuario.avatar || MuxnLogo1}
+                alt="Avatar"
+                width={100}
+                height={100}
+                style={{
+                  objectFit: "cover",
+                  width: "100px",
+                  height: "100px",
+                  minWidth: "100px",
+                  minHeight: "100px",
+                }}
+              />
             </div>
             <h5 className="mb-0">{usuario.nome}</h5>
-            
+
             {/* Mensagem de Em Análise */}
             <div className="alert alert-warning border border-warning mt-4 p-3 small">
-              <h6 className="alert-heading fw-bold mb-1">Cadastro em Análise</h6>
+              <h6 className="alert-heading fw-bold mb-1">
+                Cadastro em Análise
+              </h6>
               <p className="mb-0">
                 Por favor, aguarde a validação dos seus dados pela nossa equipe.
               </p>
             </div>
-            
+
             {/* Sem botão de completar cadastro, pois já enviou */}
-            
+
             <hr />
           </div>
         </div>
@@ -586,15 +625,18 @@ export default function MenuLat() {
             </Link>
           </div>
           <h5 className="mb-0">{usuario.nome}</h5>
-          
+
           <p className="mt-3 text-muted small">
             Complete seu perfil para cadastrar sua ONG e começar a ajudar!
           </p>
-          
-          <Link href="/cadastroCompleto" className="block w-full py-3 px-4 bg-primary hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition-all hover:shadow-lg transform hover:-translate-y-0.5 text-decoration-none">
+
+          <Link
+            href="/cadastroCompleto"
+            className="block w-full py-3 px-4 bg-primary hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition-all hover:shadow-lg transform hover:-translate-y-0.5 text-decoration-none"
+          >
             Completar Cadastro
           </Link>
-          
+
           <hr />
         </div>
       </div>
