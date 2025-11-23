@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 // Configuração: Tempo limite (30 minutos)
-const TIMEOUT_MS = 5 * 60 * 1000; 
+const TIMEOUT_MS = 15 * 60 * 1000; 
 
 export default function AutoLogout() {
   const router = useRouter();

@@ -300,6 +300,204 @@
 // export default PublicarForm;
 
 //////////////////////
+// "use client";
+// import React, { FC, useState, useEffect } from "react";
+// import { Alert, Spinner } from "react-bootstrap";
+// import Image from "next/image";
+// import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
+// import NeWUploadButton from "./button/NewUploadButton"; 
+// import publicacaoService from "@/app/services/publicacaoService";
+
+// interface PublicarFormProps {
+//   onPublish: (post: any) => void;
+// }
+
+// const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
+//   const [title, setTitle] = useState("");
+//   const [message, setMessage] = useState("");
+//   const [image, setImage] = useState<File | null>(null);
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [feedback, setFeedback] = useState<{ message: string; variant: 'success' | 'danger' } | null>(null);
+//   const [userId, setUserId] = useState<string | null>(null);
+
+//   // 1. RECUPERAR O ID DO USUÁRIO LOGADO
+//   useEffect(() => {
+//     const usuarioLogadoJson = localStorage.getItem('usuarioLogado');
+//     if (usuarioLogadoJson) {
+//       try {
+//         const usuario = JSON.parse(usuarioLogadoJson);
+//         // Tenta pegar o ID de várias formas possíveis para garantir compatibilidade
+//         const id = usuario._id || usuario.id || (usuario.usuario && usuario.usuario._id);
+        
+//         if (id) {
+//             setUserId(id);
+//         } else {
+//             console.warn("ID do usuário não encontrado no localStorage.");
+//         }
+//       } catch (e) {
+//         console.error("Erro ao ler usuário do localStorage", e);
+//       }
+//     }
+//   }, []);
+
+//   const handlePost = async (e: React.FormEvent) => {
+//     e.preventDefault();
+
+//     if (!title.trim() || !message.trim()) {
+//         setFeedback({ message: "O título e a descrição são obrigatórios.", variant: 'danger' });
+//         setTimeout(() => setFeedback(null), 3000);
+//         return;
+//     }
+
+//     // Verifica se temos o ID antes de tentar enviar
+//     if (!userId) {
+//         setFeedback({ message: "Erro de autenticação. Tente fazer login novamente.", variant: 'danger' });
+//         return;
+//     }
+
+//     setIsLoading(true);
+//     setFeedback(null);
+
+//     try {
+//         // 2. CRIAR O FORMDATA COM TODOS OS CAMPOS NECESSÁRIOS
+//         const formData = new FormData();
+//         formData.append("titulo", title);
+//         formData.append("descricao", message);
+        
+//         // CAMPO CRUCIAL: O ID DA ONG
+//         formData.append("criadoPor", userId); 
+        
+//         if (image) {
+//             // Usa 'image' ou 'imageFile' dependendo do que seu Multer backend espera.
+//             // Vou manter 'image' como padrão comum, mas se seu backend esperar 'file', mude aqui.
+//             formData.append("image", image); 
+//         }
+
+//         // 3. ENVIAR PARA O SERVIÇO
+//         const newPost = await publicacaoService.cadastrarPublicacao(formData);
+        
+//         // 4. SUCESSO
+//         onPublish(newPost);
+//         setTitle("");
+//         setMessage("");
+//         setImage(null);
+//         setFeedback({ message: "Publicação enviada com sucesso!", variant: 'success' });
+        
+//     } catch (error: any) {
+//       console.error("Erro ao cadastrar publicação:", error);
+      
+//       const errorMsg = error.response?.data?.message || error.response?.data?.error || error.message || "Falha ao enviar publicação.";
+      
+//       // Se for erro 403, damos uma mensagem mais clara
+//       if (error.response?.status === 403) {
+//           setFeedback({ message: "Acesso negado: Apenas ONGs aprovadas podem publicar.", variant: 'danger' });
+//       } else {
+//           setFeedback({ message: errorMsg, variant: 'danger' });
+//       }
+
+//     } finally {
+//         setIsLoading(false);
+//         setTimeout(() => setFeedback(null), 5000);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handlePost} className="mb-4 border rounded p-3 bg-white shadow-sm">
+//       {feedback && (
+//           <Alert 
+//               variant={feedback.variant} 
+//               onClose={() => setFeedback(null)} 
+//               dismissible 
+//               className="mb-3 fade show"
+//           >
+//               {feedback.message}
+//           </Alert>
+//       )}
+//       <div className="container-fluid col-12 vstack gap-3 p-0">
+//         <div className="d-flex">
+//           {/* Avatar */}
+//           <div className="avatar me-3 flex-shrink-0">
+//             <a href="#">
+//               <Image
+//                 className="rounded-circle border"
+//                 src={MuxnLogo1}
+//                 alt="Avatar"
+//                 height={50}
+//                 width={50}
+//                 style={{objectFit: 'cover'}}
+//               />
+//             </a>
+//           </div>
+//           <div className="flex-grow-1">
+//             <div className="mb-2">
+//               <input
+//                 type="text"
+//                 className="form-control fw-bold"
+//                 placeholder="Título da publicação"
+//                 value={title}
+//                 onChange={(e) => setTitle(e.target.value)}
+//                 disabled={isLoading}
+//                 style={{border: 'none', boxShadow: 'none', paddingLeft: 0, fontSize: '1.1rem'}}
+//               />
+//             </div>
+//             <div className="mb-2">
+//               <textarea
+//                 className="form-control"
+//                 rows={3}
+//                 placeholder="No que você está pensando? Compartilhe com a comunidade..."
+//                 value={message}
+//                 onChange={(e) => setMessage(e.target.value)}
+//                 disabled={isLoading}
+//                 style={{ minHeight: '80px', resize: 'none', border: '1px solid #eee' }}
+//               />
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+      
+//       <div className="d-flex align-items-center justify-content-between mt-3 pt-3 border-top">
+//          <div className="d-flex align-items-center">
+//             <NeWUploadButton
+//                 label={
+//                     <span className="d-flex align-items-center text-success fw-semibold" style={{fontSize: '0.9rem'}}>
+//                     <i className="bi bi-image me-2 fs-5"></i>
+//                     {image ? "Alterar mídia" : "Adicionar mídia"}
+//                     </span>
+//                 }
+//                 variant="link"
+//                 className="text-decoration-none p-0 me-3"
+//                 onFileSelect={(file) => setImage(file)}
+//                 disabled={isLoading}
+//             />
+//             {image && (
+//                 <span className="badge bg-light text-dark border d-flex align-items-center">
+//                     <small>{image.name.length > 15 ? image.name.substring(0, 15) + '...' : image.name}</small>
+//                     <button type="button" className="btn-close ms-2" style={{width: '0.5em', height: '0.5em'}} onClick={() => setImage(null)} aria-label="Remover imagem"></button>
+//                 </span>
+//             )}
+//         </div>
+
+//         <div>
+//             <button type="submit" className="btn btn-success px-4 d-flex align-items-center fw-semibold" disabled={isLoading || (!title.trim() && !message.trim())}>
+//             {isLoading ? (
+//                 <>
+//                     <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="me-2" />
+//                     Publicando...
+//                 </>
+//             ) : (
+//                 <>
+//                     <i className="bi bi-send me-2"></i>
+//                     Publicar
+//                 </>
+//             )}
+//             </button>
+//         </div>
+//       </div>
+//     </form>
+//   );
+// };
+
+// export default PublicarForm;
 "use client";
 import React, { FC, useState, useEffect } from "react";
 import { Alert, Spinner } from "react-bootstrap";
@@ -307,6 +505,8 @@ import Image from "next/image";
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import NeWUploadButton from "./button/NewUploadButton"; 
 import publicacaoService from "@/app/services/publicacaoService";
+import usuarioService from "@/app/services/usuarioService";
+import ongService from "@/app/services/ongService";
 
 interface PublicarFormProps {
   onPublish: (post: any) => void;
@@ -318,26 +518,54 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
   const [image, setImage] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState<{ message: string; variant: 'success' | 'danger' } | null>(null);
+  
   const [userId, setUserId] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string>(""); 
+  const [userAvatar, setUserAvatar] = useState<string>(""); 
 
-  // 1. RECUPERAR O ID DO USUÁRIO LOGADO
   useEffect(() => {
-    const usuarioLogadoJson = localStorage.getItem('usuarioLogado');
-    if (usuarioLogadoJson) {
-      try {
-        const usuario = JSON.parse(usuarioLogadoJson);
-        // Tenta pegar o ID de várias formas possíveis para garantir compatibilidade
-        const id = usuario._id || usuario.id || (usuario.usuario && usuario.usuario._id);
+    const fetchUserAndAvatar = async () => {
+        const usuarioLogadoJson = localStorage.getItem('usuarioLogado');
         
-        if (id) {
-            setUserId(id);
-        } else {
-            console.warn("ID do usuário não encontrado no localStorage.");
+        if (usuarioLogadoJson) {
+            try {
+                const usuarioStorage = JSON.parse(usuarioLogadoJson);
+                const id = usuarioStorage._id || usuarioStorage.id || (usuarioStorage.usuario && usuarioStorage.usuario._id);
+                
+                if (id) {
+                    setUserId(id);
+                    setUserName(usuarioStorage.nome || ""); 
+
+                    try {
+                        const dadosUsuarioWrapper = await usuarioService.buscarPorId(id);
+                        const dadosUsuario = dadosUsuarioWrapper.usuario || dadosUsuarioWrapper;
+                        
+                        if (dadosUsuario.nome) setUserName(dadosUsuario.nome);
+
+                        if (dadosUsuario.assignedTo) {
+                            if (typeof dadosUsuario.assignedTo === 'object' && dadosUsuario.assignedTo !== null) {
+                                if (dadosUsuario.assignedTo.logo) setUserAvatar(dadosUsuario.assignedTo.logo);
+                            } else {
+                                const dadosOng = await ongService.buscarOngPorId(dadosUsuario.assignedTo);
+                                if (dadosOng && dadosOng.logo) setUserAvatar(dadosOng.logo);
+                            }
+                        } else if (dadosUsuario.avatar) {
+                            setUserAvatar(dadosUsuario.avatar);
+                        }
+                    } catch (err) {
+                        console.error("Erro ao buscar detalhes:", err);
+                        // Fallback para o localStorage se a API falhar
+                        if (usuarioStorage.logo) setUserAvatar(usuarioStorage.logo);
+                        else if (usuarioStorage.avatar) setUserAvatar(usuarioStorage.avatar);
+                    }
+                }
+            } catch (e) {
+                console.error("Erro ao ler usuário do localStorage", e);
+            }
         }
-      } catch (e) {
-        console.error("Erro ao ler usuário do localStorage", e);
-      }
-    }
+    };
+
+    fetchUserAndAvatar();
   }, []);
 
   const handlePost = async (e: React.FormEvent) => {
@@ -345,13 +573,11 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
 
     if (!title.trim() || !message.trim()) {
         setFeedback({ message: "O título e a descrição são obrigatórios.", variant: 'danger' });
-        setTimeout(() => setFeedback(null), 3000);
         return;
     }
 
-    // Verifica se temos o ID antes de tentar enviar
     if (!userId) {
-        setFeedback({ message: "Erro de autenticação. Tente fazer login novamente.", variant: 'danger' });
+        setFeedback({ message: "Erro de autenticação.", variant: 'danger' });
         return;
     }
 
@@ -359,25 +585,31 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
     setFeedback(null);
 
     try {
-        // 2. CRIAR O FORMDATA COM TODOS OS CAMPOS NECESSÁRIOS
         const formData = new FormData();
         formData.append("titulo", title);
         formData.append("descricao", message);
-        
-        // CAMPO CRUCIAL: O ID DA ONG
         formData.append("criadoPor", userId); 
         
         if (image) {
-            // Usa 'image' ou 'imageFile' dependendo do que seu Multer backend espera.
-            // Vou manter 'image' como padrão comum, mas se seu backend esperar 'file', mude aqui.
-            formData.append("image", image); 
+            // Se seu backend Multer usa 'imagem', mude aqui para 'imagem'
+            formData.append("imagem", image); 
         }
 
-        // 3. ENVIAR PARA O SERVIÇO
         const newPost = await publicacaoService.cadastrarPublicacao(formData);
         
-        // 4. SUCESSO
+        // FORÇAR O OBJETO DO CRIADOR NO NOVO POST
+        if (newPost) {
+             newPost.criadoPor = { 
+                 _id: userId, 
+                 nome: userName, 
+                 // Se userAvatar estiver vazio, isso garante que o FeedPost usará o MuxnLogo1
+                 logo: userAvatar || null, 
+                 avatar: userAvatar || null
+             };
+        }
+
         onPublish(newPost);
+        
         setTitle("");
         setMessage("");
         setImage(null);
@@ -385,16 +617,8 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
         
     } catch (error: any) {
       console.error("Erro ao cadastrar publicação:", error);
-      
-      const errorMsg = error.response?.data?.message || error.response?.data?.error || error.message || "Falha ao enviar publicação.";
-      
-      // Se for erro 403, damos uma mensagem mais clara
-      if (error.response?.status === 403) {
-          setFeedback({ message: "Acesso negado: Apenas ONGs aprovadas podem publicar.", variant: 'danger' });
-      } else {
-          setFeedback({ message: errorMsg, variant: 'danger' });
-      }
-
+      const errorMsg = error.response?.data?.message || "Falha ao enviar publicação.";
+      setFeedback({ message: errorMsg, variant: 'danger' });
     } finally {
         setIsLoading(false);
         setTimeout(() => setFeedback(null), 5000);
@@ -404,27 +628,21 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
   return (
     <form onSubmit={handlePost} className="mb-4 border rounded p-3 bg-white shadow-sm">
       {feedback && (
-          <Alert 
-              variant={feedback.variant} 
-              onClose={() => setFeedback(null)} 
-              dismissible 
-              className="mb-3 fade show"
-          >
+          <Alert variant={feedback.variant} onClose={() => setFeedback(null)} dismissible className="mb-3 fade show">
               {feedback.message}
           </Alert>
       )}
       <div className="container-fluid col-12 vstack gap-3 p-0">
         <div className="d-flex">
-          {/* Avatar */}
           <div className="avatar me-3 flex-shrink-0">
             <a href="#">
               <Image
                 className="rounded-circle border"
-                src={MuxnLogo1}
+                src={userAvatar || MuxnLogo1} 
                 alt="Avatar"
-                height={50}
                 width={50}
-                style={{objectFit: 'cover'}}
+                height={50}
+                style={{ objectFit: 'cover', width: '50px', height: '50px', minWidth: '50px', minHeight: '50px' }}
               />
             </a>
           </div>
@@ -444,7 +662,7 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
               <textarea
                 className="form-control"
                 rows={3}
-                placeholder="No que você está pensando? Compartilhe com a comunidade..."
+                placeholder="No que você está pensando?"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 disabled={isLoading}
@@ -479,17 +697,7 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
 
         <div>
             <button type="submit" className="btn btn-success px-4 d-flex align-items-center fw-semibold" disabled={isLoading || (!title.trim() && !message.trim())}>
-            {isLoading ? (
-                <>
-                    <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="me-2" />
-                    Publicando...
-                </>
-            ) : (
-                <>
-                    <i className="bi bi-send me-2"></i>
-                    Publicar
-                </>
-            )}
+            {isLoading ? <><Spinner as="span" animation="border" size="sm" className="me-2" />Publicando...</> : <><i className="bi bi-send me-2"></i>Publicar</>}
             </button>
         </div>
       </div>
