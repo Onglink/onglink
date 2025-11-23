@@ -47,7 +47,7 @@ function CardsParceiros({ titulo, imagem, resumo, link, borderColor, onViewDetai
         // Aplica o cardStyle na div principal
         <div style={cardStyle} className={styles.card}>
             
-            <div className={styles.imageContainer}>
+            <div className={styles.imageContainer = "m-2"}>
                 <Image
                     {...imageProps} 
                     alt={`Logo ${finalTitulo}`}

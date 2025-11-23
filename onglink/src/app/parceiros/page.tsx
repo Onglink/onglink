@@ -348,20 +348,20 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Button,
-  InputGroup,
-  Form,
-  Modal, // Importado para o modal de detalhes
+  Modal, 
 } from "react-bootstrap";
-// Importações de estilos e componentes omitidas
 import React, { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
+// O componente Header_home e CardsParceiros devem estar importados de seus respectivos caminhos
 import Header_home from "@/app/components/header_home";
 import CardsParceiros from "@/app/components/card_parceiros"; 
+// Se você usa next/navigation, mantenha a importação:
+import { useRouter } from "next/navigation";
 
 // -------------------------------------------------------------------
 // [Frontend] CONSTANTES E TIPAGEM
 // -------------------------------------------------------------------
 
+// A URL deve ser ajustada para o seu ambiente de produção/teste se não for localhost:4000
 const API_URL = 'http://localhost:4000/api/parceiros'; 
 const ITEMS_PER_LOAD = 4; 
 
@@ -392,16 +392,38 @@ const categoryIdMap = {
     'Social': 'social'
 };
 
-// Interface de dados que o Controller DEVE retornar
+
+// NOVAS INTERFACES para sub-documentos (para tipagem limpa no Modal)
+type RedeSocial = {
+    instagram?: string;
+    facebook?: string;
+    site?: string;
+};
+
+type Endereco = {
+    rua?: string;
+    numeroEnd?: string;
+    complemento?: string;
+    bairro?: string;
+    cidade?: string;
+    estado?: string;
+    cep?: string;
+};
+
 interface Parceiro {
     _id?: string;
     nomeFantasia: string; 
     telefone: string;     
-    logo: string;        // Campo da URL da imagem
+    logo: string;        // URL da imagem
     causaSocial: string;
-    email: string;       // Necessário para o Modal (Backend deve projetar)
-    descricao: string;   // Necessário para o Modal (Backend deve projetar)
-    link?: string;
+    email: string;       
+    descricao: string;   
+    link?: string; // Mantido para compatibilidade, mas o site está em redeSocial
+    
+    // CAMPOS ADICIONAIS DO MODAL (Retornados pelo parceiroController.js)
+    razaoSocial: string; 
+    endereco: Endereco;  
+    redeSocial: RedeSocial; 
 }
 
 type ParceirosAgrupados = { [key: string]: Parceiro[]; };
@@ -411,7 +433,7 @@ type VisibleCounts = { [key: string]: number; };
 // [Frontend] COMPONENTE PRINCIPAL
 // -------------------------------------------------------------------
 export default function Parceiros() {
-  const router = useRouter();
+  const router = useRouter(); // Se não for usado, pode ser removido
   
   const [parceirosAgrupados, setParceirosAgrupados] = useState<ParceirosAgrupados>({});
   const [visibleCounts, setVisibleCounts] = useState<VisibleCounts>({});
@@ -431,25 +453,25 @@ export default function Parceiros() {
       setShowModal(true);
   };
 
+  // Método para buscar e agrupar os parceiros
   const fetchAndGroupParceiros = useCallback(async () => {
       try {
         const response = await fetch(API_URL);
         
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.mensagem || 'Falha ao buscar dados da API.');
+            // Se o status for 403 (Forbidden), pode ser CORS ou apiKeyAuth
+            const errorText = response.status === 403 ? 
+                'Acesso negado (403 Forbidden). Verifique as configurações de CORS/Autenticação.' : 
+                `Falha ao buscar dados da API. Status: ${response.status}`;
+            throw new Error(errorText);
         }
         
         const responseJson = await response.json(); 
         
-        // Lógica robusta para extrair o array de dados
+        // Assume que a resposta é um array, mas adiciona fallback
         let rawData: any = responseJson;
         if (responseJson && !Array.isArray(responseJson)) {
-            if (responseJson.parceiros && Array.isArray(responseJson.parceiros)) {
-                rawData = responseJson.parceiros;
-            } else if (responseJson.data && Array.isArray(responseJson.data)) {
-                rawData = responseJson.data;
-            }
+            rawData = (responseJson.parceiros || responseJson.data) || [];
         }
         const finalDataArray = rawData as Parceiro[]; 
         
@@ -500,7 +522,7 @@ export default function Parceiros() {
   }, [fetchAndGroupParceiros]);
 
 
-  // Método para carregar mais itens
+  // Método para carregar mais itens (Load More)
   const handleLoadMore = (category: string) => {
       setVisibleCounts(prevCounts => ({
           ...prevCounts,
@@ -515,7 +537,6 @@ export default function Parceiros() {
     const usersToShow = allUsers.slice(0, visibleCount);
     const totalUsers = allUsers.length;
     const hasMore = totalUsers > visibleCount;
-    
     const categoryColor = CATEGORY_COLORS[categoryName as keyof typeof CATEGORY_COLORS] || '#6c757d'; 
 
     if (totalUsers === 0) return null; 
@@ -527,7 +548,8 @@ export default function Parceiros() {
                 
                 <h2>PARCEIROS {categoryName.toUpperCase()} ({totalUsers})</h2>
                 
-                <div className="d-flex flex-wrap" id={idName}>
+                {/* CLASSE justify-content-center ADICIONADA PARA CENTRALIZAÇÃO */}
+                <div className="d-flex flex-wrap justify-content-center" id={idName}>
                     
                     {/* 1. RENDERIZA OS CARDS VISÍVEIS */}
                     {usersToShow.map((parceiro, index) => (
@@ -536,10 +558,10 @@ export default function Parceiros() {
                             titulo={parceiro.nomeFantasia} 
                             resumo={parceiro.telefone}     
                             imagem={parceiro.logo} 
-                            link={parceiro.link || '#'}
+                            link={parceiro.link || parceiro.redeSocial?.site || '#'} // Usa o site como link
                             borderColor={categoryColor} 
                             
-                            // NOVIDADE: Passa a função handler e os dados completos
+                            // PROPS PARA O MODAL
                             onViewDetails={handleViewDetails}
                             partnerData={parceiro} 
                         />
@@ -567,14 +589,14 @@ export default function Parceiros() {
 
 
   // --------------------------------------------------
-  // Renderização Final (Inclui o Modal)
+  // Renderização Final (Inclui o Modal de Detalhes)
   // --------------------------------------------------
   return (
     <>
       <Header_home />
 
       <main id="main_parceiros">
-        <div className="container-fluid col-12">
+        <div className="container-fluid col-12 mt-2 mb-2">
           {/* ... (Busca e navegação estática) ... */}
           
           {/* Mensagens de Erro/Carregamento */}
@@ -582,12 +604,12 @@ export default function Parceiros() {
           {error && <p style={{ color: 'red', fontWeight: 'bold' }}>{error}</p>}
           
           {/* INIDICADOR DE DIAGNÓSTICO NA UI */}
-          {totalFetched > 0 && <p style={{fontWeight: 'bold', color: 'blue', marginTop: '10px'}}>Total de Parceiros Encontrados no Backend: {totalFetched}</p>}
-          {totalFetched === 0 && !isLoading && <p style={{fontWeight: 'bold', color: 'orange', marginTop: '10px'}}>Nenhum parceiro aprovado encontrado na base de dados.</p>}
+          {/*{totalFetched > 0 && <p style={{fontWeight: 'bold', color: 'blue', marginTop: '10px'}}>Total de Parceiros Encontrados no Backend: {totalFetched}</p>}*/}
+          {totalFetched === 0 && !isLoading && !error && <p style={{fontWeight: 'bold', color: 'orange', marginTop: '10px'}}>Nenhum parceiro aprovado encontrado na base de dados.</p>}
 
 
           {/* DIVS DOS PARCEIROS (ÁREA DINÂMICA) */}
-          {!isLoading && !error && totalFetched > 0 && ( 
+          {!isLoading && !error && ( 
             <div id="div_parceiros">
               <div className="row">
                 <div className="container-fluid">
@@ -609,39 +631,77 @@ export default function Parceiros() {
       </main>
 
       {/* COMPONENTE MODAL DE DETALHES */}
-      <Modal show={showModal} onHide={handleClose} centered>
+      <Modal show={showModal} onHide={handleClose} centered size="lg">
         <Modal.Header closeButton>
           <Modal.Title>{selectedPartner?.nomeFantasia || "Detalhes do Parceiro"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedPartner ? (
             <div>
-              <div className="text-center mb-3">
-                  {/* Você pode exibir a imagem da ONG aqui se o seu Controller a retornar! */}
+              <div className="text-center mb-4 flex justify-content-center">
+                  {/* Logo da ONG */}
                   {selectedPartner.logo && (
                       <Image 
                           src={selectedPartner.logo} 
                           alt={`Logo ${selectedPartner.nomeFantasia}`} 
-                          width={120} 
-                          height={120} 
+                          width={300} 
+                          height={300} 
                           className="rounded-circle border"
+                          style={{ objectFit: "cover" }}
                       />
                   )}
+                 
               </div>
-              <p><strong>Causa Social:</strong> {selectedPartner.causaSocial}</p>
-              <p><strong>Telefone:</strong> {selectedPartner.telefone}</p>
-              <p><strong>Email:</strong> {selectedPartner.email || 'Não informado'}</p>
-              <p><strong>Descrição:</strong> {selectedPartner.descricao || 'Nenhuma descrição disponível.'}</p>
+              
+              <hr />
+
+              {/* GRUPO DE INFORMAÇÕES DE CONTATO */}
+              <h5 className="mb-2">Contato & Sede</h5>
+              <div className="row">
+                <div className="col-md-6 mb-3">
+                    <p className="mb-1"><strong>Telefone:</strong> {selectedPartner.telefone}</p>
+                    <p className="mb-1"><strong>Email:</strong> {selectedPartner.email || 'Não informado'}</p>
+                </div>
+
+                <div className="col-md-6 mb-3">
+                    {/* Endereço */}
+                    <p className="mb-1">
+                        <strong>Endereço:</strong> {selectedPartner.endereco?.rua}, {selectedPartner.endereco?.numeroEnd} {selectedPartner.endereco?.complemento}
+                    </p>
+                    <p className="mb-1">
+                        {selectedPartner.endereco?.bairro} - {selectedPartner.endereco?.cidade}/{selectedPartner.endereco?.estado} | CEP: {selectedPartner.endereco?.cep}
+                    </p>
+                </div>
+              </div>
+
+              <hr />
+              
+              {/* REDES SOCIAIS */}
+              <h5 className="mb-2">Redes e Site</h5>
+              <div className="d-flex gap-3 mb-4">
+                  {selectedPartner.redeSocial?.site && (
+                      <a href={selectedPartner.redeSocial.site} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm">
+                          Site Oficial
+                      </a>
+                  )}
+                  {selectedPartner.redeSocial?.instagram && (
+                      <a href={selectedPartner.redeSocial.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-outline-danger btn-sm">
+                          Instagram
+                      </a>
+                  )}
+                  {selectedPartner.redeSocial?.facebook && (
+                      <a href={selectedPartner.redeSocial.facebook} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary btn-sm">
+                          Facebook
+                      </a>
+                  )}
+              </div>
               
               <hr />
               
-              {selectedPartner.link && (
-                  <Link href={selectedPartner.link} passHref legacyBehavior>
-                      <a target="_blank" rel="noopener noreferrer" className="btn btn-primary w-100">
-                          Ir para o Site Oficial
-                      </a>
-                  </Link>
-              )}
+              {/* DESCRIÇÃO */}
+              <h5 className="mb-2">Descrição da ONG</h5>
+              <p>{selectedPartner.descricao || 'Nenhuma descrição disponível.'}</p>
+
             </div>
           ) : (
             <p>Carregando informações...</p>
