@@ -362,7 +362,8 @@ import { useRouter } from "next/navigation";
 // -------------------------------------------------------------------
 
 // A URL deve ser ajustada para o seu ambiente de produção/teste se não for localhost:4000
-const API_URL = 'http://localhost:4000/api/parceiros'; 
+//const API_URL = 'http://localhost:4000/api/parceiros'; 
+const API_URL = 'https://onglink-backend.vercel.app/api/parceiros';
 const ITEMS_PER_LOAD = 4; 
 
 // Lista de categorias válidas (Sem acentos para bater com o valor do DB)
@@ -716,3 +717,4 @@ export default function Parceiros() {
     </>
   );
 }
+
