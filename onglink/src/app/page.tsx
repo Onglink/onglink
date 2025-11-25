@@ -125,7 +125,7 @@ export default function Home() {
                   </Row>
 
                 <div id="div_nossos_parceiros">
-          
+{/*           
                       <h3>Nossos Parceiros:</h3>
           
                       <div id="div_apoiadores">
@@ -133,13 +133,13 @@ export default function Home() {
                           <img className="border-3 border-yellow-300 rounded-xl" src={"https://img.freepik.com/vector-premium/logotipo-comercializacion-venta_712682-3297.jpg"} alt="Empresa 2" width="200" height="200"></img>
                           <img className="border-3 border-red-500 rounded-xl" src={"https://img.freepik.com/vetores-premium/modelo-do-logotipo-da-caixa-do-estudio_10399-28.jpg"} alt="Empresa 3" width="200" height="200"></img>
                           <img className="border-3 border-green-500 rounded-xl" src={"https://img.freepik.com/vetores-premium/logotipo-da-empresa_7436-14.jpg"} alt="Empresa 4" width="200" height="200"></img>
-                      </div>
+                      </div> */}
 
                       <Link href={"/parceiros"}>
                           <Button
                             id="botao_ver_todos"
                           >
-                            Ver Todos
+                            Conheça nossos parceiros!
                           </Button>
                       </Link>
                       
