@@ -508,14 +508,14 @@
 //             </button>
 //             {/* --- MODAL DE EDIÇÃO --- */}
 //             {showEditModal && usuario.assignedTo && (
-//                 <ModalEditarOng 
+//                 <ModalEditarOng
 //                     show={showEditModal}
 //                     onHide={() => setShowEditModal(false)}
 //                     // CORREÇÃO: Passamos um objeto garantindo que endereco e redeSocial existam
 //                     ongData={{
 //                         ...usuario.assignedTo,
 //                         endereco: usuario.assignedTo.endereco || {
-//                             rua: '', numeroEnd: '', complemento: '', 
+//                             rua: '', numeroEnd: '', complemento: '',
 //                             bairro: '', cidade: '', estado: '', cep: ''
 //                         },
 //                         redeSocial: usuario.assignedTo.redeSocial || {
@@ -679,24 +679,6 @@
 // }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -738,7 +720,7 @@ type Ong = {
   telefone: string;
   email: string;
   redeSocial: RedeSocial;
-  endereco: Endereco; 
+  endereco: Endereco;
   projetosApoiados?: number;
   situacaoCadastral?: string;
 };
@@ -771,11 +753,11 @@ export default function MenuLat(): React.JSX.Element | null {
   const [loading, setLoading] = useState(true);
   const [usuario, setUsuario] = useState<Usuario | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
-  
+
   const router = useRouter();
 
   const handleEditSuccess = () => {
-      window.location.reload();
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -829,20 +811,18 @@ export default function MenuLat(): React.JSX.Element | null {
         <div className="card overflow-hidden">
           <div className="card-body pt-0 mt-3 text-center">
             <div className="avatar avatar-lg mt-n5 mb-3">
-              
-                <Image
-                  className="avatar-img rounded-circle border d-inline"
-                  src={ong.logo || MuxnLogo1}
-                  alt={`Logo ${ong.nomeFantasia}`}
-                  width={100}
-                  height={100}
-                  style={{ objectFit: "cover", width: "100px", height: "100px" }}
-                />
-              
+              <Image
+                className="avatar-img rounded-circle border d-inline"
+                src={ong.logo || MuxnLogo1}
+                alt={`Logo ${ong.nomeFantasia}`}
+                width={100}
+                height={100}
+                style={{ objectFit: "cover", width: "100px", height: "100px" }}
+              />
             </div>
             <h5 className="mb-0">{ong.nomeFantasia}</h5>
             <small className="text-muted d-block mb-2">{ong.causaSocial}</small>
-            
+
             <div className="mt-2 mb-3">
               <span className="badge bg-success bg-opacity-10 text-success border border-success">
                 ONG Verificada
@@ -857,29 +837,59 @@ export default function MenuLat(): React.JSX.Element | null {
             </button>
 
             {showEditModal && (
-                <ModalEditarOng 
-                    show={showEditModal}
-                    onHide={() => setShowEditModal(false)}
-                    ongData={{
-                        ...ong,
-                        endereco: ong.endereco || { rua: '', numeroEnd: '', complemento: '', bairro: '', cidade: '', estado: '', cep: '' },
-                        redeSocial: ong.redeSocial || { instagram: '', facebook: '', site: '' }
-                    }}
-                    onSuccess={handleEditSuccess}
-                />
+              <ModalEditarOng
+                show={showEditModal}
+                onHide={() => setShowEditModal(false)}
+                ongData={{
+                  ...ong,
+                  endereco: ong.endereco || {
+                    rua: "",
+                    numeroEnd: "",
+                    complemento: "",
+                    bairro: "",
+                    cidade: "",
+                    estado: "",
+                    cep: "",
+                  },
+                  redeSocial: {
+                    instagram: ong.redeSocial?.instagram || "",
+                    facebook: ong.redeSocial?.facebook || "",
+                    site: ong.redeSocial?.site || "",
+                  },
+                }}
+                onSuccess={handleEditSuccess}
+              />
             )}
 
             <hr />
 
             <div className="d-flex justify-content-center gap-3 mt-2">
               {ong.redeSocial?.instagram && (
-                <a href={ong.redeSocial.instagram} target="_blank" rel="noopener noreferrer">
-                  <Image src={logo_instagram} alt="Instagram" width={24} height={24} />
+                <a
+                  href={ong.redeSocial.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src={logo_instagram}
+                    alt="Instagram"
+                    width={24}
+                    height={24}
+                  />
                 </a>
               )}
               {ong.redeSocial?.facebook && (
-                <a href={ong.redeSocial.facebook} target="_blank" rel="noopener noreferrer">
-                  <Image src={logo_facebook} alt="Facebook" width={24} height={24} />
+                <a
+                  href={ong.redeSocial.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src={logo_facebook}
+                    alt="Facebook"
+                    width={24}
+                    height={24}
+                  />
                 </a>
               )}
             </div>
@@ -906,7 +916,10 @@ export default function MenuLat(): React.JSX.Element | null {
             </div>
             <h5 className="text-danger">Administrador</h5>
             <hr />
-            <Link href="/admin" className="w-full py-2 px-4 border border-red-500 text-red-500 rounded-lg">
+            <Link
+              href="/admin"
+              className="w-full py-2 px-4 border border-red-500 text-red-500 rounded-lg"
+            >
               Acessar Painel
             </Link>
           </div>
@@ -921,31 +934,34 @@ export default function MenuLat(): React.JSX.Element | null {
       <div className="card overflow-hidden">
         <div className="card-body pt-0 mt-3 text-center">
           <div className="avatar avatar-lg mt-n5 mb-3">
-            
-              <Image
-                className="avatar-img rounded-circle border d-inline"
-                src={usuario.avatar || MuxnLogo1}
-                alt="Avatar"
-                width={100}
-                height={100}
-                style={{ objectFit: "cover" }}
-              />
-            
+            <Image
+              className="avatar-img rounded-circle border d-inline"
+              src={usuario.avatar || MuxnLogo1}
+              alt="Avatar"
+              width={100}
+              height={100}
+              style={{ objectFit: "cover" }}
+            />
           </div>
           <h5 className="mb-0">{usuario.nome}</h5>
 
           {usuario.status === "user" && usuario.assignedTo ? (
-             <div className="alert alert-warning border border-warning mt-4 p-3 small">
-                <h6 className="alert-heading fw-bold mb-1">Cadastro em Análise</h6>
-                <p className="mb-0">Aguarde a validação.</p>
-             </div>
+            <div className="alert alert-warning border border-warning mt-4 p-3 small">
+              <h6 className="alert-heading fw-bold mb-1">
+                Cadastro em Análise
+              </h6>
+              <p className="mb-0">Aguarde a validação.</p>
+            </div>
           ) : (
-             <>
-                <p className="mt-3 text-muted small">Complete seu perfil!</p>
-                <Link href="/cadastroCompleto" className="block w-full py-3 px-4 bg-primary text-white rounded-lg">
-                    Completar Cadastro
-                </Link>
-             </>
+            <>
+              <p className="mt-3 text-muted small">Complete seu perfil!</p>
+              <Link
+                href="/cadastroCompleto"
+                className="block w-full py-3 px-4 bg-primary text-white rounded-lg"
+              >
+                Completar Cadastro
+              </Link>
+            </>
           )}
           <hr />
         </div>
