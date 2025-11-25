@@ -24,7 +24,7 @@ export default function Header_feed() {
             ></Image>
           </Link>
 
-          <form className="w-100 me-3" role="search">
+          {/* <form className="w-100 me-3" role="search">
             <InputGroup className="mb-3" id="searchONG">
               <Form.Control
                 placeholder="Procurar ONG"
@@ -36,9 +36,9 @@ export default function Header_feed() {
                 Buscar
               </Button>
             </InputGroup>
-          </form>
+          </form> */}
 
-          <div id="botoes_cadastro">
+          <div className="d-flex ms-auto gap-3" id="botoes_cadastro">
             {/* <Button
               id="botao_cadastro"
               onClick={() => {

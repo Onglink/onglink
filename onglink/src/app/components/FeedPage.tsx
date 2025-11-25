@@ -394,6 +394,7 @@ import { jwtDecode } from 'jwt-decode';
 import AutoLogout from "../components/AutoLogout";
 import PublicarForm from "../components/PublicarForm";
 import FeedPost from "../components/FeedPost";
+import "@/app/CSS/feed.css"
 
 // Usando o serviço que o Menu Lateral usa
 import publicacaoService from "@/app/services/publicacaoService";
@@ -550,7 +551,7 @@ const FeedPage: React.FC = () => {
       {error && <Alert variant="danger" onClose={() => setError(null)} dismissible className="mt-3">{error}</Alert>}
 
       {canPublish && (
-        <div className="mb-4 mt-3">
+        <div className="pr-3 pl-3" id="div_feed">
             <PublicarForm 
                 onPublish={handleCreatePost} 
                 userAvatar={currentUserAvatar} 
