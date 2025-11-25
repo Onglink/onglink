@@ -229,7 +229,7 @@ export default function CadastroSimplesPessoaFisica() {
         className="bg-verde1"
         style={{
           backgroundColor: "#D0E2E9",
-          minHeight: "100vh",
+          minHeight: "80vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
