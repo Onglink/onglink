@@ -13,7 +13,7 @@ export default function Header_feed() {
     <header className="py-3" id="header_header">
       <div className="container-fluid d-grid gap-3 align-items-center">
         <div className="d-flex align-items-center" id="div_header">
-          <Link href="/feed">
+          <Link href="/">
             <Image
               className="rounded-lg"
               src={logo_onglink_01}
