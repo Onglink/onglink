@@ -534,6 +534,7 @@ import React, { FC, useState, useEffect } from "react";
 import Image from "next/image"; 
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import "@/app/CSS/feed.css";
+import ModalDenuncia from "./ModalDenuncia";
 
 // Importamos o serviço para buscar os dados detalhados (Igual ao Menu Lateral)
 import usuarioService from "@/app/services/usuarioService";
@@ -556,7 +557,9 @@ interface FeedPostProps {
     onDelete?: (id: string) => void; 
 }
 
+
 const FeedPost: FC<FeedPostProps> = ({ post, currentUserId, onDelete }) => {
+    const [isDenunciaOpen, setIsDenunciaOpen] = useState(false)
   // Estados para controlar os dados de exibição (inicia com o básico que vem no post)
   const [avatarExibicao, setAvatarExibicao] = useState<string>(MuxnLogo1.src);
   const [nomeExibicao, setNomeExibicao] = useState<string>("Carregando...");
@@ -672,12 +675,17 @@ const FeedPost: FC<FeedPostProps> = ({ post, currentUserId, onDelete }) => {
                            Excluir
                        </span>
                    ) : (
-                       <span role="button" className="text-secondary cursor-pointer fw-bold">Denunciar</span>
+                       <span role="button" className="text-secondary cursor-pointer fw-bold" onClick={() => setIsDenunciaOpen(true)}>Denunciar</span>
                    )}
                </div>
            </div>
         </div>
       </div>
+      <ModalDenuncia 
+  isOpen={isDenunciaOpen} 
+  onClose={() => setIsDenunciaOpen(false)} 
+  postId={post._id} 
+/>
     </div>
   );
 };
