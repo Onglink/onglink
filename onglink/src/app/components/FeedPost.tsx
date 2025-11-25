@@ -535,7 +535,7 @@ import Image from "next/image";
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import "@/app/CSS/feed.css";
 import ModalDenuncia from "./ModalDenuncia";
-
+//import shareService from "../services/shareService";
 // Importamos o serviço para buscar os dados detalhados (Igual ao Menu Lateral)
 import usuarioService from "@/app/services/usuarioService";
 
@@ -600,7 +600,7 @@ const FeedPost: FC<FeedPostProps> = ({ post, currentUserId, onDelete }) => {
     };
 
     carregarDadosDetalhados();
-  }, [post.criadoPor?._id]);
+  }, [post.criadoPor?._id,post.criadoPor?.nome]);
 
 
   // Verifica dono (mantém lógica de ID de usuário)
@@ -614,11 +614,17 @@ const FeedPost: FC<FeedPostProps> = ({ post, currentUserId, onDelete }) => {
   } 
 
   const handleShare = async () => {
-      try {
-          await navigator.clipboard.writeText(`https://onglink.com/post/${post._id}`);
-          alert("Link copiado!");
-      } catch (err) { console.error(err); }
-  };
+    // URL simples e direta
+    const linkParaCopiar = `${window.location.origin}/post/${post._id}`;
+
+    try {
+        await navigator.clipboard.writeText(linkParaCopiar);
+        alert("Link copiado para a área de transferência!");
+    } catch (err) {
+        // Fallback garantido se o navegador bloquear
+        prompt("Copie o link abaixo:", linkParaCopiar);
+    }
+};
 
   return (
     <div className="container-fluid col-12 p-4 rounded-4 border shadow-sm mb-4 bg-white">
