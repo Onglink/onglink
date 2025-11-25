@@ -398,9 +398,15 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
                   className="avatar-img rounded-circle" 
                   src={logoSrc}
                   alt={altText} 
-                  height={60} 
-                  width={60}
-                  style={{ objectFit: "cover" }} // Adicionei para garantir que não distorça
+                  height={100} 
+                  width={100}
+                  style={{
+                    objectFit: "cover",
+                    width: "60px",
+                    height: "60px",
+                    minWidth: "60px",
+                    minHeight: "60px",
+                  }} 
                />
             </a>
           </div>

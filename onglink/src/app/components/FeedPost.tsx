@@ -625,9 +625,15 @@ const FeedPost: FC<FeedPostProps> = ({ post, currentUserId, onDelete }) => {
             <Image 
                 src={avatarExibicao} 
                 alt="Avatar" 
-                width={48} height={48} 
+                width={100} height={100} 
                 className="rounded-circle border"
-                style={{objectFit: 'cover'}} 
+                style={{
+                    objectFit: "cover",
+                    width: "60px",
+                    height: "60px",
+                    minWidth: "60px",
+                    minHeight: "60px",
+                  }} 
                 onError={(e) => { const t = e.target as HTMLImageElement; t.src = MuxnLogo1.src; }}
             />
         </div>
