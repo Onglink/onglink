@@ -139,12 +139,12 @@ export default function Feed() {
 				
      		{/* --- COLUNA ESQUERDA (Menu) --- */}
         {/* d-none d-lg-block: Some em mobile/tablet, aparece em Desktop */}
-        <div className="col-lg-3 d-none d-lg-block">
-            {/* Sticky Wrapper: Faz o menu fixar ao rolar */}
+        {/* <div className="col-lg-3 d-none d-lg-block">
+            
             <div style={{ position: 'sticky', top: '100px' }}>
               <MenuLat />
             </div>
-        </div>
+        </div> */}
 
      	
      		<div className="col-md-8 col-lg-6 vstack gap-4">

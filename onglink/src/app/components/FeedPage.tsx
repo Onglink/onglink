@@ -389,12 +389,13 @@
 //////////////////////////////////////////////
 "use client";
 import React, { useState, useEffect } from "react";
-import { Alert, Spinner } from "react-bootstrap";
+import { Alert, Spinner, Container, Row, Col } from "react-bootstrap";
 import { jwtDecode } from 'jwt-decode'; 
 import AutoLogout from "../components/AutoLogout";
 import PublicarForm from "../components/PublicarForm";
 import FeedPost from "../components/FeedPost";
 import "@/app/CSS/feed.css"
+import MenuLat from "../components/menu_lat/menu_lat";
 
 // Usando o serviço que o Menu Lateral usa
 import publicacaoService from "@/app/services/publicacaoService";
@@ -545,40 +546,100 @@ const FeedPage: React.FC = () => {
 
   const canPublish = ROLES_PUBLICADORES.includes(userRole);
 
-  return (
-    <div className="container-fluid col-12 p-0" style={{ maxWidth: '800px', margin: '0 auto' }}>
+//   return (
+//     <div className="container-fluid col-12 p-0" style={{ maxWidth: '800px', margin: '0 auto' }}>
+//       <AutoLogout />
+//       {error && <Alert variant="danger" onClose={() => setError(null)} dismissible className="mt-3">{error}</Alert>}
+
+//       {canPublish && (
+//         <div className="pr-3 pl-3" id="div_feed">
+//             <PublicarForm 
+//                 onPublish={handleCreatePost} 
+//                 userAvatar={currentUserAvatar} 
+//             />
+//         </div>
+//       )}
+
+//       <div className="mt-4">
+//         {isLoading ? (
+//           <div className="text-center p-5"><Spinner animation="border" variant="success" /></div>
+//         ) : posts.length === 0 ? (
+//           <div className="text-center p-5 bg-white border rounded">Nenhuma publicação.</div>
+//         ) : (
+//           <div className="vstack gap-4">
+//             {posts.map((post) => (
+//                <FeedPost 
+//                  key={post._id} 
+//                  post={post} 
+//                  currentUserId={userId} 
+//                  onDelete={handleDeletePost} 
+//                />
+//             ))}
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+return (
+    <div className="feed-container-wrapper">
       <AutoLogout />
-      {error && <Alert variant="danger" onClose={() => setError(null)} dismissible className="mt-3">{error}</Alert>}
+      
+      <Container>
+        <Row className="justify-content-center gx-5">
+            
+            {/* MENU LATERAL */}
+            {/* Mudamos de 'd-lg-block' para 'd-md-block' para aparecer em mais telas */}
+            <Col md={4} lg={3} className="d-none d-md-block">
+                <div style={{ position: 'sticky', top: '100px' }}>
+                    <MenuLat />
+                </div>
+            </Col>
 
-      {canPublish && (
-        <div className="pr-3 pl-3" id="div_feed">
-            <PublicarForm 
-                onPublish={handleCreatePost} 
-                userAvatar={currentUserAvatar} 
-            />
-        </div>
-      )}
+            {/* FEED */}
+            {/* Ocupa 12 (tudo) no celular, e 8 ou 6 no PC */}
+            <Col xs={12} md={8} lg={6}>
+                {error && <Alert variant="danger" onClose={() => setError(null)} dismissible>{error}</Alert>}
 
-      <div className="mt-4">
-        {isLoading ? (
-          <div className="text-center p-5"><Spinner animation="border" variant="success" /></div>
-        ) : posts.length === 0 ? (
-          <div className="text-center p-5 bg-white border rounded">Nenhuma publicação.</div>
-        ) : (
-          <div className="vstack gap-4">
-            {posts.map((post) => (
-               <FeedPost 
-                 key={post._id} 
-                 post={post} 
-                 currentUserId={userId} 
-                 onDelete={handleDeletePost} 
-               />
-            ))}
-          </div>
-        )}
-      </div>
+                {canPublish && (
+                    <div className="mb-4" id="div_feed">
+                        {/* PublicarForm recebe o avatar automaticamente agora */}
+                        <PublicarForm 
+                            onPublish={handleCreatePost} 
+                        />
+                    </div>
+                )}
+
+                <div className="mt-4">
+                    {isLoading ? (
+                    <div className="text-center p-5"><Spinner animation="border" variant="success" /></div>
+                    ) : posts.length === 0 ? (
+                    <div className="text-center p-5 bg-white border rounded">Nenhuma publicação encontrada.</div>
+                    ) : (
+                    <div className="vstack gap-4">
+                        {posts.map((post) => (
+                        <FeedPost 
+                            key={post._id} 
+                            post={post} 
+                            currentUserId={userId} 
+                            onDelete={handleDeletePost} 
+                        />
+                        ))}
+                    </div>
+                    )}
+                </div>
+            </Col>
+
+            {/* COLUNA DIREITA (Vazia) */}
+            {/* Só aparece em telas muito grandes (lg) para centralizar */}
+            <Col lg={3} className="d-none d-lg-block">
+                {/* Espaço para widgets futuros */}
+            </Col>
+
+        </Row>
+      </Container>
     </div>
   );
-};
-
+}
 export default FeedPage;
