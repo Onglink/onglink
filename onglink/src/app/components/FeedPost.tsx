@@ -530,83 +530,145 @@
 // export default FeedPost;
 ///////////////////////////////////////////////////////////////
 "use client";
-import React, { FC } from "react";
-import Image from "next/image"; // Import do Next
+import React, { FC, useState, useEffect } from "react";
+import Image from "next/image"; 
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import "@/app/CSS/feed.css";
+
+// Importamos o serviço para buscar os dados detalhados (Igual ao Menu Lateral)
+import usuarioService from "@/app/services/usuarioService";
 
 interface Post {
   _id: string;
   titulo: string;
   descricao: string;
-  imagem?: string[]; // Array do backend
+  imagem?: string[]; 
   criadoPor?: {
     _id: string;
-    nome?: string;
-    logo?: string;
-    avatar?: string;
+    nome?: string; 
+    assignedTo?: any; // Pode vir incompleto do backend, vamos buscar o completo
   };
 }
 
-interface FeedPostProps { post: Post; }
+interface FeedPostProps { 
+    post: Post; 
+    currentUserId?: string; 
+    onDelete?: (id: string) => void; 
+}
 
-const FeedPost: FC<FeedPostProps> = ({ post }) => {
+const FeedPost: FC<FeedPostProps> = ({ post, currentUserId, onDelete }) => {
+  // Estados para controlar os dados de exibição (inicia com o básico que vem no post)
+  const [avatarExibicao, setAvatarExibicao] = useState<string>(MuxnLogo1.src);
+  const [nomeExibicao, setNomeExibicao] = useState<string>("Carregando...");
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  // --- LÓGICA DO MENU LATERAL APLICADA AO POST ---
+  useEffect(() => {
+    const carregarDadosDetalhados = async () => {
+        if (!post.criadoPor?._id) return;
+
+        try {
+            // Inicialmente, mostra o que veio no post (User: Rubens)
+            const nomeInicial = post.criadoPor.nome || "Usuário";
+            setNomeExibicao(nomeInicial);
+
+            // Agora buscamos os dados completos no banco (igual Menu Lateral)
+            const data = await usuarioService.buscarPorId(post.criadoPor._id);
+            const usuario = data.usuario || data; // Tratamento padrão
+
+            // VERIFICAÇÃO DE ONG (A mesma do Menu)
+            if (usuario.status === "ong" && usuario.assignedTo) {
+                // Se assignedTo for objeto populado
+                if (typeof usuario.assignedTo === 'object') {
+                    if (usuario.assignedTo.nomeFantasia) setNomeExibicao(usuario.assignedTo.nomeFantasia);
+                    if (usuario.assignedTo.logo) setAvatarExibicao(usuario.assignedTo.logo);
+                } 
+            } 
+            // Se não for ONG, ou se for mas não carregou logo, verificamos avatar de usuário
+            else if (usuario.avatar) {
+                setAvatarExibicao(usuario.avatar);
+            }
+
+        } catch (error) {
+            console.error("Erro ao detalhar autor do post:", error);
+        } finally {
+            setIsDataLoaded(true);
+        }
+    };
+
+    carregarDadosDetalhados();
+  }, [post.criadoPor?._id]);
+
+
+  // Verifica dono (mantém lógica de ID de usuário)
+  const isOwner = currentUserId && post.criadoPor?._id === currentUserId;
+
   if (!post) return null;
 
-  // Lógica de Avatar Refinada
-  const criador = post.criadoPor || {};
-  // Prioriza LOGO, depois AVATAR, depois o padrão
-  const avatarSrc = criador.logo || criador.avatar || MuxnLogo1;
-
-  // Lógica de Imagem do Post
   let postImageSrc = null;
   if (post.imagem && Array.isArray(post.imagem) && post.imagem.length > 0) {
       postImageSrc = post.imagem[0];
   } 
 
+  const handleShare = async () => {
+      try {
+          await navigator.clipboard.writeText(`https://onglink.com/post/${post._id}`);
+          alert("Link copiado!");
+      } catch (err) { console.error(err); }
+  };
+
   return (
     <div className="container-fluid col-12 p-4 rounded-4 border shadow-sm mb-4 bg-white">
       <div className="d-flex align-items-start">
         <div className="me-3 flex-shrink-0">
+            {/* AVATAR: Usa o estado atualizado */}
             <Image 
-                src={avatarSrc} 
-                alt="Avatar ONG" 
+                src={avatarExibicao} 
+                alt="Avatar" 
                 width={48} height={48} 
                 className="rounded-circle border"
                 style={{objectFit: 'cover'}} 
-                onError={(e) => { 
-                    // Fallback nativo caso a URL do banco esteja quebrada
-                    const target = e.target as HTMLImageElement;
-                    target.src = MuxnLogo1.src; 
-                }}
+                onError={(e) => { const t = e.target as HTMLImageElement; t.src = MuxnLogo1.src; }}
             />
         </div>
         <div className="flex-grow-1">
            <div className="mb-2">
               <h5 className="mb-0 fw-bold text-dark">{post.titulo}</h5>
-              <small className="text-muted">{criador.nome || "ONG Parceira"}</small>
+              {/* NOME: Usa o estado atualizado (Nome Fantasia ou Nome User) */}
+              <small className="text-muted">
+                  {nomeExibicao}
+              </small>
            </div>
            
            <p className="text-dark mb-3" style={{whiteSpace: 'pre-wrap'}}>{post.descricao}</p>
            
            {postImageSrc && (
                <div className="mb-3 rounded-3 overflow-hidden border bg-light d-flex justify-content-center">
-                   {/* Usando <img> normal para Base64 longo evitar problemas de otimização do Next */}
-                   <img 
-                     src={postImageSrc} 
-                     alt="Conteúdo do post" 
-                     className="img-fluid" 
-                     style={{maxHeight: '500px', width: 'auto'}}
-                   />
+                   <img src={postImageSrc} alt="Post" className="img-fluid" style={{maxHeight: '500px', width: 'auto'}} />
                </div>
            )}
            
            <div className="d-flex justify-content-between border-top pt-3 mt-2">
                <div className="d-flex gap-3 text-secondary">
-                   <span role="button" className="hover-effect">Curtir</span>
-                   <span role="button" className="hover-effect">Comentar</span>
+                   <span role="button" className="hover-effect d-flex align-items-center gap-1" onClick={handleShare}>
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-share-fill" viewBox="0 0 16 16">
+                            <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5"/>
+                        </svg>
+                       Compartilhar
+                   </span>
                </div>
-               <span className="text-danger cursor-pointer fw-bold">Denunciar</span>
+               <div>
+                   {isOwner ? (
+                       <span role="button" className="text-danger fw-bold hover-effect d-flex align-items-center gap-1" onClick={() => onDelete && onDelete(post._id)}>
+                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                            </svg>
+                           Excluir
+                       </span>
+                   ) : (
+                       <span role="button" className="text-secondary cursor-pointer fw-bold">Denunciar</span>
+                   )}
+               </div>
            </div>
         </div>
       </div>
