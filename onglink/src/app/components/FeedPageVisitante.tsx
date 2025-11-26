@@ -73,7 +73,7 @@ const FeedVisitantePage: React.FC = () => {
     <div className="container-fluid col-12 p-0" style={{ maxWidth: '800px', margin: '0 auto' }}>
       
       <div className="d-flex justify-content-center mt-4 mb-3 px-3">
-          <h4>Bem-vindo, Vistante! Acompanhe abaixo as publicações de nossos parceiros</h4>
+          <h4>Bem-vindo, Visitante! Acompanhe abaixo as publicações de nossos parceiros</h4>
       </div>
 
       {error && <Alert variant="danger" onClose={() => setError(null)} dismissible>{error}</Alert>}
