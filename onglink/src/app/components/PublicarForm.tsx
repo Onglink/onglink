@@ -300,12 +300,211 @@
 // export default PublicarForm;
 
 //////////////////////
+// "use client";
+// import React, { FC, useState, useEffect } from "react";
+// import { Alert, Spinner } from "react-bootstrap";
+// import Image from "next/image";
+// import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
+// import NeWUploadButton from "./button/NewUploadButton"; 
+// import publicacaoService from "@/app/services/publicacaoService";
+
+// interface PublicarFormProps {
+//   onPublish: (post: any) => void;
+// }
+
+// const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
+//   const [title, setTitle] = useState("");
+//   const [message, setMessage] = useState("");
+//   const [image, setImage] = useState<File | null>(null);
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [feedback, setFeedback] = useState<{ message: string; variant: 'success' | 'danger' } | null>(null);
+//   const [userId, setUserId] = useState<string | null>(null);
+
+//   // 1. RECUPERAR O ID DO USUÁRIO LOGADO
+//   useEffect(() => {
+//     const usuarioLogadoJson = localStorage.getItem('usuarioLogado');
+//     if (usuarioLogadoJson) {
+//       try {
+//         const usuario = JSON.parse(usuarioLogadoJson);
+//         // Tenta pegar o ID de várias formas possíveis para garantir compatibilidade
+//         const id = usuario._id || usuario.id || (usuario.usuario && usuario.usuario._id);
+        
+//         if (id) {
+//             setUserId(id);
+//         } else {
+//             console.warn("ID do usuário não encontrado no localStorage.");
+//         }
+//       } catch (e) {
+//         console.error("Erro ao ler usuário do localStorage", e);
+//       }
+//     }
+//   }, []);
+
+//   const handlePost = async (e: React.FormEvent) => {
+//     e.preventDefault();
+
+//     if (!title.trim() || !message.trim()) {
+//         setFeedback({ message: "O título e a descrição são obrigatórios.", variant: 'danger' });
+//         setTimeout(() => setFeedback(null), 3000);
+//         return;
+//     }
+
+//     // Verifica se temos o ID antes de tentar enviar
+//     if (!userId) {
+//         setFeedback({ message: "Erro de autenticação. Tente fazer login novamente.", variant: 'danger' });
+//         return;
+//     }
+
+//     setIsLoading(true);
+//     setFeedback(null);
+
+//     try {
+//         // 2. CRIAR O FORMDATA COM TODOS OS CAMPOS NECESSÁRIOS
+//         const formData = new FormData();
+//         formData.append("titulo", title);
+//         formData.append("descricao", message);
+        
+//         // CAMPO CRUCIAL: O ID DA ONG
+//         formData.append("criadoPor", userId); 
+        
+//         if (image) {
+//             // Usa 'image' ou 'imageFile' dependendo do que seu Multer backend espera.
+//             // Vou manter 'image' como padrão comum, mas se seu backend esperar 'file', mude aqui.
+//             formData.append("image", image); 
+//         }
+
+//         // 3. ENVIAR PARA O SERVIÇO
+//         const newPost = await publicacaoService.cadastrarPublicacao(formData);
+        
+//         // 4. SUCESSO
+//         onPublish(newPost);
+//         setTitle("");
+//         setMessage("");
+//         setImage(null);
+//         setFeedback({ message: "Publicação enviada com sucesso!", variant: 'success' });
+        
+//     } catch (error: any) {
+//       console.error("Erro ao cadastrar publicação:", error);
+      
+//       const errorMsg = error.response?.data?.message || error.response?.data?.error || error.message || "Falha ao enviar publicação.";
+      
+//       // Se for erro 403, damos uma mensagem mais clara
+//       if (error.response?.status === 403) {
+//           setFeedback({ message: "Acesso negado: Apenas ONGs aprovadas podem publicar.", variant: 'danger' });
+//       } else {
+//           setFeedback({ message: errorMsg, variant: 'danger' });
+//       }
+
+//     } finally {
+//         setIsLoading(false);
+//         setTimeout(() => setFeedback(null), 5000);
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handlePost} className="mb-4 border rounded p-3 bg-white shadow-sm">
+//       {feedback && (
+//           <Alert 
+//               variant={feedback.variant} 
+//               onClose={() => setFeedback(null)} 
+//               dismissible 
+//               className="mb-3 fade show"
+//           >
+//               {feedback.message}
+//           </Alert>
+//       )}
+//       <div className="container-fluid col-12 vstack gap-3 p-0">
+//         <div className="d-flex">
+//           {/* Avatar */}
+//           <div className="avatar me-3 flex-shrink-0">
+//             <a href="#">
+//               <Image
+//                 className="rounded-circle border"
+//                 src={MuxnLogo1}
+//                 alt="Avatar"
+//                 height={50}
+//                 width={50}
+//                 style={{objectFit: 'cover'}}
+//               />
+//             </a>
+//           </div>
+//           <div className="flex-grow-1">
+//             <div className="mb-2">
+//               <input
+//                 type="text"
+//                 className="form-control fw-bold"
+//                 placeholder="Título da publicação"
+//                 value={title}
+//                 onChange={(e) => setTitle(e.target.value)}
+//                 disabled={isLoading}
+//                 style={{border: 'none', boxShadow: 'none', paddingLeft: 0, fontSize: '1.1rem'}}
+//               />
+//             </div>
+//             <div className="mb-2">
+//               <textarea
+//                 className="form-control"
+//                 rows={3}
+//                 placeholder="No que você está pensando? Compartilhe com a comunidade..."
+//                 value={message}
+//                 onChange={(e) => setMessage(e.target.value)}
+//                 disabled={isLoading}
+//                 style={{ minHeight: '80px', resize: 'none', border: '1px solid #eee' }}
+//               />
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+      
+//       <div className="d-flex align-items-center justify-content-between mt-3 pt-3 border-top">
+//          <div className="d-flex align-items-center">
+//             <NeWUploadButton
+//                 label={
+//                     <span className="d-flex align-items-center text-success fw-semibold" style={{fontSize: '0.9rem'}}>
+//                     <i className="bi bi-image me-2 fs-5"></i>
+//                     {image ? "Alterar mídia" : "Adicionar mídia"}
+//                     </span>
+//                 }
+//                 variant="link"
+//                 className="text-decoration-none p-0 me-3"
+//                 onFileSelect={(file) => setImage(file)}
+//                 disabled={isLoading}
+//             />
+//             {image && (
+//                 <span className="badge bg-light text-dark border d-flex align-items-center">
+//                     <small>{image.name.length > 15 ? image.name.substring(0, 15) + '...' : image.name}</small>
+//                     <button type="button" className="btn-close ms-2" style={{width: '0.5em', height: '0.5em'}} onClick={() => setImage(null)} aria-label="Remover imagem"></button>
+//                 </span>
+//             )}
+//         </div>
+
+//         <div>
+//             <button type="submit" className="btn btn-success px-4 d-flex align-items-center fw-semibold" disabled={isLoading || (!title.trim() && !message.trim())}>
+//             {isLoading ? (
+//                 <>
+//                     <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="me-2" />
+//                     Publicando...
+//                 </>
+//             ) : (
+//                 <>
+//                     <i className="bi bi-send me-2"></i>
+//                     Publicar
+//                 </>
+//             )}
+//             </button>
+//         </div>
+//       </div>
+//     </form>
+//   );
+// };
+
+// export default PublicarForm;
 "use client";
 import React, { FC, useState, useEffect } from "react";
 import { Alert, Spinner } from "react-bootstrap";
 import Image from "next/image";
 import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
 import NeWUploadButton from "./button/NewUploadButton"; 
+// Importamos o seu service agora
 import publicacaoService from "@/app/services/publicacaoService";
 
 interface PublicarFormProps {
@@ -318,25 +517,41 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
   const [image, setImage] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState<{ message: string; variant: 'success' | 'danger' } | null>(null);
-  const [userId, setUserId] = useState<string | null>(null);
+  
+  // Estados para identificação visual (o token agora é com o api.js)
+  const [ongId, setOngId] = useState<string | null>(null);
+  const [ongAvatar, setOngAvatar] = useState<string>(""); 
+  const [ongName, setOngName] = useState<string>("");
 
-  // 1. RECUPERAR O ID DO USUÁRIO LOGADO
   useEffect(() => {
-    const usuarioLogadoJson = localStorage.getItem('usuarioLogado');
-    if (usuarioLogadoJson) {
-      try {
-        const usuario = JSON.parse(usuarioLogadoJson);
-        // Tenta pegar o ID de várias formas possíveis para garantir compatibilidade
-        const id = usuario._id || usuario.id || (usuario.usuario && usuario.usuario._id);
-        
-        if (id) {
-            setUserId(id);
-        } else {
-            console.warn("ID do usuário não encontrado no localStorage.");
+    const storedUser = localStorage.getItem('usuarioLogado');
+    if (storedUser) {
+        try {
+            const data = JSON.parse(storedUser);
+            
+            // Lógica para extrair ID e Logo corretamente
+            let idFinal = data._id || data.id;
+            let logoFinal = data.logo || data.avatar;
+            let nomeFinal = data.nome;
+
+            // Se estiver aninhado em 'ong' ou 'usuario'
+            if (data.ong) {
+                idFinal = data.ong._id || idFinal;
+                logoFinal = data.ong.logo || logoFinal;
+                nomeFinal = data.ong.nome || nomeFinal;
+            } else if (data.usuario) {
+                logoFinal = data.usuario.logo || data.usuario.avatar || logoFinal;
+                nomeFinal = data.usuario.nome || nomeFinal;
+                idFinal = data.usuario._id || idFinal;
+            }
+
+            if (idFinal) setOngId(idFinal);
+            if (logoFinal) setOngAvatar(logoFinal);
+            if (nomeFinal) setOngName(nomeFinal);
+
+        } catch (e) {
+            console.error("Erro ao ler dados do usuário:", e);
         }
-      } catch (e) {
-        console.error("Erro ao ler usuário do localStorage", e);
-      }
     }
   }, []);
 
@@ -344,14 +559,11 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
     e.preventDefault();
 
     if (!title.trim() || !message.trim()) {
-        setFeedback({ message: "O título e a descrição são obrigatórios.", variant: 'danger' });
-        setTimeout(() => setFeedback(null), 3000);
+        setFeedback({ message: "Preencha título e descrição.", variant: 'danger' });
         return;
     }
-
-    // Verifica se temos o ID antes de tentar enviar
-    if (!userId) {
-        setFeedback({ message: "Erro de autenticação. Tente fazer login novamente.", variant: 'danger' });
+    if (!ongId) {
+        setFeedback({ message: "Erro: Identificação da ONG não encontrada. Tente relogar.", variant: 'danger' });
         return;
     }
 
@@ -359,42 +571,45 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
     setFeedback(null);
 
     try {
-        // 2. CRIAR O FORMDATA COM TODOS OS CAMPOS NECESSÁRIOS
         const formData = new FormData();
         formData.append("titulo", title);
         formData.append("descricao", message);
+        formData.append("criadoPor", ongId); 
         
-        // CAMPO CRUCIAL: O ID DA ONG
-        formData.append("criadoPor", userId); 
-        
+        // O nome do campo deve bater com o upload.single('image') do backend
         if (image) {
-            // Usa 'image' ou 'imageFile' dependendo do que seu Multer backend espera.
-            // Vou manter 'image' como padrão comum, mas se seu backend esperar 'file', mude aqui.
             formData.append("image", image); 
         }
 
-        // 3. ENVIAR PARA O SERVIÇO
+        // --- CHAMADA PELO SERVICE ---
         const newPost = await publicacaoService.cadastrarPublicacao(formData);
-        
-        // 4. SUCESSO
+
+        // --- INJEÇÃO VISUAL ---
+        // Se o backend retornou sucesso, mas não populou a logo ainda, usamos a local
+        if (newPost) {
+             if (!newPost.criadoPor || !newPost.criadoPor.logo) {
+                newPost.criadoPor = {
+                    ...(newPost.criadoPor || {}),
+                    _id: ongId,
+                    nome: ongName,
+                    logo: ongAvatar,
+                    avatar: ongAvatar
+                };
+            }
+        }
+
         onPublish(newPost);
+        
+        // Limpeza do form
         setTitle("");
         setMessage("");
         setImage(null);
-        setFeedback({ message: "Publicação enviada com sucesso!", variant: 'success' });
+        setFeedback({ message: "Publicado com sucesso!", variant: 'success' });
         
     } catch (error: any) {
-      console.error("Erro ao cadastrar publicação:", error);
-      
-      const errorMsg = error.response?.data?.message || error.response?.data?.error || error.message || "Falha ao enviar publicação.";
-      
-      // Se for erro 403, damos uma mensagem mais clara
-      if (error.response?.status === 403) {
-          setFeedback({ message: "Acesso negado: Apenas ONGs aprovadas podem publicar.", variant: 'danger' });
-      } else {
-          setFeedback({ message: errorMsg, variant: 'danger' });
-      }
-
+      console.error("❌ ERRO NO POST:", error);
+      const msg = error.response?.data?.message || error.message || "Erro ao conectar com o servidor.";
+      setFeedback({ message: msg, variant: 'danger' });
     } finally {
         setIsLoading(false);
         setTimeout(() => setFeedback(null), 5000);
@@ -403,95 +618,50 @@ const PublicarForm: FC<PublicarFormProps> = ({ onPublish }) => {
 
   return (
     <form onSubmit={handlePost} className="mb-4 border rounded p-3 bg-white shadow-sm">
-      {feedback && (
-          <Alert 
-              variant={feedback.variant} 
-              onClose={() => setFeedback(null)} 
-              dismissible 
-              className="mb-3 fade show"
-          >
-              {feedback.message}
-          </Alert>
-      )}
-      <div className="container-fluid col-12 vstack gap-3 p-0">
-        <div className="d-flex">
-          {/* Avatar */}
-          <div className="avatar me-3 flex-shrink-0">
-            <a href="#">
-              <Image
-                className="rounded-circle border"
-                src={MuxnLogo1}
-                alt="Avatar"
-                height={50}
-                width={50}
-                style={{objectFit: 'cover'}}
-              />
-            </a>
-          </div>
-          <div className="flex-grow-1">
-            <div className="mb-2">
-              <input
-                type="text"
-                className="form-control fw-bold"
-                placeholder="Título da publicação"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                disabled={isLoading}
-                style={{border: 'none', boxShadow: 'none', paddingLeft: 0, fontSize: '1.1rem'}}
-              />
-            </div>
-            <div className="mb-2">
-              <textarea
-                className="form-control"
-                rows={3}
-                placeholder="No que você está pensando? Compartilhe com a comunidade..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                disabled={isLoading}
-                style={{ minHeight: '80px', resize: 'none', border: '1px solid #eee' }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div className="d-flex align-items-center justify-content-between mt-3 pt-3 border-top">
-         <div className="d-flex align-items-center">
-            <NeWUploadButton
-                label={
-                    <span className="d-flex align-items-center text-success fw-semibold" style={{fontSize: '0.9rem'}}>
-                    <i className="bi bi-image me-2 fs-5"></i>
-                    {image ? "Alterar mídia" : "Adicionar mídia"}
-                    </span>
-                }
-                variant="link"
-                className="text-decoration-none p-0 me-3"
-                onFileSelect={(file) => setImage(file)}
-                disabled={isLoading}
+      {feedback && <Alert variant={feedback.variant} dismissible>{feedback.message}</Alert>}
+      <div className="d-flex gap-3 mb-3">
+         <div className="flex-shrink-0">
+            <Image 
+                src={ongAvatar || MuxnLogo1} 
+                alt="Avatar" 
+                width={50} height={50} 
+                className="rounded-circle border" 
+                style={{objectFit: 'cover'}} 
+                onError={(e) => { e.currentTarget.src = MuxnLogo1.src; }}
             />
-            {image && (
-                <span className="badge bg-light text-dark border d-flex align-items-center">
-                    <small>{image.name.length > 15 ? image.name.substring(0, 15) + '...' : image.name}</small>
-                    <button type="button" className="btn-close ms-2" style={{width: '0.5em', height: '0.5em'}} onClick={() => setImage(null)} aria-label="Remover imagem"></button>
+         </div>
+         <div className="w-100">
+             <input 
+                className="form-control fw-bold mb-2 border-0 px-0" 
+                placeholder={`Publicar como ${ongName || 'ONG'}...`} 
+                value={title} 
+                onChange={e => setTitle(e.target.value)} 
+                disabled={isLoading}
+             />
+             <textarea 
+                className="form-control" 
+                rows={3} 
+                placeholder="Compartilhe com a comunidade..." 
+                value={message} 
+                onChange={e => setMessage(e.target.value)} 
+                disabled={isLoading}
+             />
+         </div>
+      </div>
+      <div className="d-flex justify-content-between align-items-center border-top pt-3">
+         <NeWUploadButton 
+            onFileSelect={setImage} 
+            disabled={isLoading}
+            label={
+                <span className={`fw-bold cursor-pointer ${image ? "text-primary" : "text-success"}`}>
+                    {image ? `📷 ${image.name.substring(0, 15)}...` : "📷 Adicionar Mídia"}
                 </span>
-            )}
-        </div>
-
-        <div>
-            <button type="submit" className="btn btn-success px-4 d-flex align-items-center fw-semibold" disabled={isLoading || (!title.trim() && !message.trim())}>
-            {isLoading ? (
-                <>
-                    <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="me-2" />
-                    Publicando...
-                </>
-            ) : (
-                <>
-                    <i className="bi bi-send me-2"></i>
-                    Publicar
-                </>
-            )}
-            </button>
-        </div>
+            }
+            variant="link"
+         />
+         <button type="submit" className="btn btn-success text-white px-4 fw-bold" disabled={isLoading}>
+            {isLoading ? <Spinner size="sm"/> : "Publicar"}
+         </button>
       </div>
     </form>
   );

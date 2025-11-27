@@ -356,174 +356,261 @@
 
 // export default FeedPost;
 /////////////////////////////////
-"use client";
-import React, { FC, useState } from "react";
-import { Button, Modal, Form, FormCheck, Alert, Spinner } from "react-bootstrap";
-import Image from "next/image";
-import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
-import denunciaService from "@/app/services/denunciaService";
+// "use client";
+// import React, { FC, useState } from "react";
+// import { Button, Modal, Form, FormCheck, Alert, Spinner } from "react-bootstrap";
+// import Image from "next/image";
+// import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
+// import denunciaService from "@/app/services/denunciaService";
 
-// --- TIPAGEM CORRETA (Atualizada para bater com o FeedPage e o Backend) ---
+// // --- TIPAGEM CORRETA (Atualizada para bater com o FeedPage e o Backend) ---
+// interface Post {
+//   _id: string;
+//   titulo: string;     // <--- Mudou de 'title' para 'titulo'
+//   descricao: string;  // <--- Mudou de 'message' para 'descricao'
+//   imagem?: string[];  // <--- Mudou de 'imageURL' para array de strings
+//   createdAt?: string;
+//   criadoPor?: {
+//     nome: string;
+//     email?: string;
+//   };
+// }
+
+// interface FeedPostProps {
+//   post: Post;
+// }
+
+// const FeedPost: FC<FeedPostProps> = ({ post }) => {
+//   const [modalShow, setModalShow] = useState(false);
+//   const [isReporting, setIsReporting] = useState(false);
+//   const [reportFeedback, setReportFeedback] = useState<{ message: string, variant: 'success' | 'danger' } | null>(null);
+
+//   const [motivo, setMotivo] = useState<string[]>([]);
+//   const [descricao, setDescricao] = useState("");
+
+//   // Pega a primeira imagem se existir
+//   const postImage = post.imagem && post.imagem.length > 0 ? post.imagem[0] : null;
+
+//   const handleMotivoChange = (label: string) => {
+//       setMotivo(prev => 
+//           prev.includes(label) ? prev.filter(m => m !== label) : [...prev, label]
+//       );
+//   };
+
+//   const handleDenunciaSubmit = async () => {
+//       if (motivo.length === 0 && !descricao.trim()) {
+//           alert("Por favor, selecione pelo menos um motivo ou descreva a denúncia.");
+//           return;
+//       }
+
+//       setIsReporting(true);
+//       try {
+//           await denunciaService.cadastrarDenuncia({
+//               tipoDenuncia: motivo[0] || "Outro",
+//               motivo: descricao || motivo.join(", "),
+//               assignedTo: [post._id]
+//           });
+
+//           setReportFeedback({ message: "Denúncia enviada com sucesso.", variant: 'success' });
+//           setMotivo([]);
+//           setDescricao("");
+//           setTimeout(() => {
+//              setModalShow(false);
+//              setReportFeedback(null);
+//           }, 2000);
+
+//       } catch (error) {
+//           console.error("Erro ao enviar denúncia:", error);
+//           setReportFeedback({ message: "Erro ao enviar denúncia.", variant: 'danger' });
+//       } finally {
+//           setIsReporting(false);
+//       }
+//   };
+
+//   return (
+//     <>
+//       <Modal show={modalShow} onHide={() => setModalShow(false)} size="lg" centered>
+//         <Modal.Header closeButton>
+//           <Modal.Title>Denunciar Publicação</Modal.Title>
+//         </Modal.Header>
+//         <Modal.Body>
+//           {reportFeedback && <Alert variant={reportFeedback.variant}>{reportFeedback.message}</Alert>}
+          
+//           <Form className="mb-3">
+//              {["Conteúdo Ofensivo", "Informações Falsas", "Violação de Direitos Autorais", "Spam", "Conteúdo sexual", "Incitação ao ódio"].map((label) => (
+//                  <FormCheck
+//                     key={label}
+//                     className="fs-5"
+//                     type="checkbox"
+//                     label={label}
+//                     checked={motivo.includes(label)}
+//                     onChange={() => handleMotivoChange(label)}
+//                     disabled={isReporting}
+//                  />
+//              ))}
+//           </Form>
+
+//           <h5>Detalhes (opcional)</h5>
+//           <textarea 
+//               className="form-control border-1" 
+//               rows={3}
+//               value={descricao}
+//               onChange={(e) => setDescricao(e.target.value)}
+//               disabled={isReporting}
+//           />
+//         </Modal.Body>
+//         <Modal.Footer>
+//           <Button variant="secondary" onClick={() => setModalShow(false)} disabled={isReporting}>Cancelar</Button>
+//           <Button variant="danger" onClick={handleDenunciaSubmit} disabled={isReporting}>
+//             {isReporting ? <><Spinner as="span" animation="border" size="sm" className="me-2"/>Enviando...</> : "Enviar Denúncia"}
+//           </Button>
+//         </Modal.Footer>
+//       </Modal>
+
+//       <div style={{ backgroundColor: "#FFFFFF", borderColor: "#E5E7EB" }} className="container-fluid col-12 vstack gap-3 p-4 rounded-4 border shadow-sm mb-4">
+//         <div className="feed-item d-flex align-items-start">
+//           <div className="me-3 flex-shrink-0">
+//               <Image
+//                 className="avatar-img rounded-circle border"
+//                 src={MuxnLogo1}
+//                 alt="Avatar"
+//                 height={48}
+//                 width={48}
+//               />
+//           </div>
+//           <div className="feed-content flex-grow-1">
+//              <div className="d-flex justify-content-between align-items-start mb-2">
+//                 <div>
+//                    <h5 className="mb-1 fw-bold text-dark" style={{fontSize: '1.1rem'}}>
+//                      {/* Tenta mostrar o título, senão o nome de quem postou */}
+//                      {post.titulo || post.criadoPor?.nome || "Publicação"}
+//                    </h5>
+//                    <small className="text-muted">
+//                      {post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "Recente"}
+//                    </small>
+//                 </div>
+//              </div>
+            
+//             <p className="text-dark mb-3" style={{whiteSpace: 'pre-wrap', fontSize: '0.95rem', lineHeight: '1.5'}}>
+//                 {post.descricao}
+//             </p>
+            
+//             {postImage && (
+//               <div className="mb-3 rounded-3 overflow-hidden border bg-light d-flex justify-content-center" style={{maxHeight: '400px'}}>
+//                 <img
+//                   src={postImage}
+//                   alt={`Imagem de ${post.titulo}`}
+//                   className="img-fluid"
+//                   style={{ objectFit: "contain", maxHeight: "400px", width: '100%' }}
+//                   onError={(e) => (e.currentTarget.style.display = 'none')}
+//                 />
+//               </div>
+//             )}
+
+//             <div className="d-flex justify-content-between align-items-center pt-3 border-top mt-3">
+//                <div className="d-flex gap-2">
+//                   <Button variant="link" className="text-decoration-none text-secondary p-0 me-3 d-flex align-items-center">
+//                      <i className="bi bi-heart me-1 fs-5"></i> <span className="d-none d-sm-inline ms-1">Curtir</span>
+//                   </Button>
+//                </div>
+
+//                <div className="d-flex gap-2">
+//                    <Button variant="link" className="text-decoration-none text-danger p-0 ms-3 d-flex align-items-center" title="Denunciar" onClick={() => setModalShow(true)}>
+//                        <i className="bi bi-flag fs-5"></i>
+//                    </Button>
+//                </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default FeedPost;
+///////////////////////////////////////////////////////////////
+"use client";
+import React, { FC } from "react";
+import Image from "next/image"; // Import do Next
+import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
+import "@/app/CSS/feed.css";
+
 interface Post {
   _id: string;
-  titulo: string;     // <--- Mudou de 'title' para 'titulo'
-  descricao: string;  // <--- Mudou de 'message' para 'descricao'
-  imagem?: string[];  // <--- Mudou de 'imageURL' para array de strings
-  createdAt?: string;
+  titulo: string;
+  descricao: string;
+  imagem?: string[]; // Array do backend
   criadoPor?: {
-    nome: string;
-    email?: string;
+    _id: string;
+    nome?: string;
+    logo?: string;
+    avatar?: string;
   };
 }
 
-interface FeedPostProps {
-  post: Post;
-}
+interface FeedPostProps { post: Post; }
 
 const FeedPost: FC<FeedPostProps> = ({ post }) => {
-  const [modalShow, setModalShow] = useState(false);
-  const [isReporting, setIsReporting] = useState(false);
-  const [reportFeedback, setReportFeedback] = useState<{ message: string, variant: 'success' | 'danger' } | null>(null);
+  if (!post) return null;
 
-  const [motivo, setMotivo] = useState<string[]>([]);
-  const [descricao, setDescricao] = useState("");
+  // Lógica de Avatar Refinada
+  const criador = post.criadoPor || {};
+  // Prioriza LOGO, depois AVATAR, depois o padrão
+  const avatarSrc = criador.logo || criador.avatar || MuxnLogo1;
 
-  // Pega a primeira imagem se existir
-  const postImage = post.imagem && post.imagem.length > 0 ? post.imagem[0] : null;
-
-  const handleMotivoChange = (label: string) => {
-      setMotivo(prev => 
-          prev.includes(label) ? prev.filter(m => m !== label) : [...prev, label]
-      );
-  };
-
-  const handleDenunciaSubmit = async () => {
-      if (motivo.length === 0 && !descricao.trim()) {
-          alert("Por favor, selecione pelo menos um motivo ou descreva a denúncia.");
-          return;
-      }
-
-      setIsReporting(true);
-      try {
-          await denunciaService.cadastrarDenuncia({
-              tipoDenuncia: motivo[0] || "Outro",
-              motivo: descricao || motivo.join(", "),
-              assignedTo: [post._id]
-          });
-
-          setReportFeedback({ message: "Denúncia enviada com sucesso.", variant: 'success' });
-          setMotivo([]);
-          setDescricao("");
-          setTimeout(() => {
-             setModalShow(false);
-             setReportFeedback(null);
-          }, 2000);
-
-      } catch (error) {
-          console.error("Erro ao enviar denúncia:", error);
-          setReportFeedback({ message: "Erro ao enviar denúncia.", variant: 'danger' });
-      } finally {
-          setIsReporting(false);
-      }
-  };
+  // Lógica de Imagem do Post
+  let postImageSrc = null;
+  if (post.imagem && Array.isArray(post.imagem) && post.imagem.length > 0) {
+      postImageSrc = post.imagem[0];
+  } 
 
   return (
-    <>
-      <Modal show={modalShow} onHide={() => setModalShow(false)} size="lg" centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Denunciar Publicação</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {reportFeedback && <Alert variant={reportFeedback.variant}>{reportFeedback.message}</Alert>}
-          
-          <Form className="mb-3">
-             {["Conteúdo Ofensivo", "Informações Falsas", "Violação de Direitos Autorais", "Spam", "Conteúdo sexual", "Incitação ao ódio"].map((label) => (
-                 <FormCheck
-                    key={label}
-                    className="fs-5"
-                    type="checkbox"
-                    label={label}
-                    checked={motivo.includes(label)}
-                    onChange={() => handleMotivoChange(label)}
-                    disabled={isReporting}
-                 />
-             ))}
-          </Form>
-
-          <h5>Detalhes (opcional)</h5>
-          <textarea 
-              className="form-control border-1" 
-              rows={3}
-              value={descricao}
-              onChange={(e) => setDescricao(e.target.value)}
-              disabled={isReporting}
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setModalShow(false)} disabled={isReporting}>Cancelar</Button>
-          <Button variant="danger" onClick={handleDenunciaSubmit} disabled={isReporting}>
-            {isReporting ? <><Spinner as="span" animation="border" size="sm" className="me-2"/>Enviando...</> : "Enviar Denúncia"}
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      <div style={{ backgroundColor: "#FFFFFF", borderColor: "#E5E7EB" }} className="container-fluid col-12 vstack gap-3 p-4 rounded-4 border shadow-sm mb-4">
-        <div className="feed-item d-flex align-items-start">
-          <div className="me-3 flex-shrink-0">
-              <Image
-                className="avatar-img rounded-circle border"
-                src={MuxnLogo1}
-                alt="Avatar"
-                height={48}
-                width={48}
-              />
-          </div>
-          <div className="feed-content flex-grow-1">
-             <div className="d-flex justify-content-between align-items-start mb-2">
-                <div>
-                   <h5 className="mb-1 fw-bold text-dark" style={{fontSize: '1.1rem'}}>
-                     {/* Tenta mostrar o título, senão o nome de quem postou */}
-                     {post.titulo || post.criadoPor?.nome || "Publicação"}
-                   </h5>
-                   <small className="text-muted">
-                     {post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "Recente"}
-                   </small>
-                </div>
-             </div>
-            
-            <p className="text-dark mb-3" style={{whiteSpace: 'pre-wrap', fontSize: '0.95rem', lineHeight: '1.5'}}>
-                {post.descricao}
-            </p>
-            
-            {postImage && (
-              <div className="mb-3 rounded-3 overflow-hidden border bg-light d-flex justify-content-center" style={{maxHeight: '400px'}}>
-                <img
-                  src={postImage}
-                  alt={`Imagem de ${post.titulo}`}
-                  className="img-fluid"
-                  style={{ objectFit: "contain", maxHeight: "400px", width: '100%' }}
-                  onError={(e) => (e.currentTarget.style.display = 'none')}
-                />
-              </div>
-            )}
-
-            <div className="d-flex justify-content-between align-items-center pt-3 border-top mt-3">
-               <div className="d-flex gap-2">
-                  <Button variant="link" className="text-decoration-none text-secondary p-0 me-3 d-flex align-items-center">
-                     <i className="bi bi-heart me-1 fs-5"></i> <span className="d-none d-sm-inline ms-1">Curtir</span>
-                  </Button>
+    <div className="container-fluid col-12 p-4 rounded-4 border shadow-sm mb-4 bg-white">
+      <div className="d-flex align-items-start">
+        <div className="me-3 flex-shrink-0">
+            <Image 
+                src={avatarSrc} 
+                alt="Avatar ONG" 
+                width={48} height={48} 
+                className="rounded-circle border"
+                style={{objectFit: 'cover'}} 
+                onError={(e) => { 
+                    // Fallback nativo caso a URL do banco esteja quebrada
+                    const target = e.target as HTMLImageElement;
+                    target.src = MuxnLogo1.src; 
+                }}
+            />
+        </div>
+        <div className="flex-grow-1">
+           <div className="mb-2">
+              <h5 className="mb-0 fw-bold text-dark">{post.titulo}</h5>
+              <small className="text-muted">{criador.nome || "ONG Parceira"}</small>
+           </div>
+           
+           <p className="text-dark mb-3" style={{whiteSpace: 'pre-wrap'}}>{post.descricao}</p>
+           
+           {postImageSrc && (
+               <div className="mb-3 rounded-3 overflow-hidden border bg-light d-flex justify-content-center">
+                   {/* Usando <img> normal para Base64 longo evitar problemas de otimização do Next */}
+                   <img 
+                     src={postImageSrc} 
+                     alt="Conteúdo do post" 
+                     className="img-fluid" 
+                     style={{maxHeight: '500px', width: 'auto'}}
+                   />
                </div>
-
-               <div className="d-flex gap-2">
-                   <Button variant="link" className="text-decoration-none text-danger p-0 ms-3 d-flex align-items-center" title="Denunciar" onClick={() => setModalShow(true)}>
-                       <i className="bi bi-flag fs-5"></i>
-                   </Button>
+           )}
+           
+           <div className="d-flex justify-content-between border-top pt-3 mt-2">
+               <div className="d-flex gap-3 text-secondary">
+                   <span role="button" className="hover-effect">Curtir</span>
+                   <span role="button" className="hover-effect">Comentar</span>
                </div>
-            </div>
-          </div>
+               <span className="text-danger cursor-pointer fw-bold">Denunciar</span>
+           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
