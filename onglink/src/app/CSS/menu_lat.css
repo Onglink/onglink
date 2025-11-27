@@ -1,4 +1,4 @@
-.menu-lat {
+/* .menu-lat {
   position: sticky;
   top: 180px;
   
@@ -9,13 +9,28 @@
     border-radius: 8px;
   padding: 10px;
 
+} */
+.menu-lat {
+  /* Removemos o position sticky daqui porque vamos aplicar na coluna pai */
+  /* position: sticky; <-- REMOVIDO */
+  /* top: 180px; <-- REMOVIDO */
+  
+  /* Largura fluida para respeitar o grid */
+  width: 100%; 
+  max-width: 100%;
+  
+  /* Estilos visuais */
+  border-radius: 8px;
+  /* padding: 10px; <-- Opcional, cuidado para não somar na largura */
+  
+  /* Remove a barra de rolagem interna se não for necessária */
+  overflow-y: visible; 
 }
-
-@media (max-width: 992px) {
+/* @media (max-width: 992px) {
   .menu-lat {
     display: none;
   }
-}
+} */
 .card{
      background-color: #95CF93;
 }

@@ -145,7 +145,7 @@ export default function Login() {
         <>
         <Header_home/>
         
-        <main id="bg_login" className="min-h-screen flex items-center justify-center" style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#D0E2E9'}}>
+        <main id="bg_login" className="min-h-screen flex items-center justify-center" style={{minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#D0E2E9'}}>
             <div id="caixa_login" className="bg-white rounded-4 p-3 shadow w-100" style={{maxWidth: '500px'}}>
                 
                 <div className="m-4" id="div_login">

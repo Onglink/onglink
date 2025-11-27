@@ -1,21 +1,19 @@
 "use client";
-import Image from "next/image";
+//import Image from "next/image";
 import React, { useState, ChangeEvent, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/app/CSS/feedVisitante.css";
 import "@/app/CSS/header_alt.css";
-import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
-import logo_instagram from "@/app/img/icons/instagram_6422200.png";
-import logo_twitter from "@/app/img/icons/twitter_5968830.png";
-import logo_facebook from "@/app/img/icons/social_12942738.png";
+//import MuxnLogo1 from "@/app/img/MUXN_logo1.png";
+//import logo_instagram from "@/app/img/icons/instagram_6422200.png";
+//import logo_twitter from "@/app/img/icons/twitter_5968830.png";
+//import logo_facebook from "@/app/img/icons/social_12942738.png";
 import { Button, Modal, Form, FormCheck, Alert } from "react-bootstrap";
 import Header_home from "../components/header_home";
-import UploadButton from "../components/button/UploadButton";
-import FeedPage from "../components/FeedPage";
-import FeedPost from "../components/FeedPost";
+//import UploadButton from "../components/button/UploadButton";
+import FeedPageVisitante from "../components/FeedPageVisitante";
+//import FeedPost from "../components/FeedPost";
 import type { ModalProps } from "react-bootstrap";
-import PublicarForm from "@/app/components/PublicarForm";
-import MenuLat from "../components/menu_lat/menu_lat";
 
 interface Post {
   title: string;
@@ -142,7 +140,7 @@ export default function Home() {
               <div className="vstack gap-4 mb-3">
                 {/* //PUBLICAR NO FEED */}
                 <div id="div_feed" className="pr-4 pl-4">
-                  <FeedPage />
+                  <FeedPageVisitante />
                 </div>
               </div>
             </div>

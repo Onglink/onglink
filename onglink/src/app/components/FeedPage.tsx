@@ -250,16 +250,157 @@
 // export default FeedPage;
 
 // /////////////////////////////
+// "use client";
+// import React, { useState, useEffect } from "react";
+// import { Alert, Spinner } from "react-bootstrap";
+// import { jwtDecode } from 'jwt-decode'; 
+// import AutoLogout from "../components/AutoLogout";
+// import PublicarForm from "../components/PublicarForm";
+// import FeedPost from "../components/FeedPost";
+// import publicacaoService from "@/app/services/publicacaoService";
+
+// // --- TIPOS ---
+// interface Post {
+//   _id: string;
+//   titulo: string;
+//   descricao: string;
+//   imagem?: string[];
+//   criadoPor?: {
+//     _id: string;
+//     nome: string;
+//     email: string;
+//   };
+//   createdAt?: string;
+// }
+
+// interface JwtPayload {
+//     id: string;
+//     email: string;
+//     role: string; 
+//     iat: number;
+//     exp: number;
+// }
+
+// const FeedPage: React.FC = () => {
+//   const [posts, setPosts] = useState<Post[]>([]);
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [error, setError] = useState<string | null>(null);
+//   const [userStatus, setUserStatus] = useState<string>(''); 
+  
+//   const ROLES_PUBLICADORES = ['admin', 'ong'];
+
+//   useEffect(() => {
+//     // 1. VALIDAR TOKEN E ROLE
+//     const token = localStorage.getItem('authToken');
+    
+//     if (token) {
+//         try {
+//             const decoded = jwtDecode<JwtPayload>(token);
+            
+//             if (decoded.exp * 1000 > Date.now()) {
+//                 setUserStatus(decoded.role);
+//             } else {
+//                 console.warn("Token expirado.");
+//                 localStorage.removeItem('authToken');
+//                 setUserStatus('');
+//             }
+//         } catch (e) {
+//             console.error("Erro ao decodificar token:", e);
+//         }
+//       }
+
+//     // 2. CARREGAR POSTS
+//     const fetchPosts = async () => {
+//       setIsLoading(true);
+//       setError(null);
+//       try {
+//         const data = await publicacaoService.listarPublicacao();
+        
+//         if (Array.isArray(data)) {
+//            // O backend já deve trazer ordenado, mas por segurança:
+//           setPosts(data);
+//         } else {
+//           console.warn("API não retornou um array:", data);
+//           setPosts([]);
+//         }
+//       } catch (err) {
+//         console.error("Erro ao carregar feed:", err);
+//         setError("Não foi possível carregar as publicações.");
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     };
+    
+//     fetchPosts();
+//   }, []);
+
+//   // Adiciona o post novo no topo da lista
+//   const addPost = (newPost: Post) => {
+//     setPosts((prevPosts) => [newPost, ...prevPosts]);
+//   };
+
+//   const canPublish = ROLES_PUBLICADORES.includes(userStatus);
+
+//   return (
+//     <div className="container-fluid col-12 p-0" style={{ maxWidth: '800px', margin: '0 auto' }}>
+//       <AutoLogout />
+//       {error && (
+//         <Alert variant="danger" onClose={() => setError(null)} dismissible className="mt-3">
+//           {error}
+//         </Alert>
+//       )}
+
+//       {/* Formulário só aparece para ONG/Admin */}
+//       {canPublish && (
+//         <div className="mb-4 mt-3">
+//             <PublicarForm onPublish={addPost} />
+//         </div>
+//       )}
+
+//       {/* Lista de Posts */}
+//       <div className="mt-4">
+//         {isLoading ? (
+//           <div className="text-center p-5">
+//             <Spinner animation="border" variant="success" role="status">
+//               <span className="visually-hidden">Carregando...</span>
+//             </Spinner>
+//             <p className="text-muted mt-2">Carregando feed...</p>
+//           </div>
+//         ) : posts.length === 0 ? (
+//           <div className="text-center p-5 text-muted border rounded bg-white shadow-sm">
+//             <p className="mb-0 fs-5">Nenhuma publicação encontrada.</p>
+//             <small>Seja o primeiro a compartilhar algo!</small>
+//           </div>
+//         ) : (
+//           <div className="vstack gap-4">
+//             {posts.map((post) => (
+//                // AQUI ESTÁ A CORREÇÃO: Chamando o componente FeedPost importado
+//                <FeedPost key={post._id || Math.random().toString()} post={post} />
+//             ))}
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default FeedPage;
+
+//////////////////////////////////////////////
 "use client";
 import React, { useState, useEffect } from "react";
-import { Alert, Spinner } from "react-bootstrap";
+import { Alert, Spinner, Container, Row, Col } from "react-bootstrap";
 import { jwtDecode } from 'jwt-decode'; 
 import AutoLogout from "../components/AutoLogout";
 import PublicarForm from "../components/PublicarForm";
 import FeedPost from "../components/FeedPost";
-import publicacaoService from "@/app/services/publicacaoService";
+import "@/app/CSS/feed.css"
+import MenuLat from "../components/menu_lat/menu_lat";
 
-// --- TIPOS ---
+// Usando o serviço que o Menu Lateral usa
+import publicacaoService from "@/app/services/publicacaoService";
+import usuarioService from "@/app/services/usuarioService";
+
 interface Post {
   _id: string;
   titulo: string;
@@ -269,6 +410,12 @@ interface Post {
     _id: string;
     nome: string;
     email: string;
+    // O front fica preparado para receber isso, vindo ou não do back
+    assignedTo?: {
+        _id: string;
+        nomeFantasia?: string;
+        logo?: string;
+    } | string; // Pode vir string ou objeto
   };
   createdAt?: string;
 }
@@ -285,103 +432,214 @@ const FeedPage: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [userStatus, setUserStatus] = useState<string>(''); 
+  
+  const [userRole, setUserRole] = useState<string>(''); 
+  const [userId, setUserId] = useState<string>(''); 
+  
+  // Estado para guardar o Avatar e Nome da ONG do usuário logado
+  const [currentUserAvatar, setCurrentUserAvatar] = useState<string | undefined>(undefined);
+  // Guardamos também o nome fantasia para usar na "UI Otimista" ao postar
+  const [currentOngName, setCurrentOngName] = useState<string | undefined>(undefined);
   
   const ROLES_PUBLICADORES = ['admin', 'ong'];
 
+  // --- LÓGICA IMPORTADA DO MENU LATERAL ---
+  const fetchUserData = async (id: string) => {
+    try {
+        // Busca exatamente como o Menu faz
+        const data = await usuarioService.buscarPorId(id);
+        const usuario = data.usuario || data; 
+
+        // Lógica do Menu: Se for ONG e tiver assignedTo
+        if (usuario.status === "ong" && usuario.assignedTo) {
+             // Se assignedTo já veio populado (que é o caso do Menu)
+             if (typeof usuario.assignedTo === 'object') {
+                 if (usuario.assignedTo.logo) setCurrentUserAvatar(usuario.assignedTo.logo);
+                 if (usuario.assignedTo.nomeFantasia) setCurrentOngName(usuario.assignedTo.nomeFantasia);
+                 return;
+             }
+        }
+
+        // Se não for ONG ou não tiver logo, usa avatar do user (mesmo fallback do Menu)
+        if (usuario.avatar) {
+            setCurrentUserAvatar(usuario.avatar);
+        }
+
+    } catch (err) {
+        console.error("Erro ao carregar perfil:", err);
+    }
+  };
+
   useEffect(() => {
-    // 1. VALIDAR TOKEN E ROLE
     const token = localStorage.getItem('authToken');
-    
     if (token) {
         try {
             const decoded = jwtDecode<JwtPayload>(token);
-            
             if (decoded.exp * 1000 > Date.now()) {
-                setUserStatus(decoded.role);
+                setUserRole(decoded.role);
+                setUserId(decoded.id);
+                fetchUserData(decoded.id);
             } else {
-                console.warn("Token expirado.");
                 localStorage.removeItem('authToken');
-                setUserStatus('');
             }
         } catch (e) {
-            console.error("Erro ao decodificar token:", e);
+            console.error(e);
         }
       }
-
-    // 2. CARREGAR POSTS
-    const fetchPosts = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const data = await publicacaoService.listarPublicacao();
-        
-        if (Array.isArray(data)) {
-           // O backend já deve trazer ordenado, mas por segurança:
-          setPosts(data);
-        } else {
-          console.warn("API não retornou um array:", data);
-          setPosts([]);
-        }
-      } catch (err) {
-        console.error("Erro ao carregar feed:", err);
-        setError("Não foi possível carregar as publicações.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    
-    fetchPosts();
+    carregarPosts();
   }, []);
 
-  // Adiciona o post novo no topo da lista
-  const addPost = (newPost: Post) => {
-    setPosts((prevPosts) => [newPost, ...prevPosts]);
+  const carregarPosts = async () => {
+    setIsLoading(true);
+    try {
+      const data = await publicacaoService.listarPublicacao();
+      if (Array.isArray(data)) setPosts(data);
+      else setPosts([]);
+    } catch (err) {
+      setError("Não foi possível carregar as publicações.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const canPublish = ROLES_PUBLICADORES.includes(userStatus);
+  const handleCreatePost = async (dadosForm: { title: string; message: string; image?: File | null }) => {
+    try {
+        if (!userId) return alert("Faça login novamente.");
 
-  return (
-    <div className="container-fluid col-12 p-0" style={{ maxWidth: '800px', margin: '0 auto' }}>
+        const formData = new FormData();
+        formData.append('titulo', dadosForm.title);
+        formData.append('descricao', dadosForm.message);
+        formData.append('criadoPor', userId);
+        if (dadosForm.image) formData.append('image', dadosForm.image);
+
+        const novaPublicacao = await publicacaoService.cadastrarPublicacao(formData);
+        
+        // --- TRUQUE VISUAL (Optimistic UI) ---
+        // Como não mexemos no backend para ele devolver o populate na hora,
+        // nós "montamos" o objeto visualmente com os dados que já temos do Menu Lateral (currentOngName e Avatar)
+        if (currentUserAvatar && novaPublicacao.criadoPor) {
+             // Forçamos a estrutura visual para aparecer bonito na hora
+             novaPublicacao.criadoPor.assignedTo = { 
+                 logo: currentUserAvatar, 
+                 nomeFantasia: currentOngName || 'Minha ONG', 
+                 _id: 'temp' 
+             };
+        }
+
+        setPosts((prev) => [novaPublicacao, ...prev]);
+
+    } catch (err: any) {
+        console.error(err);
+        alert(`Falha ao publicar.`);
+    }
+  };
+
+  const handleDeletePost = async (id: string) => {
+    if (!window.confirm("Excluir publicação?")) return;
+    try {
+        await publicacaoService.deletarPublicacao(id);
+        setPosts((prev) => prev.filter(post => post._id !== id));
+    } catch (err) {
+        alert("Erro ao excluir.");
+    }
+  };
+
+  const canPublish = ROLES_PUBLICADORES.includes(userRole);
+
+//   return (
+//     <div className="container-fluid col-12 p-0" style={{ maxWidth: '800px', margin: '0 auto' }}>
+//       <AutoLogout />
+//       {error && <Alert variant="danger" onClose={() => setError(null)} dismissible className="mt-3">{error}</Alert>}
+
+//       {canPublish && (
+//         <div className="pr-3 pl-3" id="div_feed">
+//             <PublicarForm 
+//                 onPublish={handleCreatePost} 
+//                 userAvatar={currentUserAvatar} 
+//             />
+//         </div>
+//       )}
+
+//       <div className="mt-4">
+//         {isLoading ? (
+//           <div className="text-center p-5"><Spinner animation="border" variant="success" /></div>
+//         ) : posts.length === 0 ? (
+//           <div className="text-center p-5 bg-white border rounded">Nenhuma publicação.</div>
+//         ) : (
+//           <div className="vstack gap-4">
+//             {posts.map((post) => (
+//                <FeedPost 
+//                  key={post._id} 
+//                  post={post} 
+//                  currentUserId={userId} 
+//                  onDelete={handleDeletePost} 
+//                />
+//             ))}
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+return (
+    <div className="feed-container-wrapper">
       <AutoLogout />
-      {error && (
-        <Alert variant="danger" onClose={() => setError(null)} dismissible className="mt-3">
-          {error}
-        </Alert>
-      )}
+      
+      <Container>
+        <Row className="justify-content-center gx-5">
+            
+            {/* MENU LATERAL */}
+            {/* Mudamos de 'd-lg-block' para 'd-md-block' para aparecer em mais telas */}
+            <Col md={4} lg={3} className="d-none d-md-block">
+                <div style={{ position: 'sticky', top: '100px' }}>
+                    <MenuLat />
+                </div>
+            </Col>
 
-      {/* Formulário só aparece para ONG/Admin */}
-      {canPublish && (
-        <div className="mb-4 mt-3">
-            <PublicarForm onPublish={addPost} />
-        </div>
-      )}
+            {/* FEED */}
+            {/* Ocupa 12 (tudo) no celular, e 8 ou 6 no PC */}
+            <Col xs={12} md={8} lg={6}>
+                {error && <Alert variant="danger" onClose={() => setError(null)} dismissible>{error}</Alert>}
 
-      {/* Lista de Posts */}
-      <div className="mt-4">
-        {isLoading ? (
-          <div className="text-center p-5">
-            <Spinner animation="border" variant="success" role="status">
-              <span className="visually-hidden">Carregando...</span>
-            </Spinner>
-            <p className="text-muted mt-2">Carregando feed...</p>
-          </div>
-        ) : posts.length === 0 ? (
-          <div className="text-center p-5 text-muted border rounded bg-white shadow-sm">
-            <p className="mb-0 fs-5">Nenhuma publicação encontrada.</p>
-            <small>Seja o primeiro a compartilhar algo!</small>
-          </div>
-        ) : (
-          <div className="vstack gap-4">
-            {posts.map((post) => (
-               // AQUI ESTÁ A CORREÇÃO: Chamando o componente FeedPost importado
-               <FeedPost key={post._id || Math.random().toString()} post={post} />
-            ))}
-          </div>
-        )}
-      </div>
+                {canPublish && (
+                    <div className="mb-4" id="div_feed">
+                        {/* PublicarForm recebe o avatar automaticamente agora */}
+                        <PublicarForm 
+                            onPublish={handleCreatePost} 
+                        />
+                    </div>
+                )}
+
+                <div className="mt-4">
+                    {isLoading ? (
+                    <div className="text-center p-5"><Spinner animation="border" variant="success" /></div>
+                    ) : posts.length === 0 ? (
+                    <div className="text-center p-5 bg-white border rounded">Nenhuma publicação encontrada.</div>
+                    ) : (
+                    <div className="vstack gap-4">
+                        {posts.map((post) => (
+                        <FeedPost 
+                            key={post._id} 
+                            post={post} 
+                            currentUserId={userId} 
+                            onDelete={handleDeletePost} 
+                        />
+                        ))}
+                    </div>
+                    )}
+                </div>
+            </Col>
+
+            {/* COLUNA DIREITA (Vazia) */}
+            {/* Só aparece em telas muito grandes (lg) para centralizar */}
+            <Col lg={3} className="d-none d-lg-block">
+                {/* Espaço para widgets futuros */}
+            </Col>
+
+        </Row>
+      </Container>
     </div>
   );
-};
-
+}
 export default FeedPage;

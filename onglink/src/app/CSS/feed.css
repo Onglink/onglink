@@ -94,9 +94,12 @@
 #div_feed{
     background-color: #95CF93;
      border-radius: 15px;
-     margin: 1rem;
+     margin: 0 0 24px 0;
      border-width: 0.2rem;
      border-color:#8BC28A;
+     width: 100%;
+     border-style: solid;
+     padding: 10px;
      
 }
 #divisoria{

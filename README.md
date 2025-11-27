@@ -16,6 +16,10 @@
 
 O nosso Projeto Interdisciplinar, Onglink, trata-se de uma plataforma cujo principal objetivo é facilitar e otimizar a divulgação de ONGs. Nela, os usuários poderão criar seu próprio perfil para sua organização, as ONGs poderão publicar suas atividades e campanhas sociais, e os usuários e visitantes poderão acompanhar o desenvolvimento dessas ONGs através de suas publicações, também terão em mãos ferramentas de busca de ONGs e poderão acessar o perfil da ONG escolhida para ter mais acesso a informações de contato. Nesse semestre nosso objetivo foi melhorar a nossa interface, aplicando técnicas de acessibilidade para os usuários e criamos o back-end, tornando a aplicação funcional.
 
+## Link para Acesso à Aplicação
+
+<a href="onglink.vercel.app" > onglink.vercel.app </a>
+
 <br>
 
 <a href="#topo"> → [Voltar ao topo] </a>
@@ -23,12 +27,17 @@ O nosso Projeto Interdisciplinar, Onglink, trata-se de uma plataforma cujo princ
 <span id="doc">
 
 ## 📌 Documentação do Projeto
+
 <ul>
     <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/diagrama_casoUso_qhcjg3.jpg" width="800">
-    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761695872/backlog_produto_avvtvc.png" width="500">
     <br>
     <br>
-    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1762385203/tmp_826e5f24-fbd0-4cd6-bd48-98a41f31eb2a_yrsioq.jpg" width="500">
+    <br>
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764102073/Opera_Snapshot_2025-11-25_172048_127.0.0.1_gzeadt.png" width="500">
+    <br>
+    <br>
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764102188/Opera_Snapshot_2025-11-25_172240_127.0.0.1_a3qzke.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764102224/Opera_Snapshot_2025-11-25_172325_127.0.0.1_qrrrdu.png" width="500">
 </ul>
 
 <a href="#topo"> → [Voltar ao topo] </a>
@@ -61,10 +70,15 @@ O nosso Projeto Interdisciplinar, Onglink, trata-se de uma plataforma cujo princ
       <td> 22/10/2025 </td>
       <td> Concluída ✔️  </td>
   </tr>
-    <tr>
+  <tr>
       <td> 04 </td>
       <td> 05/11/2025 </td>
-      <td> Em Andamento 🚧 </td>
+      <td> Concluída ✔️ </td>
+  </tr>
+  <tr>
+      <td> 05 </td>
+      <td> 20/11/2025 </td>
+      <td> Concluída ✔️ </td>
   </tr>
   
 </table>
@@ -72,13 +86,23 @@ O nosso Projeto Interdisciplinar, Onglink, trata-se de uma plataforma cujo princ
 <br>
 
 <ul>
-    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692923/backlog_sprint1_tlfjr0.png" width="500">
-    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692921/backlog_sprint2_jwxshb.png" width="500">
-    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761692922/backlog_sprint3_hxykil.png" width="500">
-    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1761693718/backlog_sprint4_cl7qnb.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764102260/Opera_Snapshot_2025-11-25_172404_127.0.0.1_dj8fyu.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764102291/Opera_Snapshot_2025-11-25_172434_127.0.0.1_jofnzm.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764102323/Opera_Snapshot_2025-11-25_172513_127.0.0.1_ib0s0d.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764102381/Opera_Snapshot_2025-11-25_172610_127.0.0.1_v5esvh.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764102474/Opera_Snapshot_2025-11-25_172646_127.0.0.1_wxk8xh.png" width="500">
+    <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764102480/Opera_Snapshot_2025-11-25_172718_127.0.0.1_flpdqn.png" width="500">    
 </ul>
 
 <a href="#topo"> → [Voltar ao topo] </a>
+
+## Gráficos de Burndown das Sprints
+
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764103797/burndown1_rpo4vv.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764103797/burndown2_rduhak.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764103798/burndown3_wrqfah.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764103798/burndown4_ma2ve3.png">
+<img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764103797/burndown5_ctek5c.png">
 
 <span id="tecnologias">
 

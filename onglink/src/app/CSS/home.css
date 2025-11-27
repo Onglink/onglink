@@ -49,7 +49,7 @@
 #row1, #row2, #row3
 {
     margin-top: 70px;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
     overflow: auto;
     scroll-snap-type: y mandatory;
     scroll-snap-stop: always;
@@ -176,7 +176,7 @@
     margin-right: 5px;
 }
 
-#botao_cadastro2, #botao_ver_todos
+#botao_cadastro2
 {
     background-color: rgba(4, 165, 44, 0.75);
     border: none;
@@ -186,8 +186,21 @@
     font-weight: 700;
     box-shadow: 0px 7px rgba(2, 84, 23, 0.75)
 }
-
-#botao_cadastro2:hover, #botao_ver_todos:hover{
+#botao_cadastro2:hover{
+    background-color: rgba(3, 62, 18, 0.85);
+    color: #AEF2AC;
+}
+#botao_ver_todos
+{
+    background-color: rgba(4, 165, 44, 0.75);
+    border: none;
+    color: white;
+    width: 500px;
+    height: 70px;
+    font-weight: 700;
+    box-shadow: 0px 7px rgba(2, 84, 23, 0.75)
+}
+#botao_ver_todos:hover{
     background-color: rgba(3, 62, 18, 0.85);
     color: #AEF2AC;
 }
@@ -208,4 +221,93 @@ a
 #links_footer
 {
     text-align: center;
+}
+/* --- home.css ATUALIZADO --- */
+
+/* 1. Configuração da Imagem (Maior e Responsiva) */
+.mascote-img {
+    width: 100%;
+    max-width: 650px; /* Aumentei para ficar bem grande */
+    height: auto;
+    object-fit: contain;
+    display: block;
+    /* Importante: Removemos margens automáticas para controlar via Flexbox */
+}
+
+/* 2. Configuração dos Textos (O Fim da Largura Fixa) */
+#desc_home p, 
+#header_vantagens, 
+#vantagens, 
+#div_botao p {
+    padding: 10px; /* Reduzi o padding para aproximar */
+    width: 100%;   /* Ocupa o espaço disponível */
+    max-width: 600px; /* Não deixa ficar muito largo em telas gigantes */
+    color: rgba(7, 113, 33, 0.75);
+    font-weight: 800;
+    font-size: 1.1rem; /* Tamanho fluido */
+}
+
+/* Títulos */
+#desc_home h4, #row2 h4, #row3 h4 {
+    font-weight: 900;
+    font-size: 2rem;
+    color: #05b3ca;
+    margin-bottom: 15px;
+}
+
+/* 3. Configuração das Linhas (Rows) */
+#row1, #row2, #row3 {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+}
+
+/* --- MÁGICA DA APROXIMAÇÃO (Desktop) --- */
+/* Só aplica em telas maiores que tablet (768px) */
+@media (min-width: 768px) {
+    /* Coluna da Esquerda: Empurra conteúdo para a Direita (--> Centro) */
+    .col-content-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end; 
+        text-align: right; /* Opcional: Alinha texto à direita */
+        padding-right: 0 !important; /* Remove espaço extra */
+    }
+
+    /* Coluna da Direita: Empurra conteúdo para a Esquerda (<-- Centro) */
+    .col-content-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding-left: 0 !important; /* Remove espaço extra */
+    }
+    
+    /* Remove padding extra dos itens internos para colar mais */
+    #vantagens { padding-left: 0; }
+    #desc_home p { padding-left: 0; padding-right: 0; }
+}
+
+/* --- AJUSTES PARA CELULAR (Mobile) --- */
+@media (max-width: 767px) {
+    .mascote-img {
+        max-width: 300px; /* Menor no celular */
+        margin: 0 auto 20px auto; /* Centraliza e dá espaço */
+    }
+    
+    #row1, #row2, #row3 {
+        text-align: center; /* Texto centralizado no mobile */
+        flex-direction: column; /* Empilha um sobre o outro */
+    }
+
+    /* No celular, removemos os alinhamentos forçados */
+    .col-content-right, .col-content-left {
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    /* Remove paddings que atrapalham no mobile */
+    #vantagens { padding-left: 0; list-style-position: inside; }
 }

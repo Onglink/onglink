@@ -43,89 +43,88 @@ export default function Home() {
         
         
             <main className="main_home">
-              {/*<!--Main-->*/}
-        
-              <div className="main1">
-                  
-                  <Row className="row" id="row1">
-        
-                      <Col sm={6} id="div_imagem_home">
-                        <Image alt="" src={planetilson} width={1000}></Image>
-                      </Col>
-                      <Col sm={6} id="desc_home">
+        <div className="main1">
+          
+          {/* --- ROW 1: Imagem (Esq) | Texto (Dir) --- */}
+          <Row className="row" id="row1">
+            {/* Coluna da Imagem: Empurra para a DIREITA (->) */}
+            <Col md={6} className="col-content-right">
+              <Image
+                alt="Mascote Onglink"
+                src={planetilson}
+                className="mascote-img"
+              />
+            </Col>
+            
+            {/* Coluna do Texto: Empurra para a ESQUERDA (<-) */}
+            <Col md={6} className="col-content-left" id="desc_home">
+              <h4> O apoio que sua ONG precisa! </h4>
+              <p>
+                Venha conhecer a Onglink, plataforma desenvolvida para você
+                poder consultar as entidades de apoio social e ONG’s. Nossa
+                missão é ter na plataforma, entidades certificadas e de real
+                atuação no mercado. Cadastre-se e nos ajude a
+                divulgar o link do bem.
+              </p>
+            </Col>
+          </Row>
 
-                          <h4> O apoio que sua ONG precisa! </h4>
+          {/* --- ROW 2: Texto (Esq) | Imagem (Dir) --- */}
+          <Row className="row" id="row2">
+             {/* Coluna do Texto: Empurra para a DIREITA (->) */}
+            <Col md={6} className="col-content-right">
+              <h4>Por que se juntar à ONGlink?</h4>
+              <ul id="vantagens" style={{ listStyle: 'none' }}> {/* listStyle none para alinhar melhor */}
+                <li> Se você está procurando uma instituição para poder contribuir</li>
+                <li> e quer ter certeza de que essa organização tem seriedade e é confiável?</li>
+                <li> Venha fazer parte da nossa plataforma e nunca mais preocupe-se com isso.</li>
+              </ul>
+            </Col>
 
-                          <p>
-                            Venha conhecer a Onglink, 
-                            plataforma desenvolvida para você
-                            poder consultar as entidades de 
-                            apoio social e ONG’s.
-                            Nossa missão é ter na plataforma, 
-                            entidades certificadas e de real atuação 
-                            no mercado.
-                            Clique aqui para se cadastrar e nos 
-                            ajudar a divulgar o link do bem.  
-                          </p>
-                      </Col>
-                  </Row>
+             {/* Coluna da Imagem: Empurra para a ESQUERDA (<-) */}
+            <Col md={6} className="col-content-left">
+              <Image
+                alt="Mascote Pintor"
+                src={planetilson_pintor}
+                className="mascote-img"
+              />
+            </Col>
+          </Row>
 
+          {/* --- ROW 3: Imagem (Esq) | Texto (Dir) --- */}
+          <Row className="row" id="row3">
+             {/* Coluna da Imagem: Empurra para a DIREITA (->) */}
+            <Col md={6} className="col-content-right">
+              <Image
+                alt="Mascote Final"
+                src={planetilson3}
+                className="mascote-img"
+              />
+            </Col>
 
-                  <Row className="row" id="row2">
-                      <Col>
-                        <h4>Por que se juntar à ONGlink?</h4>
+             {/* Coluna do Texto: Empurra para a ESQUERDA (<-) */}
+            <Col md={6} className="col-content-left">
+              <div id="div_botao" className="text-center text-md-start"> {/* Ajuste de alinhamento interno */}
+                <h4>Junte-se à ONGlink!</h4>
+                <p>
+                  Seja mais um parceiro e ajude-nos a divulgar o link do bem!
+                </p>
 
-                        <ul id="vantagens">
-                            <li>Se você está procurando uma instituição para poder contibuir</li>
-                            <li>e quer ter certeza de que essa organização tem seriedade e é confiável?</li>
-                            <li>Venha fazer parte da nossa plataforma e nunca mais preocupe-se com isso.</li>
-                        </ul>
-                      </Col>
-                      
-                      <Col>
-                        <Image alt="" src={planetilson_pintor}></Image>
-                      </Col>
-                  </Row>
+                <Link href={"/cadastroSimples"}>
+                  <Button id="botao_cadastro2">Cadastre-se</Button>
+                </Link>
 
-                  <Row className="row" id="row3">
-                    <Col>
-                      <Image alt="" src={planetilson3} width={1000} id="planetilson3"></Image>
-                    </Col>
+                <p className="mt-3 mb-3"> ou </p>
 
-                    <Col>
-                      <div id="div_botao" className="text-center">
-                        <h4>Junte-se à ONGlink!</h4>
-
-                        <p>
-                          Seja mais um parceiro e ajude-nos a divulgar o link do bem!
-                        </p>
-
-                        <Link href={"/cadastroSimples"}>
-                          <Button
-                              id="botao_cadastro2"
-                            >
-                              Cadastre-se
-                          </Button>
-                        </Link>
-
-                          <p> ou </p>
-
-                        {/* <Link className="mt-0" href={"/feedVisitante"}>
-                          <Button
-                              id="botao_cadastro2"
-                            >
-                              Entre como visitante
-                          </Button>
-                        </Link> */}
-                        <BotaoVisitante />
+                <BotaoVisitante />
                           
                       </div>
                     </Col>
 
                   </Row>
 
-                <div id="div_nossos_parceiros">
-          
+                <div className="pt-5" id="div_nossos_parceiros">
+{/*           
                       <h3>Nossos Parceiros:</h3>
           
                       <div id="div_apoiadores">
@@ -133,13 +132,13 @@ export default function Home() {
                           <img className="border-3 border-yellow-300 rounded-xl" src={"https://img.freepik.com/vector-premium/logotipo-comercializacion-venta_712682-3297.jpg"} alt="Empresa 2" width="200" height="200"></img>
                           <img className="border-3 border-red-500 rounded-xl" src={"https://img.freepik.com/vetores-premium/modelo-do-logotipo-da-caixa-do-estudio_10399-28.jpg"} alt="Empresa 3" width="200" height="200"></img>
                           <img className="border-3 border-green-500 rounded-xl" src={"https://img.freepik.com/vetores-premium/logotipo-da-empresa_7436-14.jpg"} alt="Empresa 4" width="200" height="200"></img>
-                      </div>
+                      </div> */}
 
                       <Link href={"/parceiros"}>
                           <Button
                             id="botao_ver_todos"
                           >
-                            Ver Todos
+                            Conheça nossos parceiros!
                           </Button>
                       </Link>
                       
