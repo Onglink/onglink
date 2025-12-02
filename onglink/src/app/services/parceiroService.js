@@ -1,28 +1,48 @@
-// parceiroSevice.js (CÓDIGO CORRIGIDO COM TRATAMENTO DE ERRO)
+// [Frontend] parceiroSevice.js (Versão Robusta contra HTML)
 
 import api from './api';
-
 
 const parceiroSevice = {
     listarParceiro: async () => {
         try {
-            // Tenta obter os dados da API
             const response = await api.get('/parceiros');
             
-            // Verifica se a resposta foi bem-sucedida (status 2xx)
+            // Verifica se a requisição foi um sucesso (Status 2xx)
             if (response.status >= 200 && response.status < 300) {
-                 return response.data;
+                 return response.data; // Retorna os dados JSON
             } else {
-                 // Trata respostas não-2xx (como 404 ou 500)
+                 // Se for 4xx ou 5xx, trata como falha de dados
                  console.error('Resposta da API não foi bem-sucedida:', response.status);
-                 return []; // Retorna um array vazio para não quebrar a aplicação
+                 throw new Error(`Falha na API com status ${response.status}.`);
             }
 
         } catch (error) {
-            // Captura falhas de rede, timeouts ou erros no Axios/Fetch
-            console.error('Erro ao buscar parceiros na camada de serviço:', error.message);
-            // IMPORTANTE: Retorna um array vazio para evitar que o componente trave
-            return []; 
+            let errorMessage = "Erro de rede desconhecido.";
+
+            if (error.response) {
+                // O erro de "JSON inválido" ocorre aqui. Tentamos ler o corpo HTML
+                
+                // Se o corpo dos dados for uma string (que geralmente é HTML ou erro simples)
+                if (typeof error.response.data === 'string') {
+                    // Verificamos se a string é HTML
+                    if (error.response.data.startsWith('<!DOCTYPE')) {
+                        errorMessage = "Erro de Servidor (Express) - Retornou HTML em vez de JSON. Verifique o server.js.";
+                    } else {
+                        // Pode ser um erro simples não formatado (404/500)
+                        errorMessage = `Erro HTTP ${error.response.status}: ${error.response.data.substring(0, 50)}...`;
+                    }
+                } else if (error.response.data && error.response.data.message) {
+                    // Erros formatados em JSON (melhor cenário)
+                    errorMessage = error.response.data.message;
+                }
+            } else {
+                // Erro de rede (servidor Express/Backend desligado)
+                errorMessage = "Falha de Rede: O servidor Backend não está acessível.";
+            }
+
+            console.error('Erro detalhado:', errorMessage);
+            // IMPORTANTE: Lança o erro com a mensagem tratada para o componente capturar
+            throw new Error(errorMessage);
         }
     }
 };
