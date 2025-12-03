@@ -6,7 +6,7 @@
     <a href="#doc">Documentação do Projeto</a>  |
     <a href="#sprints">Entregas de Sprints</a>  |  
     <a href="#tecnologias">Tecnologias</a>  |  
-    <a href="#equipe">Equipe</a>
+    <a href="#equipe">Equipe</a> |
     <a href="#ihc">Documentação IHC</a>
 </p>
 
@@ -125,7 +125,7 @@ No projeto ONGLink foram utilizadas as seguintes ferramentas, linguagens, biblio
 <span id="equipe">
 
 <span id="ihc">
-## 📌 Documentação do Projeto IHC
+## 📌 Documentação do Projeto IHC <br>
 https://fatecspgov-my.sharepoint.com/:p:/r/personal/vinicius_reis23_fatec_sp_gov_br/Documents/Documenta%C3%A7%C3%A3o%20IHC.pptx?d=w737eff341c294ca78c39d88e0b204504&csf=1&web=1&e=GfmYCt
 
 ## 👥 Equipe
