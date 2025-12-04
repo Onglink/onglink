@@ -7,7 +7,8 @@
     <a href="#sprints">Entregas de Sprints</a>  |  
     <a href="#tecnologias">Tecnologias</a>  |  
     <a href="#equipe">Equipe</a> |
-    <a href="#ihc">Documentação IHC</a>
+    <a href="#ihc">Documentação IHC</a> |
+    <a href="sprintreview"> Sprint Reviews </a>
 </p>
 
 <span id="sobre">
@@ -97,6 +98,48 @@ O nosso Projeto Interdisciplinar, Onglink, trata-se de uma plataforma cujo princ
 
 <a href="#topo"> → [Voltar ao topo] </a>
 
+<a href="#sprintreview"><b> Sprints Reviews <b></a><br>
+<br>
+<b>Sprint No.:</b> 1 <br>
+<b>Período da Sprint:</b> 10/09/2025 até 24/09/2025<br>
+<b>Objetivo da Sprint:</b> Corrigir front-end, início do projeto em Java e início da documentação do PI.<br>
+<b>O que foi concluído:</b> Criação do figma, front-end das páginas de perfil de usuário, feed, parceiros, <br>
+cadastro simples e cadastro completo, home page, criação dos repositórios no github e início do projeto em java (view), <br>
+documentação readme.<br>
+<b>O que não foi concluído:</b> Publicar o front-end no vercel.<br>
+<br>
+<b>Sprint No.:</b>2<br>
+<b>Período da Sprint:</b> 24/09/2025 até 08/10/2025<br>
+<b>Objetivo da Sprint:</b> Ajustar detalhes no front-end, criação do microsserviço, atualização do readme e continuação do projeto em Java.<br>
+<b>O que foi concluído:</b> Front-end: Editar perfil de usuário, tela de parceiros, feed, microsserviço: gerador de link de compartilhamento, <br>
+criação do model em Java, criação das coleções no mongoDb, atualização do  diagrama de casos de uso e diagrama de classes.<br>
+<b>O que não foi concluído:</b> Publicar o front-end no vercel e atualizar o readme.<br>
+<br>
+<b>Sprint No.:</b> 3<br>
+<b>Período da Sprint:</b> 09/10/2025 até 22/10/2025<br>
+<b>Objetivo da Sprint:</b> Foco na entrega das API’s<br>
+<b>O que foi concluído:</b>Documentação readme, criação das API’s de cadasro, publicação e editar perfil, popular o banco de dados.<br>
+<b>O que não foi concluído:</b> Publicar o front-end no vercel, criar a API de denúncia, funcionalidade de bloquear postagens, <br>
+funcionalidade vitrine e criação do controller em java.<br>
+<br>
+<b>Sprint No.:</b>4<br>
+<b>Período da Sprint:</b> 23/10/2025 até 05/11/2025<br>
+<b>Objetivo da Sprint:</b> Ajustes no back-end e documentação de IHC.<br>
+<b>O que foi concluído:</b> Criar API de denúncia, Publicar no vercel, criar controller em Java, criação do questionário de usuário,<br>
+criação de personas e cenários, criação da documentação das API’s com Swagger e API_KEY, funcionalidade publicar no feed.<br>
+<b>O que não foi concluído:</b> Funcionalidade de bloqueio de postagens, funcionalidade vitrine.<br>
+<br>
+<b>Sprint No.:</b> 5<br>
+<b>Período da Sprint:</b> 06/11/2025 até 20/11/2025<br>
+<b>Objetivo da Sprint:</b> Concluir integração front/back-end, concluir projeto em Java<br>
+<b>O que foi concluído:</b> Funcionalidade de bloqueio de postagens, funcionalidade vitrine, página de feed para visitantes,<br>
+realizar cadastro na plataforma, validação dos documentos para cadastro de ong (Java), validação de login na plataforma, <br>
+exibição de ongs na vitrine, padronização dos formulários, criação de relatório em Java, ajustes de funcionalidades no Java e<br>
+criação da documentação da aplicação em Java. <br>
+
+<a href="#topo"> → [Voltar ao topo] </a>
+
+
 ## Gráficos de Burndown das Sprints
 
 <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764103797/burndown1_rpo4vv.png">
@@ -106,6 +149,7 @@ O nosso Projeto Interdisciplinar, Onglink, trata-se de uma plataforma cujo princ
 <img src="https://res.cloudinary.com/dmhdqihrp/image/upload/v1764103797/burndown5_ctek5c.png">
 
 <span id="tecnologias">
+<a href="#topo"> → [Voltar ao topo] </a>
 
 ## 💻 Tecnologias
 
