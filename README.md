@@ -139,6 +139,8 @@ criação da documentação da aplicação em Java. <br>
 
 <a href="#topo"> → [Voltar ao topo] </a>
 
+ <img src="https://res.cloudinary.com/df48qk6bj/image/upload/v1764806866/sprint_retrospective_zytjxx.png">
+
 
 ## Gráficos de Burndown das Sprints
 
