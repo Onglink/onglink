@@ -8,7 +8,8 @@
     <a href="#tecnologias">Tecnologias</a>  |  
     <a href="#equipe">Equipe</a> |
     <a href="#ihc">Documentação IHC</a> |
-    <a href="sprintreview"> Sprint Reviews </a>
+    <a href="sprintreview"> Sprint Reviews </a>|
+    <a href="sprintretro"> Sprint Retrospective </a>
 </p>
 
 <span id="sobre">
@@ -98,7 +99,7 @@ O nosso Projeto Interdisciplinar, Onglink, trata-se de uma plataforma cujo princ
 
 <a href="#topo"> → [Voltar ao topo] </a>
 
-<a href="#sprintreview"><b> Sprints Reviews <b></a><br>
+<a href="#sprintreview"><b> Sprints Reviews </b></a><br>
 <br>
 <b>Sprint No.:</b> 1 <br>
 <b>Período da Sprint:</b> 10/09/2025 até 24/09/2025<br>
@@ -139,8 +140,10 @@ criação da documentação da aplicação em Java. <br>
 
 <a href="#topo"> → [Voltar ao topo] </a>
 
- <img src="https://res.cloudinary.com/df48qk6bj/image/upload/v1764806866/sprint_retrospective_zytjxx.png">
-
+<a href="#sprintretro"><b> Sprint Retrospective </b></a><br>
+<br>
+ <img src="https://res.cloudinary.com/df48qk6bj/image/upload/v1764806866/sprint_retrospective_zytjxx.png"><br>
+<a href="#topo"> → [Voltar ao topo] </a>
 
 ## Gráficos de Burndown das Sprints
 
