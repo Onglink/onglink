@@ -8,8 +8,8 @@
     <a href="#tecnologias">Tecnologias</a>  |  
     <a href="#equipe">Equipe</a> |
     <a href="#ihc">Documentação IHC</a> |
-    <a href="sprintreview"> Sprint Reviews </a>|
-    <a href="sprintretro"> Sprint Retrospective </a>
+    <a href="#sprintreview"> Sprint Reviews </a>|
+    <a href="#sprintretro"> Sprint Retrospective </a>
 </p>
 
 <span id="sobre">
