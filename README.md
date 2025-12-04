@@ -99,7 +99,7 @@ O nosso Projeto Interdisciplinar, Onglink, trata-se de uma plataforma cujo princ
 
 <a href="#topo"> → [Voltar ao topo] </a>
 
-<a href="#sprintreview"><b> Sprints Reviews </b></a><br>
+<span id="#sprintreview"><b> Sprints Reviews </b><br>
 <br>
 <b>Sprint No.:</b> 1 <br>
 <b>Período da Sprint:</b> 10/09/2025 até 24/09/2025<br>
@@ -140,7 +140,7 @@ criação da documentação da aplicação em Java. <br>
 
 <a href="#topo"> → [Voltar ao topo] </a>
 
-<a href="#sprintretro"><b> Sprint Retrospective </b></a><br>
+<span id="#sprintretro"><b> Sprint Retrospective </b><br>
 <br>
  <img src="https://res.cloudinary.com/df48qk6bj/image/upload/v1764806866/sprint_retrospective_zytjxx.png"><br>
 <a href="#topo"> → [Voltar ao topo] </a>
